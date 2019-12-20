@@ -1,0 +1,173 @@
+fileFormatVersion: 2
+guid: b4e1ac0cccc37874aaff2d54c0c9c269
+timeCreated: 1461848830
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Rig
+    100004: RigHead
+    100006: RigHeadGizmo
+    100008: RigLArm1
+    100010: RigLArm1Gizmo
+    100012: RigLArm2
+    100014: RigLArm2Gizmo
+    100016: RigLBLeg1
+    100018: RigLBLeg2
+    100020: RigLBLegAnkle
+    100022: RigLBLegFoot1
+    100024: RigLBLegPlatform
+    100026: RigLFLeg1
+    100028: RigLFLeg2
+    100030: RigLFLegAnkle
+    100032: RigLFLegFoot1
+    100034: RigLFLegPlatform
+    100036: RigMouthDown
+    100038: RigMouthDownGizmo
+    100040: RigMouthUp
+    100042: RigMouthUpGizmo
+    100044: RigNeck1
+    100046: RigNeck2
+    100048: RigPelvis
+    100050: RigPelvisGizmo
+    100052: RigRArm1
+    100054: RigRArm1Gizmo
+    100056: RigRArm2
+    100058: RigRArm2Gizmo
+    100060: RigRBLeg1
+    100062: RigRBLeg2
+    100064: RigRBLegAnkle
+    100066: RigRBLegFoot1
+    100068: RigRBLegPlatform
+    100070: RigRFLeg1
+    100072: RigRFLeg2
+    100074: RigRFLegAnkle
+    100076: RigRFLegFoot1
+    100078: RigRFLegPlatform
+    100080: RigRibcage
+    100082: RigRibcageGizmo
+    100084: RigSpine1
+    100086: RigSpine2
+    100088: RigVineLeft
+    100090: RigVineLeftGizmo
+    100092: RigVineRight
+    100094: RigVineRightGizmo
+    100096: Toon Treant
+    400000: //RootNode
+    400002: Rig
+    400004: RigHead
+    400006: RigHeadGizmo
+    400008: RigLArm1
+    400010: RigLArm1Gizmo
+    400012: RigLArm2
+    400014: RigLArm2Gizmo
+    400016: RigLBLeg1
+    400018: RigLBLeg2
+    400020: RigLBLegAnkle
+    400022: RigLBLegFoot1
+    400024: RigLBLegPlatform
+    400026: RigLFLeg1
+    400028: RigLFLeg2
+    400030: RigLFLegAnkle
+    400032: RigLFLegFoot1
+    400034: RigLFLegPlatform
+    400036: RigMouthDown
+    400038: RigMouthDownGizmo
+    400040: RigMouthUp
+    400042: RigMouthUpGizmo
+    400044: RigNeck1
+    400046: RigNeck2
+    400048: RigPelvis
+    400050: RigPelvisGizmo
+    400052: RigRArm1
+    400054: RigRArm1Gizmo
+    400056: RigRArm2
+    400058: RigRArm2Gizmo
+    400060: RigRBLeg1
+    400062: RigRBLeg2
+    400064: RigRBLegAnkle
+    400066: RigRBLegFoot1
+    400068: RigRBLegPlatform
+    400070: RigRFLeg1
+    400072: RigRFLeg2
+    400074: RigRFLegAnkle
+    400076: RigRFLegFoot1
+    400078: RigRFLegPlatform
+    400080: RigRibcage
+    400082: RigRibcageGizmo
+    400084: RigSpine1
+    400086: RigSpine2
+    400088: RigVineLeft
+    400090: RigVineLeftGizmo
+    400092: RigVineRight
+    400094: RigVineRightGizmo
+    400096: Toon Treant
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Toon Treant
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Toon Treant
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

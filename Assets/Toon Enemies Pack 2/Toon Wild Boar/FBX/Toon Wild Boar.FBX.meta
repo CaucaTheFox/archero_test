@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: a6cc3c431facb7142ba90ece21dd3e2d
+timeCreated: 1464614608
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Rig
+    100004: RigHead
+    100006: RigHeadGizmo
+    100008: RigLBLeg1
+    100010: RigLBLeg2
+    100012: RigLBLegAnkle
+    100014: RigLBLegFoot1
+    100016: RigLBLegFoot2
+    100018: RigLBLegPlatform
+    100020: RigLFLeg1
+    100022: RigLFLeg2
+    100024: RigLFLegAnkle
+    100026: RigLFLegFoot1
+    100028: RigLFLegFoot2
+    100030: RigLFLegPlatform
+    100032: RigMouthB
+    100034: RigMouthBGizmo
+    100036: RigMouthT
+    100038: RigMouthTGizmo
+    100040: RigNeck
+    100042: RigPelvis
+    100044: RigPelvisGizmo
+    100046: RigRBLeg1
+    100048: RigRBLeg2
+    100050: RigRBLegAnkle
+    100052: RigRBLegFoot1
+    100054: RigRBLegFoot2
+    100056: RigRBLegPlatform
+    100058: RigRFLeg1
+    100060: RigRFLeg2
+    100062: RigRFLegAnkle
+    100064: RigRFLegFoot1
+    100066: RigRFLegFoot2
+    100068: RigRFLegPlatform
+    100070: RigRibcage
+    100072: RigRibcageGizmo
+    100074: RigSpine1
+    100076: RigSpine2
+    100078: RigSpine3
+    100080: RigTail1
+    100082: RigTail1Gizmo
+    100084: RigTail2
+    100086: RigTail2Gizmo
+    100088: RigTail3
+    100090: RigTail3Gizmo
+    100092: RigTail4
+    100094: RigTail4Gizmo
+    100096: RigTail5
+    100098: RigTail5Gizmo
+    100100: Toon Wild Boar
+    400000: //RootNode
+    400002: Rig
+    400004: RigHead
+    400006: RigHeadGizmo
+    400008: RigLBLeg1
+    400010: RigLBLeg2
+    400012: RigLBLegAnkle
+    400014: RigLBLegFoot1
+    400016: RigLBLegFoot2
+    400018: RigLBLegPlatform
+    400020: RigLFLeg1
+    400022: RigLFLeg2
+    400024: RigLFLegAnkle
+    400026: RigLFLegFoot1
+    400028: RigLFLegFoot2
+    400030: RigLFLegPlatform
+    400032: RigMouthB
+    400034: RigMouthBGizmo
+    400036: RigMouthT
+    400038: RigMouthTGizmo
+    400040: RigNeck
+    400042: RigPelvis
+    400044: RigPelvisGizmo
+    400046: RigRBLeg1
+    400048: RigRBLeg2
+    400050: RigRBLegAnkle
+    400052: RigRBLegFoot1
+    400054: RigRBLegFoot2
+    400056: RigRBLegPlatform
+    400058: RigRFLeg1
+    400060: RigRFLeg2
+    400062: RigRFLegAnkle
+    400064: RigRFLegFoot1
+    400066: RigRFLegFoot2
+    400068: RigRFLegPlatform
+    400070: RigRibcage
+    400072: RigRibcageGizmo
+    400074: RigSpine1
+    400076: RigSpine2
+    400078: RigSpine3
+    400080: RigTail1
+    400082: RigTail1Gizmo
+    400084: RigTail2
+    400086: RigTail2Gizmo
+    400088: RigTail3
+    400090: RigTail3Gizmo
+    400092: RigTail4
+    400094: RigTail4Gizmo
+    400096: RigTail5
+    400098: RigTail5Gizmo
+    400100: Toon Wild Boar
+    2300000: //RootNode
+    2300002: Toon Wild Boar
+    3300000: //RootNode
+    3300002: Toon Wild Boar
+    4300000: Toon Wild Boar
+    9500000: //RootNode
+    13700000: Toon Wild Boar
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
