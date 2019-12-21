@@ -27,23 +27,23 @@ namespace Core
             });
 
             Debug.Log($"[GameContext] Features initialized in {stopwatch.ElapsedMilliseconds} ms");
-            stopwatch.Restart();
+            //stopwatch.Restart();
 
-            var modulesConfig = container.Resolve<IScriptableObjectConfig<ModuleConfig>>();
-            var activeModules = new HashSet<string>(modulesConfig.Value.modules);
+            //var modulesConfig = container.Resolve<IScriptableObjectConfig<ModuleConfig>>();
+            //var activeModules = new HashSet<string>(modulesConfig.Value.modules);
             
-            ReflectionUtility.ForAllInstances<IModule>(module => {
-                if (!activeModules.Contains(module.GetType().Name)) {
-                    return;
-                }
+            //ReflectionUtility.ForAllInstances<IModule>(module => {
+            //    if (!activeModules.Contains(module.GetType().Name)) {
+            //        return;
+            //    }
                 
-                container.ResolveAll(module);
-                module.Init();
-            });
+            //    container.ResolveAll(module);
+            //    module.Init();
+            //});
 
-            Debug.Log($"[GameContext] Modules initialized in {stopwatch.ElapsedMilliseconds} ms");
+            //Debug.Log($"[GameContext] Modules initialized in {stopwatch.ElapsedMilliseconds} ms");
 
-            stopwatch.Stop();
+            //stopwatch.Stop();
         }
 
         private static IoC.IoC CreateContainer ()

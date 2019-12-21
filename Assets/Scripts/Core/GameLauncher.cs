@@ -12,6 +12,7 @@ namespace Core
 
         private void Start()
         {
+            GameContext.Init();
             screenManager.Push<RoomScreenController>(RoomScreenController.ScreenName);
         }
     }
