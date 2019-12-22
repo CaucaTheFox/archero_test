@@ -7,7 +7,7 @@ using UnityEditor;
 namespace Spreadsheets.Importers
 {
 
-    public static class ImportCollectionContent
+    public static class RoomConfigImporter
     {
         private const string Uri = "https://docs.google.com/spreadsheets" +
             "/d/e/2PACX-1vRWPrm3oa7WjeuxoZxISDgFkG87Y2TY0Oa5PsLvCddi6Jq3rEXFoIkXe7U1jwK9BTc75k2qHzJNJt4Y/" +
