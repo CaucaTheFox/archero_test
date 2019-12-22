@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CameraScripts
+namespace Core.CameraScripts
 {
     public class TopDownCamera : MonoBehaviour
     {

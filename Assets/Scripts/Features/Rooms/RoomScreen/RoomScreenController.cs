@@ -1,4 +1,4 @@
-using CameraScripts;
+using Core.CameraScripts;
 using Core.IoC;
 using Core.ResourceManagement;
 using Features.Heroes;
@@ -27,6 +27,7 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region - State
+        private Hero hero;
         #endregion
 
         #region - Lifecycle
@@ -41,14 +42,27 @@ namespace Features.Rooms.Screens
             var heroTemplate = resourceManager.LoadResource<Hero>(DefaultHeroPath);
             var heroSettings = heroModel.GetHeroBaseSettings(DefaultHeroId);
         
-            var hero = UnityEngine.Object.Instantiate(heroTemplate, Screen3D.HeroContainer);
+            hero = UnityEngine.Object.Instantiate(heroTemplate, Screen3D.HeroContainer);
             hero.Settings = heroSettings;
             TopDownCamera.CameraTarget = hero.transform;
+            Screen2D.Joystick.OnUpdate += HandlePlayerInput;
+            Screen2D.Joystick.OnMovementEnded += HandleJoystickTouchEnded;
         }
+
         #endregion
 
         #region - Private
-      
+        private void HandlePlayerInput()
+        {
+            var input = new Vector3(Screen2D.Joystick.Horizontal, 0, Screen2D.Joystick.Vertical);
+            hero.MoveCharacter(input);
+
+        }
+
+        private void HandleJoystickTouchEnded()
+        {
+            hero.Shoot();
+        }
         #endregion
     }
 }
