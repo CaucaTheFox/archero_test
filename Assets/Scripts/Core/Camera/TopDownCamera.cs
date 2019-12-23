@@ -56,7 +56,6 @@ namespace Core.CameraScripts
 
             newPosition.x = Mathf.Clamp(newPosition.x, lowerBounds, topBounds);
             newPosition.z = Mathf.Clamp(newPosition.z, leftBounds, rightBounds);
-            Debug.Log($"X: {newPosition.x}, Z: {newPosition.z}");
 
             transform.position = Vector3.SmoothDamp(
                 transform.position,

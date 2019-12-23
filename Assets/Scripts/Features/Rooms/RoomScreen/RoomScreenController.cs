@@ -1,9 +1,11 @@
 using Core.CameraScripts;
 using Core.IoC;
 using Core.ResourceManagement;
+using Features.Enemies;
 using Features.Heroes;
 using Features.Screens;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Features.Rooms.Screens
@@ -14,6 +16,7 @@ namespace Features.Rooms.Screens
         public const string ScreenName = "RoomScreen";
         private const string DefaultHeroId = "archer_green";
         private const string DefaultHeroPath = "HeroPrefabs/archer_green";
+        private const string EnemyPath = "EnemyPrefabs/";
         #endregion
 
         #region - Properties
@@ -24,10 +27,13 @@ namespace Features.Rooms.Screens
         #region - Dependencies
         [Inject] private IHeroModel heroModel;
         [Inject] private IResourceManager resourceManager;
+        [Inject] private IEnemiesModel enemiesModel;
         #endregion
 
         #region - State
         private Hero hero;
+        private Dictionary<string, Enemy> enemyPrefabCache = new Dictionary<string, Enemy>();
+        private Dictionary<int, Enemy> enemiesOnScreen = new Dictionary<int, Enemy>();
         #endregion
 
         #region - Lifecycle
@@ -46,6 +52,23 @@ namespace Features.Rooms.Screens
             hero.Settings = heroSettings;
             TopDownCamera.CameraTarget = hero.transform;
             Screen2D.Joystick.OnUpdate += HandlePlayerInput;
+
+            enemiesModel.Init();
+            var enemyIndex = 0;
+            foreach(var enemy in enemiesModel)
+            {
+                var settings = enemy.GetSettings();
+                var split = settings.Id.Split('_');
+                var path = EnemyPath + split[0] + "/" + settings.Id;
+                var enemyTemplate = enemyPrefabCache.TryGetValue(settings.Id, out var template)
+                    ? template
+                    : resourceManager.LoadResource<Enemy>(path);
+                enemyPrefabCache[settings.Id] = enemyTemplate;
+                var enemyInstance = UnityEngine.Object.Instantiate(enemyTemplate, Screen3D.EnemyContainer);
+                enemyInstance.EnemyModel = enemy;
+                enemiesOnScreen.Add(enemyIndex, enemyInstance);
+                enemyIndex++;
+            }
         }
 
         #endregion

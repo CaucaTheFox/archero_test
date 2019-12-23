@@ -26,7 +26,7 @@ namespace Features.Rooms.Screens
 
         #region Unity Serialized Fields
         [SerializeField] private NavMeshSurface baseFloorSurface;
-        [SerializeField] private Transform heroContainer, specialFloorContainer;
+        [SerializeField] private Transform heroContainer, enemyContainer, specialFloorContainer;
         [SerializeField] private BaseTileToTemplate[] baseTileTemplates;
         [SerializeField] private SpecialTileToTemplate[] specialTileTemplates;
         #endregion
@@ -37,6 +37,7 @@ namespace Features.Rooms.Screens
 
         #region Properties
         public Transform HeroContainer => heroContainer;
+        public Transform EnemyContainer => enemyContainer;
         #endregion
 
         #region State
