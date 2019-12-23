@@ -46,22 +46,22 @@ namespace Features.Rooms.Screens
             hero.Settings = heroSettings;
             TopDownCamera.CameraTarget = hero.transform;
             Screen2D.Joystick.OnUpdate += HandlePlayerInput;
-            Screen2D.Joystick.OnMovementEnded += HandleJoystickTouchEnded;
         }
 
         #endregion
 
         #region - Private
-        private void HandlePlayerInput()
+        private void HandlePlayerInput(bool isPointerDown)
         {
-            var input = new Vector3(Screen2D.Joystick.Horizontal, 0, Screen2D.Joystick.Vertical);
-            hero.MoveCharacter(input);
-
-        }
-
-        private void HandleJoystickTouchEnded()
-        {
-            hero.Shoot();
+            if (isPointerDown)
+            {
+                var input = new Vector3(Screen2D.Joystick.Horizontal, 0, Screen2D.Joystick.Vertical);
+                hero.MoveCharacter(input);
+            }
+            else
+            {
+                hero.Shoot();
+            }
         }
         #endregion
     }

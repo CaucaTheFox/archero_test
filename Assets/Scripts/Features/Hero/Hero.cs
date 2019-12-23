@@ -15,7 +15,6 @@ namespace Features.Heroes
 
         #region Properties
         public HeroSettings Settings {get;set;}
-        private Vector3 refVelocity;
         #endregion
 
         #region Lifecycle
@@ -32,8 +31,11 @@ namespace Features.Heroes
         #region Public
         public void MoveCharacter(Vector3 joyStickInput)
         {
-            transform.Translate(joyStickInput * 7f * Time.deltaTime, Space.World);
-            transform.forward = joyStickInput;
+            transform.Translate(joyStickInput * walkingSpeed * Time.deltaTime, Space.World);
+            if (joyStickInput != Vector3.zero)
+            {
+                transform.forward = joyStickInput;
+            }
             animator.SetTrigger("Run");
         }
 
