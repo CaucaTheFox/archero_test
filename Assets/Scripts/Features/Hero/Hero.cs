@@ -1,12 +1,13 @@
 ﻿using Core.IoC;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Features.Heroes
 {
     public class Hero : InjectableBehaviour
     {
         #region Unity Serialized Fields
-        [SerializeField] private float walkingSpeed;
+        [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
         #endregion
 
@@ -31,7 +32,8 @@ namespace Features.Heroes
         #region Public
         public void MoveCharacter(Vector3 joyStickInput)
         {
-            transform.Translate(joyStickInput * walkingSpeed * Time.deltaTime, Space.World);
+            //navMeshAgent.SetDestination(joyStickInput);
+            transform.Translate(joyStickInput * navMeshAgent.speed * Time.deltaTime, Space.World);
             if (joyStickInput != Vector3.zero)
             {
                 transform.forward = joyStickInput;

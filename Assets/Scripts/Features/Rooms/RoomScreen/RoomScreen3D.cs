@@ -37,7 +37,7 @@ namespace Features.Rooms.Screens
         private void Start()
         {
             tileToPrefabMap = tileTemplates.ToDictionary(x => x.Tile, y => y.Template);
-            SpawnTiles();
+            //SpawnTiles();
         }
 
         #endregion
