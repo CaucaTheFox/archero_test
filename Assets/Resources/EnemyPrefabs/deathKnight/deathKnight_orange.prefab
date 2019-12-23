@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 220040700276946596}
   - component: {fileID: 8886539880119685391}
   - component: {fileID: 9597222}
-  - component: {fileID: 4374396153625399565}
+  - component: {fileID: 2756143622494669984}
   m_Layer: 0
   m_Name: deathKnight_orange
   m_TagString: Untagged
@@ -417,7 +417,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4374396153625399565
+--- !u!114 &2756143622494669984
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -426,10 +426,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 126572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b12582826902f94d8d5c2ca2c052607, type: 3}
+  m_Script: {fileID: 11500000, guid: 528d9a99d011047498aa8b2e1d24fa14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 220040700276946596}
+  invisibilityCooldownSeconds: 5
+  invisibilityDuration: 5
 --- !u!1 &129406
 GameObject:
   m_ObjectHideFlags: 0

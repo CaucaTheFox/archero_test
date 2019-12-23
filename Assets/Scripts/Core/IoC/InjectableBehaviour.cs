@@ -4,7 +4,7 @@ namespace Core.IoC
 {
     public class InjectableBehaviour: MonoBehaviour
     {
-        protected virtual void Awake()
+        public virtual void Awake()
         {
             GameContext.Container.ResolveAll(this);
         }

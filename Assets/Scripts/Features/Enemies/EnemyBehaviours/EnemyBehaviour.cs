@@ -7,11 +7,11 @@ namespace Features.Enemies
     public class EnemyBehaviour : InjectableBehaviour
     {
         #region Unity Serialized Fields
-        [SerializeField] private Enemy enemy;
+        [SerializeField] protected Enemy enemy;
         #endregion
 
         #region Dependencies
-        [Inject] private IHeroModel heroModel;
+        [Inject] public IHeroModel heroModel;
         #endregion
 
         #region Properties
@@ -25,12 +25,10 @@ namespace Features.Enemies
         #endregion
 
         #region Public
-        public virtual void Init()
-        {
-          
-        }
+        #endregion
 
-        public virtual void MoveTowardsHero()
+        #region Private
+        private void MoveTowardsHero()
         {
             enemy.MoveTorwardsTarget(heroModel.HeroPosition);
         }

@@ -1,5 +1,6 @@
 using Core.IoC;
 using Core.ResourceManagement;
+using Core.Time;
 
 namespace Core
 {
@@ -8,6 +9,7 @@ namespace Core
         public void RegisterServices(IIoC container)
         {
             container.RegisterSingleton<IResourceManager, ResourceManager>();
+            container.RegisterSingleton<ITimeProvider, TimeProvider>();
         }
     }
 }

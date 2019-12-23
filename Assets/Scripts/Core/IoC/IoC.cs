@@ -94,7 +94,7 @@ namespace Core.IoC
 		{
 			var type = target.GetType();
 			var fields = type.GetFields(
-				BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+				BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy
 			);
 			
 			foreach (var field in fields)
