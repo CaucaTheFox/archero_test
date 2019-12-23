@@ -16,12 +16,18 @@ namespace Features.Rooms
         public void RegisterServices(IIoC container)
         {
             container.RegisterSingleton<IRoomsModel, RoomsModel>();
-            container.RegisterSingleton<IJsonConfig<RoomsConfig>, RoomsConfigContainer>();
+            container.RegisterSingleton<IJsonConfig<BaseFloorConfig>, BaseFloorConfigContainer>();
+            container.RegisterSingleton<IJsonConfig<SpecialFloorConfig>, SpecialFloorConfigContainer>();
         }
 
-        private class RoomsConfigContainer : JsonConfig<RoomsConfig>
+        private class BaseFloorConfigContainer : JsonConfig<BaseFloorConfig>
         {
-            protected override string ConfigPath => "Configs/Rooms/RoomsConfig";
+            protected override string ConfigPath => "Configs/Rooms/BaseFloorConfig";
+        }
+
+        private class SpecialFloorConfigContainer : JsonConfig<SpecialFloorConfig>
+        {
+            protected override string ConfigPath => "Configs/Rooms/SpecialFloorConfig";
         }
     }
 }

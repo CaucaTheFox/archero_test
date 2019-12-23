@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using Utility.Utility;
 
 namespace Features.Rooms.Screens
@@ -10,15 +11,24 @@ namespace Features.Rooms.Screens
     public class RoomScreen3D : InjectableBehaviour
     {
         [Serializable]
-        private struct TileToTemplate
+        private struct BaseTileToTemplate
         {
             public GameObject Template;
-            public RoomTile Tile;
+            public BaseFloorTile Tile;
+        }
+
+       [Serializable]
+        private struct SpecialTileToTemplate
+        {
+            public GameObject Template;
+            public SpecialFloorTile Tile;
         }
 
         #region Unity Serialized Fields
-        [SerializeField] private Transform tilesContainer, heroContainer;
-        [SerializeField] private TileToTemplate[] tileTemplates;
+        [SerializeField] private NavMeshSurface baseFloorSurface;
+        [SerializeField] private Transform heroContainer, specialFloorContainer;
+        [SerializeField] private BaseTileToTemplate[] baseTileTemplates;
+        [SerializeField] private SpecialTileToTemplate[] specialTileTemplates;
         #endregion
 
         #region Dependencies
@@ -30,39 +40,70 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region State
-        private Dictionary<RoomTile, GameObject> tileToPrefabMap;
+        private Dictionary<BaseFloorTile, GameObject> baseTileToPrefabMap;
+        private Dictionary<SpecialFloorTile, GameObject> specialTileToPrefabMap;
         #endregion
 
         #region Lifecycle
         private void Start()
         {
-            tileToPrefabMap = tileTemplates.ToDictionary(x => x.Tile, y => y.Template);
-            //SpawnTiles();
+            baseTileToPrefabMap = baseTileTemplates.ToDictionary(x => x.Tile, y => y.Template);
+            specialTileToPrefabMap = specialTileTemplates.ToDictionary(x => x.Tile, y => y.Template);
+            InstantiateBaseFloorTiles();
+            InstantiateSpecialFloorTiles();
+            baseFloorSurface.BuildNavMesh();
         }
 
         #endregion
 
         #region Private
-        private void SpawnTiles()
+        private void InstantiateBaseFloorTiles()
         {
-            var roomConfig = roomModel.GetRandomRoomConfig();
-            tilesContainer.DestroyChildren();
-            for (int i = 0; i < roomConfig.Rows.Count; i++)
+            var floorConfig = roomModel.GetRandomBaseFloorConfig();
+            baseFloorSurface.transform.DestroyChildren();
+            for (int i = 0; i < floorConfig.Rows.Count; i++)
             {
-                var row = roomConfig.Rows[i];
+                var row = floorConfig.Rows[i];
                 for (int j = 0; j < row.Tiles.Length; j++)
                 {
                     var tile = row.Tiles[j];
-                    if (!tileToPrefabMap.TryGetValue(tile, out var template))
+                    if (!baseTileToPrefabMap.TryGetValue(tile, out var template))
                     {
-                        throw new Exception($"[RoomView] No Template found for tile type {tile}");
+                        throw new Exception($"[RoomScreen3D] No Template found for tile type {tile}");
                     }
 
-                    var tileInstance = GameObject.Instantiate(template, tilesContainer);
+                    var tileInstance = GameObject.Instantiate(template, baseFloorSurface.transform);
                     tileInstance.transform.position = new Vector3(j, 0, i);
                 }
             }
         }
+
+        private void InstantiateSpecialFloorTiles()
+        {
+            var floorConfig = roomModel.GetRandomSpecialFloorConfig();
+            specialFloorContainer.DestroyChildren();
+            for (int i = 0; i < floorConfig.Rows.Count; i++)
+            {
+                var row = floorConfig.Rows[i];
+                for (int j = 0; j < row.Tiles.Length; j++)
+                {
+                    var tile = row.Tiles[j];
+                    if (tile == SpecialFloorTile.Undefined)
+                    {
+                        continue;
+                    }
+
+                    if (!specialTileToPrefabMap.TryGetValue(tile, out var template))
+                    {
+                        throw new Exception($"[RoomView] No Template found for tile type {tile}");
+                    }
+
+                    var tileInstance = GameObject.Instantiate(template, specialFloorContainer);
+                    tileInstance.transform.position = new Vector3(j, specialFloorContainer.position.y, i);
+                }
+            }
+        }
+
         #endregion
 
     }

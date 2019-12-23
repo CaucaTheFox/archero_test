@@ -5,21 +5,30 @@ namespace Features.Rooms
 {
     public interface IRoomsModel
     {
-        RoomConfig GetRandomRoomConfig();
+        BaseFloor GetRandomBaseFloorConfig();
+        SpecialFloor GetRandomSpecialFloorConfig();
     }
 
     public class RoomsModel : IRoomsModel
     {
         #region Dependencies
-        [Inject] private IJsonConfig<RoomsConfig> roomsConfig;
+        [Inject] private IJsonConfig<BaseFloorConfig> baseFloorsConfig;
+        [Inject] private IJsonConfig<SpecialFloorConfig> specialFloorsConfig;
         #endregion
 
         #region Public
-        public RoomConfig GetRandomRoomConfig()
+        public BaseFloor GetRandomBaseFloorConfig()
         {
-            var rooms = roomsConfig.Value.Rooms;
+            var rooms = baseFloorsConfig.Value.BaseFloors;
             var randomIndex = Random.Range(0,rooms.Count);
             return rooms[randomIndex]; 
+        }
+
+        public SpecialFloor GetRandomSpecialFloorConfig()
+        {
+            var rooms = specialFloorsConfig.Value.SpecialFloors;
+            var randomIndex = Random.Range(0, rooms.Count);
+            return rooms[randomIndex];
         }
         #endregion
     }
