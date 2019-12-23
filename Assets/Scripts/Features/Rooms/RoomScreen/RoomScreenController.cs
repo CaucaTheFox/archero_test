@@ -51,6 +51,7 @@ namespace Features.Rooms.Screens
             hero = UnityEngine.Object.Instantiate(heroTemplate, Screen3D.HeroContainer);
             hero.Settings = heroSettings;
             TopDownCamera.CameraTarget = hero.transform;
+            heroModel.HeroInstance = hero;
             Screen2D.Joystick.OnUpdate += HandlePlayerInput;
 
             enemiesModel.Init();

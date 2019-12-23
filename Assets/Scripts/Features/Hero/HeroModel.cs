@@ -1,17 +1,25 @@
 ﻿using Core.IoC;
-using Core.ResourceManagement;
+using UnityEngine;
 
 namespace Features.Heroes
 {
     public interface IHeroModel
     {
+        Hero HeroInstance { get; set; }
+        Vector3 HeroPosition { get; }
         HeroSettings GetHeroBaseSettings(string id);
+
     }
 
     public class HeroModel : IHeroModel
     {
         #region Dependencies
         [Inject] private IJsonConfig<HeroConfig> heroConfig;
+        #endregion
+
+        #region Properties
+        public Hero HeroInstance { get; set; }
+        public Vector3 HeroPosition => HeroInstance.Position; 
         #endregion
 
         #region Public

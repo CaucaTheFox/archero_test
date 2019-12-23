@@ -4911,6 +4911,7 @@ GameObject:
   - component: {fileID: 4434776278628515296}
   - component: {fileID: 4565366656362253282}
   - component: {fileID: 9530616}
+  - component: {fileID: 2790741544495853368}
   m_Layer: 0
   m_Name: cactusMonster_magenta
   m_TagString: Untagged
@@ -5003,6 +5004,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2790741544495853368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b12582826902f94d8d5c2ca2c052607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 4434776278628515296}
 --- !u!1 &119014
 GameObject:
   m_ObjectHideFlags: 0

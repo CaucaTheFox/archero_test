@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 7267090637042419875}
   - component: {fileID: 5859173584620298777}
   - component: {fileID: 9530270}
+  - component: {fileID: 7507305161185421555}
   m_Layer: 0
   m_Name: cactusMonster_purple
   m_TagString: Untagged
@@ -626,6 +627,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7507305161185421555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b12582826902f94d8d5c2ca2c052607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7267090637042419875}
 --- !u!1 &141366
 GameObject:
   m_ObjectHideFlags: 0

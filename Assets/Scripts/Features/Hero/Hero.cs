@@ -16,6 +16,7 @@ namespace Features.Heroes
 
         #region Properties
         public HeroSettings Settings {get;set;}
+        public Vector3 Position => transform.position;
         #endregion
 
         #region Lifecycle
@@ -32,7 +33,6 @@ namespace Features.Heroes
         #region Public
         public void MoveCharacter(Vector3 joyStickInput)
         {
-            //navMeshAgent.SetDestination(joyStickInput);
             transform.Translate(joyStickInput * navMeshAgent.speed * Time.deltaTime, Space.World);
             if (joyStickInput != Vector3.zero)
             {

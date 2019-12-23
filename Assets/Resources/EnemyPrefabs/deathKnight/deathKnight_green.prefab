@@ -6002,6 +6002,7 @@ GameObject:
   - component: {fileID: 3275444777370976045}
   - component: {fileID: 1654495188114951405}
   - component: {fileID: 9533198}
+  - component: {fileID: 3493846994558076678}
   m_Layer: 0
   m_Name: deathKnight_green
   m_TagString: Untagged
@@ -6096,6 +6097,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3493846994558076678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b12582826902f94d8d5c2ca2c052607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 3275444777370976045}
 --- !u!1 &182978
 GameObject:
   m_ObjectHideFlags: 0

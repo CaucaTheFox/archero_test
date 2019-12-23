@@ -691,6 +691,7 @@ GameObject:
   - component: {fileID: 7434718574400754904}
   - component: {fileID: 5552263778760428525}
   - component: {fileID: 9562036}
+  - component: {fileID: 4127464899053538036}
   m_Layer: 0
   m_Name: dragon_green
   m_TagString: Untagged
@@ -800,6 +801,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4127464899053538036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b12582826902f94d8d5c2ca2c052607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7434718574400754904}
 --- !u!1 &129446
 GameObject:
   m_ObjectHideFlags: 0

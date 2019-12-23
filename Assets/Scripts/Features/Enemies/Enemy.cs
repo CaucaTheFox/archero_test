@@ -19,14 +19,6 @@ namespace Features.Enemies
         #endregion
 
         #region Lifecycle
-        private void Start()
-        {
-
-        }
-        private void OnDestroy()
-        {
-
-        }
         #endregion
 
         #region Public
