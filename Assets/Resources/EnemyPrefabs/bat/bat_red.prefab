@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 7127079544586096097}
   - component: {fileID: 7211117955545391085}
   - component: {fileID: 9596988}
-  - component: {fileID: 8977759976406977374}
+  - component: {fileID: 3678555642509017297}
   m_Layer: 0
   m_Name: bat_red
   m_TagString: Untagged
@@ -494,7 +494,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -525,7 +525,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8977759976406977374
+--- !u!114 &3678555642509017297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,10 +534,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 189024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b12582826902f94d8d5c2ca2c052607, type: 3}
+  m_Script: {fileID: 11500000, guid: f880b6422c620df499e5222d150e32f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7127079544586096097}
+  frequency: 1
+  magnitude: 5
 --- !u!1 &194132
 GameObject:
   m_ObjectHideFlags: 0
