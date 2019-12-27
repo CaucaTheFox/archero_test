@@ -1284,14 +1284,14 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 110144796}
+  - {fileID: 110146768}
   - {fileID: 110149752}
+  - {fileID: 110103648}
   - {fileID: 110168574}
   - {fileID: 110163190}
   - {fileID: 110188464}
-  - {fileID: 110103648}
   - {fileID: 110100002}
-  - {fileID: 110144796}
-  - {fileID: 110146768}
   - {fileID: 110139540}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}

@@ -788,12 +788,12 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
+  - {fileID: 110172752}
+  - {fileID: 110101232}
   - {fileID: 110183872}
   - {fileID: 110119710}
   - {fileID: 110127874}
   - {fileID: 110132292}
-  - {fileID: 110172752}
-  - {fileID: 110101232}
   - {fileID: 110182412}
   - {fileID: 110132270}
   - {fileID: 110166276}

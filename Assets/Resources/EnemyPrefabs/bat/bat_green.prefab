@@ -71,6 +71,7 @@ Transform:
   - {fileID: 451336}
   - {fileID: 466786}
   - {fileID: 453836}
+  - {fileID: 1977959054067571728}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -88,6 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 7228405397716150745}
   animator: {fileID: 9510704}
+  healthBarAnchor: {fileID: 1977959054067571728}
 --- !u!195 &7228405397716150745
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -280,7 +282,7 @@ GameObject:
   - component: {fileID: 453836}
   - component: {fileID: 13799750}
   - component: {fileID: 5695021196697676324}
-  - component: {fileID: 1404753944235037861}
+  - component: {fileID: 5820917680168983771}
   m_Layer: 0
   m_Name: Toon Bat
   m_TagString: Untagged
@@ -375,8 +377,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &1404753944235037861
-MeshCollider:
+--- !u!65 &5820917680168983771
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -385,10 +387,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: cae08b2a8dd381e41b32ff4f43feaab9, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 3.3792999, y: 1, z: 2.290522}
+  m_Center: {x: -0.013769031, y: 2.0642887e-15, z: 0.6452613}
 --- !u!1 &128344
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,4 +690,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 401782}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6404060327102554581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1977959054067571728}
+  m_Layer: 0
+  m_Name: HealthBarAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1977959054067571728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6404060327102554581}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.689, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 401782}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -49,7 +49,7 @@ namespace Features.Rooms.Screens
             hero = heroModel.CreateHero(Screen3D.HeroContainer);
             hero.OnHitEnemy += HandleHitEnemy;
             TopDownCamera.CameraTarget = hero.transform;
- 
+            Screen2D.InstantiateHeroHealthBar(hero.HealthBarAnchor, Camera.main, heroModel);
             enemiesModel.Init();
             enemiesModel.OnDeath += HandleEnemyDeath;
             SpawnEnemies();
@@ -71,6 +71,7 @@ namespace Features.Rooms.Screens
                 enemyPrefabCache[settings.Id] = enemyTemplate;
                 var enemyInstance = UnityEngine.Object.Instantiate(enemyTemplate, Screen3D.EnemyContainer);
                 enemyInstance.SetModel(enemy);
+                Screen2D.InstantiateEnemyHealthBar(enemyInstance.HealthBarAnchor, Camera.main, enemy);
                 enemiesOnScreen.Add(enemy.Index, enemyInstance);
             }
         }
@@ -101,7 +102,12 @@ namespace Features.Rooms.Screens
         private void HandleEnemyDeath(IEnemyModel model)
         {
             var index = model.Index;
-            enemiesOnScreen.TryGetValue(index, out var enemy);
+           
+            if (!enemiesOnScreen.TryGetValue(index, out var enemy))
+            {
+                throw new Exception("[RoomScreenController] No enemy on screen with Id " + index);
+            }
+
             enemy.PlayDeathAnimation();
             enemiesOnScreen.Remove(index);
 

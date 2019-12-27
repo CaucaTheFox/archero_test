@@ -15,6 +15,7 @@ namespace Features.Heroes
         #region Unity Serialized Fields
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
+        [SerializeField] private Transform healthBarAnchor;
         [SerializeField] private Arrow arrowPrefab;
         [SerializeField] private AnimationEventProvider animationEventProvider;
         #endregion
@@ -25,6 +26,7 @@ namespace Features.Heroes
         #region Properties
         public HeroSettings Settings {get;set;}
         public Vector3 Position => transform.position;
+        public Transform HealthBarAnchor => healthBarAnchor;
         #endregion
 
         #region State

@@ -10,6 +10,7 @@ namespace Features.Enemies
         #region Unity Serialized Fields
         [SerializeField] private long invisibilityCooldownSeconds;
         [SerializeField] private long invisibilityDuration;
+        [SerializeField] private float invisibilitySpeed;
         #endregion
 
         #region Dependencies
@@ -19,7 +20,6 @@ namespace Features.Enemies
         #region State
         private long lastTimeInvisible;
         private long invisibilityStart;
-        private bool isInvisible;
         #endregion
 
         #region Lifecycle
@@ -32,27 +32,29 @@ namespace Features.Enemies
             base.Update();
 
             var now = timeProvider.TimestampUtcNow;
-            if (isInvisible)
+            if (!enemy.EnemyModel.IsVisible)
             {
                 if (now - invisibilityStart > invisibilityDuration)
                 {
+                    enemy.EnemyModel.IsVisible = true;
+                    enemy.transform
+                        .DOScale(Vector3.one, 0.3f)
+                        .SetEase(Ease.OutBounce);
+                    enemy.ResetSpeed();
                     invisibilityStart = 0;
                     lastTimeInvisible = now;
-                    isInvisible = false;
-                    enemy.transform
-                    .DOScale(Vector3.one, 0.3f)
-                    .SetEase(Ease.OutBounce);
                 }
                 return;
             }
 
             if (now - lastTimeInvisible > invisibilityCooldownSeconds)
             {
-                invisibilityStart = now;
-                isInvisible = true;
+                enemy.EnemyModel.IsVisible = false;
                 enemy.transform
                     .DOScale(Vector3.zero, 0.3f)
                     .SetEase(Ease.InBounce);
+                enemy.ChangeSpeed(invisibilitySpeed);
+                invisibilityStart = now;
             }
         }
         #endregion

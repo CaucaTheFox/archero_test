@@ -14,13 +14,10 @@ namespace Features.Enemies
         [Inject] public IHeroModel heroModel;
         #endregion
 
-        #region Properties
-        #endregion
-
         #region Lifecycle
         public virtual void Update()
         {
-            MoveTowardsHero();
+            MoveTowardsHero();  
         }
         #endregion
 

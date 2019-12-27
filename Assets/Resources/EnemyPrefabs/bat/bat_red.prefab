@@ -467,6 +467,7 @@ Transform:
   - {fileID: 468676}
   - {fileID: 417922}
   - {fileID: 419250}
+  - {fileID: 2072073999873970638}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -484,6 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 7211117955545391085}
   animator: {fileID: 9596988}
+  healthBarAnchor: {fileID: 2072073999873970638}
 --- !u!195 &7211117955545391085
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -494,7 +496,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -581,7 +583,7 @@ GameObject:
   - component: {fileID: 419250}
   - component: {fileID: 13730812}
   - component: {fileID: 3613940692489220737}
-  - component: {fileID: 2150437855291585357}
+  - component: {fileID: 7829480709770159884}
   m_Layer: 0
   m_Name: Toon Bat
   m_TagString: Untagged
@@ -676,8 +678,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &2150437855291585357
-MeshCollider:
+--- !u!65 &7829480709770159884
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -686,7 +688,36 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 5b6f98951d2cc8643b294d83eb337fc0, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 3.3792999, y: 1, z: 2.290522}
+  m_Center: {x: -0.013769031, y: 2.0642887e-15, z: 0.6452613}
+--- !u!1 &2126449979005265581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072073999873970638}
+  m_Layer: 0
+  m_Name: HealthBarAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2072073999873970638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126449979005265581}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.689, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 475480}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

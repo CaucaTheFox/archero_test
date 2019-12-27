@@ -7,6 +7,8 @@ namespace Features.Heroes
     public interface IHeroModel
     {
         Vector3 HeroPosition { get; }
+        float CurrentHealthNormalized { get; }
+        int CurrentHealth { get; }
         int GetCurrentHeroAttack { get; }
 
         Hero CreateHero(Transform parent);
@@ -31,25 +33,27 @@ namespace Features.Heroes
         #endregion
 
         #region Properties
-        private Hero heroInstance;
         public Vector3 HeroPosition => heroInstance.Position;
+        public float CurrentHealthNormalized => (float) CurrentHealth / heroInstance.Settings.Health;
+        public int CurrentHealth { get; set; }
+
+        public int GetCurrentHeroAttack => heroInstance.Settings.Attack; // could be altered with armor/items to be more than base attack
         #endregion
 
         #region State
-        private int currentHealth;
         private HeroState currentState;
+        private Hero heroInstance;
         #endregion
         #region Public
         public Hero CreateHero(Transform parent)
         {
             var heroTemplate = resourceManager.LoadResource<Hero>(DefaultHeroPath);
             var heroSettings = GetHeroBaseSettings();
-
+            CurrentHealth = heroSettings.Health;
             heroInstance = Object.Instantiate(heroTemplate, parent);
             heroInstance.Settings = heroSettings;
             return heroInstance;
         }
-        public int GetCurrentHeroAttack => heroInstance.Settings.Attack; // could be altered with armor/items to be more than base attack
         #endregion
 
         #region Private

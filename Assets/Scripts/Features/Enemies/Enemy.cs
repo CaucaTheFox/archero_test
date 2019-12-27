@@ -10,6 +10,7 @@ namespace Features.Enemies
         #region Unity Serialized Fields
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
+        [SerializeField] private Transform healthBarAnchor;
         #endregion
 
         #region Dependencies
@@ -18,12 +19,18 @@ namespace Features.Enemies
         #region Properties
         public IEnemyModel EnemyModel { get; private set; }
         public Vector3 Position => transform.position;
+        public Transform HealthBarAnchor => healthBarAnchor;
         #endregion
 
         #region State
+        private float baseSpeed;
         #endregion
 
         #region Lifecycle       
+        private void Start()
+        {
+            baseSpeed = navMeshAgent.speed;
+        }
         public void SetModel(IEnemyModel enemyModel)
         {
             EnemyModel = enemyModel;
@@ -39,8 +46,16 @@ namespace Features.Enemies
         #region Public
         public void MoveTorwardsTarget(Vector3 target)
         {
+            if (EnemyModel.IsDead)
+            {
+                return;
+            }
             navMeshAgent.SetDestination(target);
-            animator.SetTrigger("Run");
+            var trigger = navMeshAgent.speed > 3
+                ? "Run"
+                : "Walk";
+
+            animator.SetTrigger(trigger);
         }
 
         public void PlayDeathAnimation()
@@ -49,9 +64,17 @@ namespace Features.Enemies
             var deathSequence = DOTween.Sequence();
             deathSequence.AppendInterval(1.5f);
             deathSequence.Append(transform
-                .DOScale(Vector3.zero, 3f)
-                .SetEase(Ease.OutBounce)
-                .OnComplete(() => GameObject.Destroy(gameObject)));
+                .DOScale(Vector3.zero, 1.5f)
+                .OnComplete(() => Destroy(gameObject)));
+        }
+
+        public void ChangeSpeed(float speed)
+        {
+            navMeshAgent.speed = speed;
+        }
+        public void ResetSpeed()
+        {
+            navMeshAgent.speed = baseSpeed;
         }
         #endregion
 

@@ -359,6 +359,7 @@ Transform:
   - {fileID: 420994}
   - {fileID: 451126}
   - {fileID: 466754}
+  - {fileID: 5368406753788368732}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -376,6 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 8886539880119685391}
   animator: {fileID: 9597222}
+  healthBarAnchor: {fileID: 5368406753788368732}
 --- !u!195 &8886539880119685391
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -386,7 +388,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -432,6 +434,7 @@ MonoBehaviour:
   enemy: {fileID: 220040700276946596}
   invisibilityCooldownSeconds: 5
   invisibilityDuration: 5
+  invisibilitySpeed: 3
 --- !u!1 &129406
 GameObject:
   m_ObjectHideFlags: 0
@@ -6357,4 +6360,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 480822}
   m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7370549796326722106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5368406753788368732}
+  m_Layer: 0
+  m_Name: HealthBarAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5368406753788368732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370549796326722106}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.911, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 480822}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

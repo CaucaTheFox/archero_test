@@ -44,9 +44,9 @@ namespace Features.Heroes
                 return;
             }
 
-            var movement = FlightDirection * Time.deltaTime * arrowSpeed;
-            movement.y = 0;
-            transform.position += movement;
+            var movement = FlightDirection * Time.deltaTime * arrowSpeed + transform.position;
+            movement.y = 0.5f;
+            transform.position = movement;
         }
         private void OnDestroy()
         {
