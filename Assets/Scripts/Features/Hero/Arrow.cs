@@ -8,7 +8,7 @@ namespace Features.Heroes
     public class Arrow : MonoBehaviour
     {
         #region Events
-        public event Action<Enemy> OnHitEnemy;
+        public event Action<int> OnHitEnemy;
         #endregion
 
         #region Unity Serialized Fields
@@ -22,7 +22,7 @@ namespace Features.Heroes
 
         #region State
         private float lifeTime;
-        private bool hitObstacle;
+        private bool hasHit;
         #endregion
 
         #region Lifecycle
@@ -32,7 +32,7 @@ namespace Features.Heroes
         }
         private void Update()
         {
-            if (hitObstacle)
+            if (hasHit)
             {
                 return;
             }
@@ -60,16 +60,17 @@ namespace Features.Heroes
             var obstacle = collider.gameObject.GetComponent<NavMeshObstacle>();
             if (obstacle != null)
             {
-                hitObstacle = true;
+                hasHit = true;
                 GameObject.Destroy(gameObject, 0.5f);
                 return;
             }
 
-            var hitEnemy = collider.gameObject.GetComponent<Enemy>();
+            var hitEnemy = collider.GetComponentInParent<Enemy>();
             if (hitEnemy != null)
             {
-                OnHitEnemy?.Invoke(hitEnemy);
-                GameObject.Destroy(gameObject);
+                OnHitEnemy?.Invoke(hitEnemy.EnemyModel.Index);
+                hasHit = true;
+                GameObject.Destroy(gameObject, 0.5f);
             }
         }
         #endregion

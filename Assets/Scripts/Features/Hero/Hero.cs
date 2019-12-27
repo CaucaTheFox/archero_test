@@ -1,5 +1,4 @@
 ﻿using Core.IoC;
-using Features.Enemies;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +9,7 @@ namespace Features.Heroes
     public class Hero : InjectableBehaviour
     {
         #region Events
+        public event Action<int> OnHitEnemy;
         #endregion
 
         #region Unity Serialized Fields
@@ -28,7 +28,7 @@ namespace Features.Heroes
         #endregion
 
         #region State
-        private bool isMoving; 
+        private bool isMoving;
         #endregion
 
         #region Lifecycle
@@ -77,6 +77,13 @@ namespace Features.Heroes
             arrow.transform.position = Position;
             arrow.transform.up = -transform.forward;
             arrow.FlightDirection = transform.forward;
+            arrow.OnHitEnemy += DispatchHitEnemy;
+            
+            void DispatchHitEnemy(int enemyIndex)
+            {
+                arrow.OnHitEnemy -= DispatchHitEnemy;
+                OnHitEnemy?.Invoke(enemyIndex);
+            }
         }
         #endregion
     }

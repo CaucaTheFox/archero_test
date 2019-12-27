@@ -14,9 +14,7 @@ namespace Features.Rooms.Screens
     public class RoomScreenController: DualScreenController<RoomScreen2D, RoomScreen3D>
     {
         #region - Constants
-        public const string ScreenName = "RoomScreen";
-        private const string DefaultHeroId = "archer_green";
-        private const string DefaultHeroPath = "HeroPrefabs/archer_green";
+        public const string ScreenName = "RoomScreen";  
         private const string EnemyPath = "EnemyPrefabs/";
         #endregion
 
@@ -46,18 +44,23 @@ namespace Features.Rooms.Screens
                 throw new Exception("[RoomScreenController] No TopDownCamera component found on main camera.");
             }
 
-            var heroTemplate = resourceManager.LoadResource<Hero>(DefaultHeroPath);
-            var heroSettings = heroModel.GetHeroBaseSettings(DefaultHeroId);
-        
-            hero = UnityEngine.Object.Instantiate(heroTemplate, Screen3D.HeroContainer);
-            hero.Settings = heroSettings;
-            TopDownCamera.CameraTarget = hero.transform;
-            heroModel.HeroInstance = hero;
             Screen2D.Joystick.OnUpdate += HandlePlayerInput;
 
+            hero = heroModel.CreateHero(Screen3D.HeroContainer);
+            hero.OnHitEnemy += HandleHitEnemy;
+            TopDownCamera.CameraTarget = hero.transform;
+ 
             enemiesModel.Init();
-            var enemyIndex = 0;
-            foreach(var enemy in enemiesModel)
+            enemiesModel.OnDeath += HandleEnemyDeath;
+            SpawnEnemies();
+        }
+
+        #endregion
+
+        #region - Private
+        private void SpawnEnemies()
+        {
+            foreach (var enemy in enemiesModel)
             {
                 var settings = enemy.GetSettings();
                 var split = settings.Id.Split('_');
@@ -67,15 +70,10 @@ namespace Features.Rooms.Screens
                     : resourceManager.LoadResource<Enemy>(path);
                 enemyPrefabCache[settings.Id] = enemyTemplate;
                 var enemyInstance = UnityEngine.Object.Instantiate(enemyTemplate, Screen3D.EnemyContainer);
-                enemyInstance.EnemyModel = enemy;
-                enemiesOnScreen.Add(enemyIndex, enemyInstance);
-                enemyIndex++;
+                enemyInstance.SetModel(enemy);
+                enemiesOnScreen.Add(enemy.Index, enemyInstance);
             }
         }
-
-        #endregion
-
-        #region - Private
         private void HandlePlayerInput(bool isPointerDown)
         {
             if (isPointerDown)
@@ -91,8 +89,27 @@ namespace Features.Rooms.Screens
 
         private Vector3 FindClosestEnemy()
         {
-            enemiesOnScreen.OrderBy(x => Vector3.Distance(hero.Position, x.Value.Position));
-            return enemiesOnScreen.First().Value.Position;
+            var orderedByDistance = enemiesOnScreen.OrderBy(x => Vector3.Distance(hero.Position, x.Value.Position));
+            return orderedByDistance.First().Value.Position;
+        }
+
+        private void HandleHitEnemy(int enemyIndex)
+        {
+            enemiesModel.ApplyDamage(enemyIndex, heroModel.GetCurrentHeroAttack); 
+        }
+
+        private void HandleEnemyDeath(IEnemyModel model)
+        {
+            var index = model.Index;
+            enemiesOnScreen.TryGetValue(index, out var enemy);
+            enemy.PlayDeathAnimation();
+            enemiesOnScreen.Remove(index);
+
+            if (enemiesOnScreen.Count == 0)
+            {
+                enemiesModel.GenerateNextWave();
+                SpawnEnemies();
+            }
         }
         #endregion
     }

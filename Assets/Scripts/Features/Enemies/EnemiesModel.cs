@@ -1,4 +1,5 @@
 ﻿using Core.IoC;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,11 @@ namespace Features.Enemies
 {
     public interface IEnemiesModel : IEnumerable<IEnemyModel>
     {
+        event Action<IEnemyModel> OnDamageTaken;
+        event Action<IEnemyModel> OnDeath;
         void Init();
+        void ApplyDamage(int enemyIndex, int damage);
+        void GenerateNextWave();
     }
 
     public class EnemiesModel : IEnemiesModel
@@ -15,26 +20,67 @@ namespace Features.Enemies
         #region Constants
         private const int MaxEnemies = 4; // for demo purpose, enemy count per room would be defined by GD differently 
         #endregion
+
+        #region Events
+        public event Action<IEnemyModel> OnDamageTaken;
+        public event Action<IEnemyModel> OnDeath;
+        #endregion
+
         #region Dependencies
         [Inject] private IJsonConfig<EnemyConfig> enemyConfig;
         #endregion
 
         #region State
-        private List<EnemyModel> EnemyModels; 
+        private EnemyModel[] EnemyModels; 
         #endregion
 
         #region Public
         public void Init()
         {
-            EnemyModels = new List<EnemyModel>();
             var enemyAmount = UnityEngine.Random.Range(1, MaxEnemies);
-            var enemySettings = enemyConfig.Value.Enemies.Select(x => x.Value).ToList(); 
+            GenerateEnemies(enemyAmount);
+        }
+
+        public void ApplyDamage(int enemyIndex, int damage)
+        {
+            EnemyModels[enemyIndex].ApplyDamage(damage);
+        }
+
+        public void GenerateNextWave()
+        {
+            foreach (var model in EnemyModels)
+            {
+                model.OnDamageTaken -= DispatchDamageTaken;
+                model.OnDeath -= DispatchDamageTaken;
+            }
+
+            var enemyAmount = UnityEngine.Random.Range(1, MaxEnemies);
+            GenerateEnemies(enemyAmount);
+        }
+        #endregion
+
+        #region Private
+        private void GenerateEnemies(int enemyAmount)
+        {
+            EnemyModels = new EnemyModel[enemyAmount];
+            var enemySettings = enemyConfig.Value.Enemies.Select(x => x.Value).ToList();
             for (int i = 0; i < enemyAmount; i++)
             {
                 var randomIndex = UnityEngine.Random.Range(0, enemyConfig.Value.Enemies.Count);
-                var enemyModel = new EnemyModel(enemySettings[randomIndex]);
-                EnemyModels.Add(enemyModel);
+                var enemyModel = new EnemyModel(enemySettings[randomIndex], i);
+                EnemyModels[i] = enemyModel;
+                enemyModel.OnDamageTaken += DispatchDamageTaken;
+                enemyModel.OnDeath += DispatchDeath;
             }
+        }
+        private void DispatchDamageTaken(int enemyIndex)
+        {
+            OnDamageTaken?.Invoke(EnemyModels[enemyIndex]);
+        }
+
+        private void DispatchDeath(int enemyIndex)
+        {
+            OnDeath?.Invoke(EnemyModels[enemyIndex]);
         }
         #endregion
 
