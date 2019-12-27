@@ -1,17 +1,22 @@
 ﻿using Core.IoC;
-using Core.Time;
-using System.Collections;
+using Features.Enemies;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Utility;
 
 namespace Features.Heroes
 {
     public class Hero : InjectableBehaviour
     {
+        #region Events
+        #endregion
+
         #region Unity Serialized Fields
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
         [SerializeField] private Arrow arrowPrefab;
+        [SerializeField] private AnimationEventProvider animationEventProvider;
         #endregion
 
         #region Dependencies
@@ -23,25 +28,25 @@ namespace Features.Heroes
         #endregion
 
         #region State
-        private Coroutine arrowInstantiationRoutine;
+        private bool isMoving; 
         #endregion
 
         #region Lifecycle
         private void Start()
         {
-
+            animationEventProvider.OnAttack += ShowArrow;
         }
         private void OnDestroy()
         {
-            StopArrowShooting();
+            animationEventProvider.OnAttack -= ShowArrow;
         }
         #endregion
 
         #region Public
         public void MoveCharacter(Vector3 joyStickInput)
         {
-            StopArrowShooting();
-            
+            isMoving = true;
+            animator.speed = 1;
             transform.Translate(joyStickInput * navMeshAgent.speed * Time.deltaTime, Space.World);
             if (joyStickInput != Vector3.zero)
             {
@@ -50,38 +55,29 @@ namespace Features.Heroes
             animator.SetTrigger("Run");
         }
 
-        public void Shoot()
+        public void Shoot(Vector3 closestEnemyPosition)
         {
+            isMoving = false;
             animator.SetTrigger("Arrow Attack");
-            if (arrowInstantiationRoutine == null)
-            {
-                arrowInstantiationRoutine = StartCoroutine(InstantiateArrows()); 
-            }
+            animator.speed = Settings.AttackSpeed;
+            transform.LookAt(closestEnemyPosition);
         }
         #endregion
 
         #region Private
 
-        private void StopArrowShooting()
+        private void ShowArrow()
         {
-            if (arrowInstantiationRoutine != null)
+            if (isMoving)
             {
-                StopCoroutine(arrowInstantiationRoutine);
-                arrowInstantiationRoutine = null;
+                return;
             }
-        }
-        private IEnumerator InstantiateArrows()
-        {
-            while(true)
-            {
-                yield return new WaitForSeconds(1 / Settings.AttackSpeed);
-                var arrow = GameObject.Instantiate<Arrow>(arrowPrefab);
-                arrow.transform.position = Position;
-                arrow.transform.up = -transform.forward;
-                arrow.FlightDirection = transform.forward; 
-            }
-        }
 
+            var arrow = GameObject.Instantiate<Arrow>(arrowPrefab);
+            arrow.transform.position = Position;
+            arrow.transform.up = -transform.forward;
+            arrow.FlightDirection = transform.forward;
+        }
         #endregion
     }
 }

@@ -6,6 +6,7 @@ using Features.Heroes;
 using Features.Screens;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Features.Rooms.Screens
@@ -84,8 +85,14 @@ namespace Features.Rooms.Screens
             }
             else
             {
-                hero.Shoot();
+                hero.Shoot(FindClosestEnemy());
             }
+        }
+
+        private Vector3 FindClosestEnemy()
+        {
+            enemiesOnScreen.OrderBy(x => Vector3.Distance(hero.Position, x.Value.Position));
+            return enemiesOnScreen.First().Value.Position;
         }
         #endregion
     }

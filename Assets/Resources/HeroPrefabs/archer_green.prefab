@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 6525117066372407758}
   - component: {fileID: 9549156}
   - component: {fileID: 7439596452709693156}
+  - component: {fileID: 3419189530746467531}
   m_Layer: 0
   m_Name: archer_green
   m_TagString: Untagged
@@ -187,6 +188,7 @@ MonoBehaviour:
   animator: {fileID: 9549156}
   arrowPrefab: {fileID: 7840150960771850421, guid: 9f016ee583bd9cc4587c3c7ba686141d,
     type: 3}
+  animationEventProvider: {fileID: 3419189530746467531}
 --- !u!95 &9549156
 Animator:
   serializedVersion: 3
@@ -228,6 +230,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3419189530746467531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e8493426dbab1449a9eadff5ca1962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &107886
 GameObject:
   m_ObjectHideFlags: 0

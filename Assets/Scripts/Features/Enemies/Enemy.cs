@@ -16,23 +16,17 @@ namespace Features.Enemies
 
         #region Properties
         public IEnemyModel EnemyModel {get;set;}
+        public Vector3 Position => transform.position;
         #endregion
 
         #region Lifecycle
         #endregion
 
         #region Public
-        public void MoveTorwardsTarget
-            (Vector3 target)
+        public void MoveTorwardsTarget(Vector3 target)
         {
             navMeshAgent.SetDestination(target);
             animator.SetTrigger("Run");
-        }
-
-        public void Shoot()
-        {
-            animator.SetTrigger("Idle");
-            animator.SetTrigger("Arrow Attack");
         }
         #endregion
 
