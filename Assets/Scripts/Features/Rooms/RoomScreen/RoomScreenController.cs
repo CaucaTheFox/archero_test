@@ -44,15 +44,15 @@ namespace Features.Rooms.Screens
                 throw new Exception("[RoomScreenController] No TopDownCamera component found on main camera.");
             }
 
-            Screen2D.Joystick.OnUpdate += HandlePlayerInput;
-
             hero = heroModel.CreateHero(Screen3D.HeroContainer);
             hero.OnHitEnemy += HandleHitEnemy;
             TopDownCamera.CameraTarget = hero.transform;
             Screen2D.InstantiateHeroHealthBar(hero.HealthBarAnchor, Camera.main, heroModel);
             enemiesModel.Init();
             enemiesModel.OnDeath += HandleEnemyDeath;
+            enemiesModel.OnPlayerHit += HandlePlayerHit;
             SpawnEnemies();
+            Screen2D.Joystick.OnUpdate += HandlePlayerInput;
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace Features.Rooms.Screens
         {
             foreach (var enemy in enemiesModel)
             {
-                var settings = enemy.GetSettings();
+                var settings = enemy.Settings;
                 var split = settings.Id.Split('_');
                 var path = EnemyPath + split[0] + "/" + settings.Id;
                 var enemyTemplate = enemyPrefabCache.TryGetValue(settings.Id, out var template)
@@ -70,13 +70,18 @@ namespace Features.Rooms.Screens
                     : resourceManager.LoadResource<Enemy>(path);
                 enemyPrefabCache[settings.Id] = enemyTemplate;
                 var enemyInstance = UnityEngine.Object.Instantiate(enemyTemplate, Screen3D.EnemyContainer);
-                enemyInstance.SetModel(enemy);
+                enemyInstance.Init(enemy);
                 Screen2D.InstantiateEnemyHealthBar(enemyInstance.HealthBarAnchor, Camera.main, enemy);
                 enemiesOnScreen.Add(enemy.Index, enemyInstance);
             }
         }
         private void HandlePlayerInput(bool isPointerDown)
         {
+            if (heroModel.CurrentState == HeroState.Dead)
+            {
+                return;
+            }
+
             if (isPointerDown)
             {
                 var input = new Vector3(Screen2D.Joystick.Horizontal, 0, Screen2D.Joystick.Vertical);
@@ -116,6 +121,11 @@ namespace Features.Rooms.Screens
                 enemiesModel.GenerateNextWave();
                 SpawnEnemies();
             }
+        }
+
+        private void HandlePlayerHit(int damage)
+        {
+            heroModel.ApplyDamage(damage);
         }
         #endregion
     }

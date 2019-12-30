@@ -15,20 +15,23 @@ namespace Features.Enemies
         #endregion
 
         #region Lifecycle
-        public virtual void Update()
+        protected virtual void Update()
         {
-            MoveTowardsHero();  
+            Move();
         }
         #endregion
 
-        #region Public
-        #endregion
-
-        #region Private
-        private void MoveTowardsHero()
+        #region Public     
+        protected virtual void Move()
         {
             enemy.MoveTorwardsTarget(heroModel.HeroPosition);
         }
+
+        protected virtual void Attack()
+        {
+        
+        }
         #endregion
+
     }
 }

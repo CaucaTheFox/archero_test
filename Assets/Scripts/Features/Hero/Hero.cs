@@ -64,6 +64,16 @@ namespace Features.Heroes
             animator.speed = Settings.AttackSpeed;
             transform.LookAt(closestEnemyPosition);
         }
+
+        public void PlayDamageAnimation()
+        {
+            animator.SetTrigger("Take Damage");
+        }
+
+        public void PlayDeathAnimation()
+        {
+            animator.SetTrigger("Die");
+        }
         #endregion
 
         #region Private

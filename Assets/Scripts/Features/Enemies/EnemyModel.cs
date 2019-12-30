@@ -6,18 +6,25 @@ namespace Features.Enemies
     {
         event Action<int> OnDamageTaken;
         event Action<int> OnDeath;
+        event Action<int> OnPlayerHit;
         event Action OnVisibilityChange;
 
         int Index { get; }
         float CurrentHealthNormalized { get; }
         bool IsDead { get; }
         bool IsVisible { get; set; }
-        EnemySettings GetSettings();
+        EnemySettings Settings { get; }
+        EnemyState EnemyState { get; set; }
         void ApplyDamage(int damage);
+        void DispatchPlayerHit(int damage);
+
     }
     public enum EnemyState
     {
-        Alive,
+        Moving,
+        MeleeAttack,
+        ParticleAttack,
+        RangedAttack,
         Dead,
     }
 
@@ -26,13 +33,14 @@ namespace Features.Enemies
         #region Events
         public event Action<int> OnDamageTaken;
         public event Action<int> OnDeath;
+        public event Action<int> OnPlayerHit;
         public event Action OnVisibilityChange;
         #endregion
 
         #region Properties
         public int Index { get; }
-        public float CurrentHealthNormalized => (float) currentHealth / settings.Health;
-        public bool IsDead => state == EnemyState.Dead;
+        public float CurrentHealthNormalized => (float) currentHealth / Settings.Health;
+        public bool IsDead => EnemyState == EnemyState.Dead;
         public bool IsVisible {
             get => isVisible;
             set
@@ -41,48 +49,51 @@ namespace Features.Enemies
                 OnVisibilityChange?.Invoke();
             }
         }
+
+        public EnemySettings Settings { get; }
+
+        public EnemyState EnemyState { get; set; }
         #endregion
 
         #region State     
-        private EnemySettings settings;
         private bool isVisible;
         // in real game setting, these would be applied to a gamestate saved to disk
         private int currentHealth;
-        private EnemyState state;
         #endregion
 
         #region Public
         public EnemyModel(EnemySettings settings, int index)
         {
-            this.settings = settings;
+            this.Settings = settings;
             this.Index = index;
             currentHealth = settings.Health;
-            state = EnemyState.Alive;
+            EnemyState = EnemyState.Moving;
             isVisible = true;
         }
 
-        public EnemySettings GetSettings()
-        {
-            return settings;
-        }
         public void ApplyDamage(int damage)
         {
-            if (state == EnemyState.Dead || !IsVisible)
+            if (EnemyState == EnemyState.Dead || !IsVisible)
             {
                 return;
             }
 
-            currentHealth -= damage + settings.DamageResistance; 
+            currentHealth -= damage + Settings.DamageResistance; 
             if (currentHealth > 0)
             {
                 OnDamageTaken?.Invoke(Index);
             }
             else
             {
-                state = EnemyState.Dead;
+                EnemyState = EnemyState.Dead;
                 OnDeath?.Invoke(Index);
             }
         }
+
+        public void DispatchPlayerHit(int damage)
+        {
+            OnPlayerHit.Invoke(damage);
+    }
         #endregion
     }
 }

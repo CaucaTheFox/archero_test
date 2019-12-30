@@ -1,4 +1,5 @@
 ﻿using Features.Heroes;
+using UnityEngine;
 
 namespace UI
 {
@@ -12,14 +13,21 @@ namespace UI
         public void SetData(IHeroModel model)
         {
             heroModel = model;
+            heroModel.OnDamageTaken += HandleDamageTaken;
+            heroModel.OnDeath += HandleDeath;
             base.SetData(heroModel.CurrentHealthNormalized, heroModel.CurrentHealth);
         }
         #endregion
 
         #region Private
-        private void UpdateData()
+        private void HandleDamageTaken()
         {
             base.TweenedUpdate(heroModel.CurrentHealthNormalized, heroModel.CurrentHealth);
+        }
+        private void HandleDeath()
+        {
+            base.TweenedUpdate(heroModel.CurrentHealthNormalized, heroModel.CurrentHealth);
+            GameObject.Destroy(gameObject, 0.5f);
         }
         #endregion
     }

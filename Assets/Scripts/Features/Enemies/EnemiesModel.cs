@@ -10,6 +10,7 @@ namespace Features.Enemies
     {
         event Action<IEnemyModel> OnDamageTaken;
         event Action<IEnemyModel> OnDeath;
+        event Action<int> OnPlayerHit;
         void Init();
         void ApplyDamage(int enemyIndex, int damage);
         void GenerateNextWave();
@@ -24,6 +25,7 @@ namespace Features.Enemies
         #region Events
         public event Action<IEnemyModel> OnDamageTaken;
         public event Action<IEnemyModel> OnDeath;
+        public event Action<int> OnPlayerHit;
         #endregion
 
         #region Dependencies
@@ -52,6 +54,7 @@ namespace Features.Enemies
             {
                 model.OnDamageTaken -= DispatchDamageTaken;
                 model.OnDeath -= DispatchDamageTaken;
+                model.OnPlayerHit -= DispatchPlayerHit; 
             }
 
             var enemyAmount = UnityEngine.Random.Range(1, MaxEnemies);
@@ -71,8 +74,10 @@ namespace Features.Enemies
                 EnemyModels[i] = enemyModel;
                 enemyModel.OnDamageTaken += DispatchDamageTaken;
                 enemyModel.OnDeath += DispatchDeath;
+                enemyModel.OnPlayerHit += DispatchPlayerHit;
             }
         }
+
         private void DispatchDamageTaken(int enemyIndex)
         {
             OnDamageTaken?.Invoke(EnemyModels[enemyIndex]);
@@ -82,6 +87,12 @@ namespace Features.Enemies
         {
             OnDeath?.Invoke(EnemyModels[enemyIndex]);
         }
+
+        private void DispatchPlayerHit(int damage)
+        {
+            OnPlayerHit?.Invoke(damage);
+        }
+
         #endregion
 
         #region Enumerable

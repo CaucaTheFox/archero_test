@@ -10,7 +10,11 @@ namespace Features.Enemies
         #region Unity Serialized Fields
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
+        [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private Transform healthBarAnchor;
+        [SerializeField] private EnemyWeapon meleeWeapon;
+        [SerializeField] private EnemyWeapon rangedWeapon;
+        [SerializeField] private EnemyWeapon particleWeapon;
         #endregion
 
         #region Dependencies
@@ -20,21 +24,37 @@ namespace Features.Enemies
         public IEnemyModel EnemyModel { get; private set; }
         public Vector3 Position => transform.position;
         public Transform HealthBarAnchor => healthBarAnchor;
+        public Rigidbody Rigidbody => rigidBody;
         #endregion
 
         #region State
-        private float baseSpeed;
+        private int meleeDamage;
+        private int particleDamage;
+        private int rangedDamage;
         #endregion
 
         #region Lifecycle       
-        private void Start()
-        {
-            baseSpeed = navMeshAgent.speed;
-        }
-        public void SetModel(IEnemyModel enemyModel)
+        public void Init(IEnemyModel enemyModel)
         {
             EnemyModel = enemyModel;
             EnemyModel.OnDamageTaken += OnDamageTaken;
+            if (meleeWeapon != null)
+            {
+                meleeDamage = EnemyModel.Settings.MeleeDamage;
+                meleeWeapon.OnPlayerHit += HandleHitPlayerMelee;
+            }
+
+            if (particleWeapon != null)
+            {
+                particleDamage = EnemyModel.Settings.ParticleDamage;
+                particleWeapon.OnPlayerHit += HandleHitPlayerParticle;
+            }
+
+            if (rangedWeapon != null)
+            {
+                rangedDamage = EnemyModel.Settings.RangedDamage;
+                rangedWeapon.OnPlayerHit += HandleHitPlayerRanged;
+            }
         }
         private void OnDestroy()
         {
@@ -68,13 +88,40 @@ namespace Features.Enemies
                 .OnComplete(() => Destroy(gameObject)));
         }
 
-        public void ChangeSpeed(float speed)
+        public virtual void MeleeAttack(string attackAnim)
         {
-            navMeshAgent.speed = speed;
+            if (meleeWeapon == null)
+            {
+                throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a melee weapon");
+            }
+            animator.SetTrigger(attackAnim);
+            ChangeEnemyState(EnemyState.MeleeAttack);
+            meleeWeapon.Attack(() => ChangeEnemyState(EnemyState.Moving));
         }
-        public void ResetSpeed()
+        public virtual void ParticleAttack(string attackAnim)
         {
-            navMeshAgent.speed = baseSpeed;
+            if (particleWeapon == null)
+            {
+                throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a particle weapon");
+            }
+            animator.SetTrigger(attackAnim);
+            ChangeEnemyState(EnemyState.ParticleAttack);
+            particleWeapon.Attack(() => ChangeEnemyState(EnemyState.Moving));
+        }
+        public virtual void RangedAttack(string attackAnim)
+        {
+            if (rangedWeapon == null)
+            {
+                throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a ranged weapon");
+            }
+            animator.SetTrigger(attackAnim);
+            ChangeEnemyState(EnemyState.RangedAttack);
+            rangedWeapon.Attack(() => ChangeEnemyState(EnemyState.Moving));
+        }
+
+        public void ChangeEnemyState(EnemyState state)
+        {
+            EnemyModel.EnemyState = state;
         }
         #endregion
 
@@ -82,6 +129,20 @@ namespace Features.Enemies
         private void OnDamageTaken(int damage)
         {
             animator.SetTrigger("Take Damage");
+        }
+        private void HandleHitPlayerMelee()
+        {
+            EnemyModel.DispatchPlayerHit(meleeDamage);
+        }
+
+        private void HandleHitPlayerParticle()
+        {
+            EnemyModel.DispatchPlayerHit(particleDamage);
+        }
+
+        private void HandleHitPlayerRanged()
+        {
+            EnemyModel.DispatchPlayerHit(rangedDamage);
         }
         #endregion
     }
