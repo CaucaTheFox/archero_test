@@ -19,7 +19,6 @@ namespace Features.Enemies
         #endregion
 
         #region Unity Serialized Fields
-        [SerializeField] private float visibilityDuration;
         [SerializeField] private WeaponType weaponType;
         #endregion
 
@@ -36,35 +35,32 @@ namespace Features.Enemies
             }
         }
 
-        public void Attack(Action callBack)
+        public void Attack()
         {
             switch(weaponType)
             {
                 case WeaponType.Particle:
-                    ParticleAttack(callBack);
+                    ShowParticle();
                     break;
                 case WeaponType.Ranged:
-                    RangedAttack(callBack);
+                    RangedAttack();
                     break;
             }
+        }
+
+        public void HideParticle()
+        {
+            gameObject.SetActive(false);
         }
         #endregion
 
         #region Private
-        private void ParticleAttack(Action callBack)
+        private void ShowParticle()
         {
             gameObject.SetActive(true);
-            StartCoroutine(DelayedAttackEnd());
-
-            IEnumerator DelayedAttackEnd()
-            {
-                yield return new WaitForSeconds(visibilityDuration);
-                gameObject.SetActive(false);
-                callBack?.Invoke();
-            }
         }
 
-        private void RangedAttack(Action callBack)
+        private void RangedAttack()
         {
         }
         #endregion

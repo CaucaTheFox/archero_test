@@ -7,30 +7,36 @@ namespace Features.Enemies
 {
     public class Enemy : InjectableBehaviour
     {
+        #region Constants
+        private const string DeathAnim = "Die";
+        private const string RunAnim = "Run";
+        private const string MeleeAttackAnim = "MeleeAttack";
+        private const string ParticleAttackAnim = "ParticleAttack";
+        private const string RangedAttackAnim = "RangedAttack";
+        private const string DamageAnim = "Take Damage";
+        private const string IdleAnim = "Idle";
+        #endregion
+
         #region Unity Serialized Fields
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
-        [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private Transform healthBarAnchor;
         [SerializeField] private EnemyWeapon meleeWeapon;
         [SerializeField] private EnemyWeapon rangedWeapon;
         [SerializeField] private EnemyWeapon particleWeapon;
         #endregion
 
-        #region Dependencies
-        #endregion
-
         #region Properties
         public IEnemyModel EnemyModel { get; private set; }
         public Vector3 Position => transform.position;
         public Transform HealthBarAnchor => healthBarAnchor;
-        public Rigidbody Rigidbody => rigidBody;
         #endregion
 
         #region State
         private int meleeDamage;
         private int particleDamage;
         private int rangedDamage;
+        private float baseSpeed;
         #endregion
 
         #region Lifecycle       
@@ -55,6 +61,8 @@ namespace Features.Enemies
                 rangedDamage = EnemyModel.Settings.RangedDamage;
                 rangedWeapon.OnPlayerHit += HandleHitPlayerRanged;
             }
+
+            baseSpeed = navMeshAgent.speed;
         }
         private void OnDestroy()
         {
@@ -71,16 +79,12 @@ namespace Features.Enemies
                 return;
             }
             navMeshAgent.SetDestination(target);
-            var trigger = navMeshAgent.speed > 3
-                ? "Run"
-                : "Walk";
-
-            animator.SetTrigger(trigger);
+            animator.SetTrigger(RunAnim);
         }
 
         public void PlayDeathAnimation()
         {
-            animator.SetTrigger("Die");
+            animator.SetTrigger(DeathAnim);
             var deathSequence = DOTween.Sequence();
             deathSequence.AppendInterval(1.5f);
             deathSequence.Append(transform
@@ -88,47 +92,62 @@ namespace Features.Enemies
                 .OnComplete(() => Destroy(gameObject)));
         }
 
-        public virtual void MeleeAttack(string attackAnim)
+        public void MeleeAttack()
         {
             if (meleeWeapon == null)
             {
                 throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a melee weapon");
             }
-            animator.SetTrigger(attackAnim);
-            ChangeEnemyState(EnemyState.MeleeAttack);
-            meleeWeapon.Attack(() => ChangeEnemyState(EnemyState.Moving));
+            animator.SetTrigger(MeleeAttackAnim);
+            meleeWeapon.Attack();
         }
-        public virtual void ParticleAttack(string attackAnim)
+        public void ParticleAttack()
         {
             if (particleWeapon == null)
             {
                 throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a particle weapon");
             }
-            animator.SetTrigger(attackAnim);
-            ChangeEnemyState(EnemyState.ParticleAttack);
-            particleWeapon.Attack(() => ChangeEnemyState(EnemyState.Moving));
+            animator.SetTrigger(ParticleAttackAnim);
+            particleWeapon.Attack();
         }
-        public virtual void RangedAttack(string attackAnim)
+
+        public void EndParticleAttack()
+        {
+            particleWeapon.HideParticle();
+        }
+
+        public void RangedAttack()
         {
             if (rangedWeapon == null)
             {
                 throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a ranged weapon");
             }
-            animator.SetTrigger(attackAnim);
-            ChangeEnemyState(EnemyState.RangedAttack);
-            rangedWeapon.Attack(() => ChangeEnemyState(EnemyState.Moving));
+            animator.SetTrigger(RangedAttackAnim);
+            rangedWeapon.Attack();
         }
 
-        public void ChangeEnemyState(EnemyState state)
+        public void SetSpeed(float speed)
         {
-            EnemyModel.EnemyState = state;
+            navMeshAgent.speed = speed;
+            navMeshAgent.enabled = speed > 0;
+        }
+
+        public void SetBaseSpeed()
+        {
+            navMeshAgent.speed = baseSpeed;
+            navMeshAgent.enabled = true;
+        }
+
+        public void PlayIdleAnimation()
+        {
+            animator.Play(IdleAnim);
         }
         #endregion
 
         #region Private
         private void OnDamageTaken(int damage)
         {
-            animator.SetTrigger("Take Damage");
+            animator.SetTrigger(DamageAnim);
         }
         private void HandleHitPlayerMelee()
         {

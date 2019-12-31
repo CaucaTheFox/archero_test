@@ -21,10 +21,7 @@ namespace Features.Enemies
     }
     public enum EnemyState
     {
-        Moving,
-        MeleeAttack,
-        ParticleAttack,
-        RangedAttack,
+        Alive,
         Dead,
     }
 
@@ -67,7 +64,7 @@ namespace Features.Enemies
             this.Settings = settings;
             this.Index = index;
             currentHealth = settings.Health;
-            EnemyState = EnemyState.Moving;
+            EnemyState = EnemyState.Alive;
             isVisible = true;
         }
 

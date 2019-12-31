@@ -220,12 +220,6 @@ MonoBehaviour:
   distance: 38
   angle: -180
   smoothSpeed: 0
-  xPositionBounds:
-  - -0.5
-  - 8
-  zPositionBounds:
-  - -37
-  - -17
   cameraXRotation:
   - 56
   - 56
