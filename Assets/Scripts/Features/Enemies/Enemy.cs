@@ -1,5 +1,6 @@
 ﻿using Core.IoC;
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,10 @@ namespace Features.Enemies
         private const string RangedAttackAnim = "RangedAttack";
         private const string DamageAnim = "Take Damage";
         private const string IdleAnim = "Idle";
+        #endregion
+
+        #region Events
+        public event Action OnDestinationReached; 
         #endregion
 
         #region Unity Serialized Fields
@@ -64,6 +69,25 @@ namespace Features.Enemies
 
             baseSpeed = navMeshAgent.speed;
         }
+
+        private void Update()
+        {
+            if (
+                !navMeshAgent.enabled
+                || navMeshAgent.pathPending
+                || navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance
+            )
+            {
+                return;
+            }
+
+            if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+            {
+                OnDestinationReached?.Invoke();
+            }
+        }
+                    
+                    
         private void OnDestroy()
         {
             EnemyModel.OnDamageTaken -= OnDamageTaken;
@@ -81,7 +105,6 @@ namespace Features.Enemies
             navMeshAgent.SetDestination(target);
             animator.SetTrigger(RunAnim);
         }
-
         public void PlayDeathAnimation()
         {
             animator.SetTrigger(DeathAnim);
@@ -129,13 +152,13 @@ namespace Features.Enemies
         public void SetSpeed(float speed)
         {
             navMeshAgent.speed = speed;
-            navMeshAgent.enabled = speed > 0;
+            navMeshAgent.isStopped = speed == 0;
         }
 
         public void SetBaseSpeed()
         {
             navMeshAgent.speed = baseSpeed;
-            navMeshAgent.enabled = true;
+            navMeshAgent.isStopped = false;
         }
 
         public void PlayIdleAnimation()
