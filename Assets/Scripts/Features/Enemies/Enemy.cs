@@ -105,6 +105,11 @@ namespace Features.Enemies
             navMeshAgent.SetDestination(target);
             animator.SetTrigger(RunAnim);
         }
+
+        public void StopAgent()
+        {
+            navMeshAgent.isStopped = true;
+        }
         public void PlayDeathAnimation()
         {
             animator.SetTrigger(DeathAnim);

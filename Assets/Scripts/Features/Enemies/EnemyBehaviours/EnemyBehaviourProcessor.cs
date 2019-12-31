@@ -44,6 +44,8 @@ namespace Features.Enemies
                 yield return new WaitForSeconds(behaviour.ActionDuration);
                 behaviour.Action.Exit();
             }
+
+            processingRoutine = null;
         }
 
         private void HandleDeath(int _)

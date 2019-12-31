@@ -20,6 +20,7 @@ namespace Features.Enemies
 
         #region Unity Serialized Fields
         [SerializeField] private WeaponType weaponType;
+        [SerializeField] private ParticleSystem particleSystem;
         #endregion
 
         #region Lifecycle
@@ -50,7 +51,7 @@ namespace Features.Enemies
 
         public void HideParticle()
         {
-            gameObject.SetActive(false);
+            particleSystem.Stop();
         }
         #endregion
 
@@ -58,6 +59,7 @@ namespace Features.Enemies
         private void ShowParticle()
         {
             gameObject.SetActive(true);
+            particleSystem.Play();
         }
 
         private void RangedAttack()

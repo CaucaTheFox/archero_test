@@ -46,6 +46,7 @@ namespace Features.Rooms.Screens
 
             hero = heroModel.CreateHero(Screen3D.HeroContainer);
             hero.OnHitEnemy += HandleHitEnemy;
+            heroModel.OnDeath += HandlePlayerDeath;
             TopDownCamera.CameraTarget = hero.transform;
             Screen2D.InstantiateHeroHealthBar(hero.HealthBarAnchor, Camera.main, heroModel);
             enemiesModel.Init();
@@ -126,6 +127,34 @@ namespace Features.Rooms.Screens
         private void HandlePlayerHit(int damage)
         {
             heroModel.ApplyDamage(damage);
+        }
+
+        private void HandlePlayerDeath()
+        {
+            foreach (var enemy in enemiesOnScreen)
+            {
+               
+                GameObject.Destroy(enemy.Value.gameObject);
+            }
+            enemiesOnScreen.Clear();
+            enemiesModel.OnPlayerHit -= HandlePlayerHit;
+            enemiesModel.OnDeath -= HandleEnemyDeath;
+
+            Screen2D.ShowGameOverPanel();
+            Screen2D.OnReset += HandleGameReset;
+        }
+
+        private void HandleGameReset()
+        {
+            Screen2D.OnReset -= HandleGameReset;
+            Screen2D.HideGameOverPanel();
+
+            Screen2D.Joystick.OnUpdate -= HandlePlayerInput;
+            hero.OnHitEnemy -= HandleHitEnemy;
+            heroModel.OnDeath -= HandlePlayerDeath;
+            GameObject.Destroy(hero.gameObject);
+    
+            Init();
         }
         #endregion
     }

@@ -7,7 +7,7 @@ namespace Features.Enemies
     {
         public override void Enter()
         {
-            enemyActor.EnemyModel.IsVisible = true;
+            enemyActor.EnemyModel.IsVisible = false;
             enemyActor.transform
                 .DOScale(Vector3.zero, 0.3f)
                 .SetEase(Ease.InBounce);
@@ -24,7 +24,7 @@ namespace Features.Enemies
         public override void Exit()
         {
             enemyActor.OnDestinationReached -= HandleDestinationReached;
-            enemyActor.EnemyModel.IsVisible = false;
+            enemyActor.EnemyModel.IsVisible = true;
             enemyActor.transform
                 .DOScale(Vector3.one, 0.3f)
                 .SetEase(Ease.OutBounce);

@@ -28,6 +28,7 @@ namespace UI
             base.TweenedUpdate(enemyModel.CurrentHealthNormalized, 0);
             DestroyBar();
         }
+
         private void HandleVisibilityChange()
         {
             gameObject.SetActive(enemyModel.IsVisible);
@@ -35,10 +36,14 @@ namespace UI
 
         private void DestroyBar()
         {
+            GameObject.Destroy(gameObject, 1f);
+        }
+
+        private void OnDestroy()
+        {
             enemyModel.OnDamageTaken -= HandleDamageTaken;
             enemyModel.OnDeath -= HandleDeath;
             enemyModel.OnVisibilityChange -= HandleVisibilityChange;
-            GameObject.Destroy(gameObject, 1f);
         }
         #endregion
     }

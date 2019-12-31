@@ -739,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  particleSystem: {fileID: 1209367473670098862}
 --- !u!1 &6404060327102554581
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +831,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e35b4c1cab6fa8b45a5ea3015c27b114, type: 3}
+--- !u!198 &1209367473670098862 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19858612, guid: e35b4c1cab6fa8b45a5ea3015c27b114,
+    type: 3}
+  m_PrefabInstance: {fileID: 1209367473655876378}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1209367473655989002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 444432, guid: e35b4c1cab6fa8b45a5ea3015c27b114,

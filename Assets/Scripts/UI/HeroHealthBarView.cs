@@ -29,6 +29,12 @@ namespace UI
             base.TweenedUpdate(heroModel.CurrentHealthNormalized, heroModel.CurrentHealth);
             GameObject.Destroy(gameObject, 0.5f);
         }
+
+        private void OnDestroy()
+        {
+            heroModel.OnDamageTaken -= HandleDamageTaken;
+            heroModel.OnDeath -= HandleDeath;
+        }
         #endregion
     }
 }

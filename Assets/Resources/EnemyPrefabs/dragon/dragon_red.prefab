@@ -2909,6 +2909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  particleSystem: {fileID: 2958659026541640364}
 --- !u!1 &8530033557866526650
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,15 +3001,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b016902fa95739745ad3aa832dd54747, type: 3}
---- !u!1 &2958659026560754688 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 188488, guid: b016902fa95739745ad3aa832dd54747,
-    type: 3}
-  m_PrefabInstance: {fileID: 2958659026560926792}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2958659026561137584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 475128, guid: b016902fa95739745ad3aa832dd54747,
+    type: 3}
+  m_PrefabInstance: {fileID: 2958659026560926792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2958659026541640364 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19840740, guid: b016902fa95739745ad3aa832dd54747,
+    type: 3}
+  m_PrefabInstance: {fileID: 2958659026560926792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2958659026560754688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 188488, guid: b016902fa95739745ad3aa832dd54747,
     type: 3}
   m_PrefabInstance: {fileID: 2958659026560926792}
   m_PrefabAsset: {fileID: 0}

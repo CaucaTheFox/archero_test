@@ -1,17 +1,25 @@
 using Features.Enemies;
 using Features.Heroes;
+using System;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
+using Utility.Utility;
 
 namespace Features.Rooms.Screens
 {
     public class RoomScreen2D : MonoBehaviour
     {
+        #region Events
+        public event Action OnReset;
+        #endregion
+
         #region Unity Serialized Fields
         [SerializeField] private Joystick joystick;
         [SerializeField] private EnemyHealthBarView enemyHealthBarTemplate;
         [SerializeField] private HeroHealthBarView heroHealthBarTemplate;
-        [SerializeField] private Transform markerViewCollection;
+        [SerializeField] private Transform markerViewCollection, gameOverPanel;
+        [SerializeField] private Button resetButton;
         #endregion
 
         #region Properties
@@ -31,6 +39,19 @@ namespace Features.Rooms.Screens
             var healthBar = Instantiate(enemyHealthBarTemplate, markerViewCollection);
             healthBar.SetData(enemyModel);
             healthBar.SetTarget(target, camera);
+        }
+
+        public void ShowGameOverPanel()
+        {
+            gameOverPanel.gameObject.SetActive(true);
+            markerViewCollection.DestroyChildren();
+            resetButton.onClick.AddListener(() => OnReset?.Invoke());
+        }
+
+        public void HideGameOverPanel()
+        {
+            gameOverPanel.gameObject.SetActive(false);
+            resetButton.onClick.RemoveAllListeners();
         }
         #endregion
     }
