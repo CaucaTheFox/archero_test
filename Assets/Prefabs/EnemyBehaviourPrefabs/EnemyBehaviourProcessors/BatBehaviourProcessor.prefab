@@ -50,7 +50,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   behaviours:
   - Action: {fileID: 6620366831542525263}
-    ActionDuration: 3
+    ActionDuration: 1
   - Action: {fileID: 8090163110647027266}
     ActionDuration: 2
   - Action: {fileID: 401512032831244162}

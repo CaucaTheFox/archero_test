@@ -6,7 +6,7 @@
         {
             base.Execute();
             enemyActor.SetSpeed(0f);
-            enemyActor.MeleeAttack();
+            enemyActor.RangedAttack();
         }
     }
 }

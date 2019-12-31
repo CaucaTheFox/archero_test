@@ -54,6 +54,9 @@ namespace Features.Rooms
                     case "W":
                         Tiles[i] = SpecialFloorTile.Wall;
                         break;
+                    case "T":
+                        Tiles[i] = SpecialFloorTile.Trap;
+                        break;
                 }
             }
         }
@@ -63,5 +66,6 @@ namespace Features.Rooms
     {
         Undefined,
         Wall,
+        Trap,
     }
 }

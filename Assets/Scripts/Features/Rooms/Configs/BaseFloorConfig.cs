@@ -53,12 +53,6 @@ namespace Features.Rooms
                     case "W":
                         Tiles[i] = BaseFloorTile.Water;
                         break;
-                    case "T":
-                        Tiles[i] = BaseFloorTile.Trap;
-                        break;
-                    case "B":
-                        Tiles[i] = BaseFloorTile.Bridge;
-                        break;
                 }
             }
         }
@@ -67,8 +61,6 @@ namespace Features.Rooms
     public enum BaseFloorTile
     {
         Grass,
-        Water,
-        Trap,
-        Bridge
+        Water
     }
 }

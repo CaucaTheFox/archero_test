@@ -90,14 +90,25 @@ namespace Features.Rooms.Screens
             }
             else
             {
-                hero.Shoot(FindClosestEnemy());
+                var closestEnemy = FindClosestEnemy();
+                if (closestEnemy == null)
+                {
+                    return;
+                }
+
+                hero.Shoot(closestEnemy.Position);
             }
         }
 
-        private Vector3 FindClosestEnemy()
+        private Enemy FindClosestEnemy()
         {
-            var orderedByDistance = enemiesOnScreen.OrderBy(x => Vector3.Distance(hero.Position, x.Value.Position));
-            return orderedByDistance.First().Value.Position;
+            var orderedByDistance = enemiesOnScreen
+                .Where(x => x.Value.EnemyModel.IsVisible)
+                .OrderBy(x => Vector3.Distance(hero.Position, x.Value.Position));
+                
+            return orderedByDistance.Count() == 0 
+                ? null 
+                : orderedByDistance.First().Value;
         }
 
         private void HandleHitEnemy(int enemyIndex)

@@ -100,7 +100,8 @@ namespace Features.Rooms.Screens
                     }
 
                     var tileInstance = GameObject.Instantiate(template, specialFloorContainer);
-                    tileInstance.transform.position = new Vector3(j, specialFloorContainer.position.y, i);
+                    var yPosition = tile == SpecialFloorTile.Trap ? 0 : specialFloorContainer.position.y;
+                    tileInstance.transform.position = new Vector3(j, yPosition, i);
                 }
             }
         }

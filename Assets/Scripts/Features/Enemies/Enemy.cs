@@ -11,7 +11,6 @@ namespace Features.Enemies
         #region Constants
         private const string DeathAnim = "Die";
         private const string RunAnim = "Run";
-        private const string MeleeAttackAnim = "MeleeAttack";
         private const string ParticleAttackAnim = "ParticleAttack";
         private const string RangedAttackAnim = "RangedAttack";
         private const string DamageAnim = "Take Damage";
@@ -120,13 +119,13 @@ namespace Features.Enemies
                 .OnComplete(() => Destroy(gameObject)));
         }
 
-        public void MeleeAttack()
+        public void MeleeAttack(string attackName)
         {
             if (meleeWeapon == null)
             {
                 throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a melee weapon");
             }
-            animator.SetTrigger(MeleeAttackAnim);
+            animator.SetTrigger(attackName);
             meleeWeapon.Attack();
         }
         public void ParticleAttack()

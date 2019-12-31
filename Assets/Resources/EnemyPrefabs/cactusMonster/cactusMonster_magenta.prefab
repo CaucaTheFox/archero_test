@@ -4965,7 +4965,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 4565366656362253282}
   animator: {fileID: 9530616}
   healthBarAnchor: {fileID: 2857348088070667771}
-  meleeWeapon: {fileID: 0}
+  meleeWeapon: {fileID: 5882590267787126750}
   rangedWeapon: {fileID: 0}
   particleWeapon: {fileID: 0}
 --- !u!195 &4565366656362253282
@@ -4977,18 +4977,18 @@ NavMeshAgent:
   m_GameObject: {fileID: 116526}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1.5
-  m_Acceleration: 8
+  m_Radius: 1
+  m_Speed: 5
+  m_Acceleration: 30
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!95 &9530616
 Animator:
@@ -5300,6 +5300,7 @@ GameObject:
   - component: {fileID: 13738564}
   - component: {fileID: 7543457892120653392}
   - component: {fileID: 6803755277446822663}
+  - component: {fileID: 5882590267787126750}
   m_Layer: 0
   m_Name: Toon Cactus Monster
   m_TagString: Untagged
@@ -5425,6 +5426,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: dc8d370eb6d96944fa2a00726d78ec60, type: 3}
+--- !u!114 &5882590267787126750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  particleSystem: {fileID: 0}
 --- !u!1 &135600
 GameObject:
   m_ObjectHideFlags: 0
