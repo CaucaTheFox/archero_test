@@ -75,7 +75,6 @@ namespace Features.Heroes
             var random = UnityEngine.Random.value;
             if (random <= heroInstance.Settings.Dodge)
             {
-                heroInstance.PlayDodgeAnim();
                 OnDodge?.Invoke();
                 return;
             }

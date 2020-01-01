@@ -16,7 +16,6 @@ namespace Features.Heroes
         private const string RunAnim = "Run";
         private const string TakeDamageAnim = "Take Damage";
         private const string DeathAnim = "Die";
-        private const string DodgeAnim = "Defend";
         private const string ShootAnim = "Arrow Attack";
         #endregion
 
@@ -78,11 +77,6 @@ namespace Features.Heroes
         public void PlayDeathAnimation()
         {
             animator.SetTrigger(DeathAnim);
-        }
-
-        public void PlayDodgeAnim()
-        {
-            animator.SetTrigger(DodgeAnim);
         }
         #endregion
 

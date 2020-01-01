@@ -1,6 +1,7 @@
 using Features.Enemies;
 using Features.Heroes;
 using System;
+using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ namespace Features.Rooms.Screens
         [SerializeField] private HeroHealthBarView heroHealthBarTemplate;
         [SerializeField] private Transform markerViewCollection, gameOverPanel;
         [SerializeField] private Button resetButton;
+        [SerializeField] private TextMeshProUGUI waveCountLabel, gameOverLabel;
         #endregion
 
         #region Properties
@@ -27,6 +29,10 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region Public
+        public void UpdateWaveCount(int waveCount)
+        {
+            waveCountLabel.text = "Wave " + waveCount;
+        }
         public void InstantiateHeroHealthBar(Transform target, Camera camera, IHeroModel heroModel)
         {
             var healthBar = Instantiate(heroHealthBarTemplate, markerViewCollection);
@@ -41,9 +47,10 @@ namespace Features.Rooms.Screens
             healthBar.SetTarget(target, camera);
         }
 
-        public void ShowGameOverPanel()
+        public void ShowGameOverPanel(int waveCount)
         {
             gameOverPanel.gameObject.SetActive(true);
+            gameOverLabel.text = $"You fell in wave {waveCount}. Can you do better?";
             markerViewCollection.DestroyChildren();
             resetButton.onClick.AddListener(() => OnReset?.Invoke());
         }

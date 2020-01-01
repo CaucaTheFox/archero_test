@@ -70,7 +70,7 @@ namespace Features.Heroes
             {
                 OnHitEnemy?.Invoke(hitEnemy.EnemyModel.Index);
                 hasHit = true;
-                GameObject.Destroy(gameObject, 0.5f);
+                GameObject.Destroy(gameObject);
             }
         }
         #endregion

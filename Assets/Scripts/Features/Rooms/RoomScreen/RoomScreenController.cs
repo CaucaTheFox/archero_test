@@ -33,6 +33,7 @@ namespace Features.Rooms.Screens
         private Hero hero;
         private Dictionary<string, Enemy> enemyPrefabCache = new Dictionary<string, Enemy>();
         private Dictionary<int, Enemy> enemiesOnScreen = new Dictionary<int, Enemy>();
+        private int waveCount;
         #endregion
 
         #region - Lifecycle
@@ -55,6 +56,8 @@ namespace Features.Rooms.Screens
             SpawnEnemies();
             Screen2D.Joystick.OnUpdate += HandlePlayerInput;
             Screen3D.OnPlayerHit += HandlePlayerHit;
+            waveCount += 1;
+            Screen2D.UpdateWaveCount(waveCount);
         }
 
         #endregion
@@ -153,7 +156,7 @@ namespace Features.Rooms.Screens
             enemiesModel.OnDeath -= HandleEnemyDeath;
             Screen3D.OnPlayerHit -= HandlePlayerHit;
 
-            Screen2D.ShowGameOverPanel();
+            Screen2D.ShowGameOverPanel(waveCount);
             Screen2D.OnReset += HandleGameReset;
 
         }
@@ -167,7 +170,7 @@ namespace Features.Rooms.Screens
             hero.OnHitEnemy -= HandleHitEnemy;
             heroModel.OnDeath -= HandlePlayerDeath;
             GameObject.Destroy(hero.gameObject);
-    
+            waveCount = 0;
             Init();
         }
         #endregion

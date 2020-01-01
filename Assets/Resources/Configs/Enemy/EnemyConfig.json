@@ -5,14 +5,14 @@
       "Name": "Pink Batto",
       "Health": 800,
       "MeleeDamage": 50,
-      "ParticleDamage": 100,
+      "ParticleDamage": 150,
       "RangedDamage": 0
     },
     "cactusMonster_purple": {
       "Id": "cactusMonster_purple",
       "Name": "Purple Poky",
       "Health": 600,
-      "MeleeDamage": 0,
+      "MeleeDamage": 100,
       "ParticleDamage": 0,
       "RangedDamage": 0
     },
@@ -20,7 +20,7 @@
       "Id": "deathKnight_orange",
       "Name": "Orange Death",
       "Health": 300,
-      "MeleeDamage": 100,
+      "MeleeDamage": 200,
       "ParticleDamage": 0,
       "RangedDamage": 0
     },
@@ -36,7 +36,7 @@
       "Id": "slime_blue",
       "Name": "Glibber",
       "Health": 500,
-      "MeleeDamage": 50,
+      "MeleeDamage": 150,
       "ParticleDamage": 0,
       "RangedDamage": 0
     }
