@@ -51,7 +51,8 @@ namespace Features.Enemies
 
         public void HideParticle()
         {
-            particleSystem.Stop();
+            //particleSystem.Stop();
+            gameObject.SetActive(false);
         }
         #endregion
 
@@ -59,7 +60,7 @@ namespace Features.Enemies
         private void ShowParticle()
         {
             gameObject.SetActive(true);
-            particleSystem.Play();
+            //particleSystem.Play();
         }
 
         private void RangedAttack()

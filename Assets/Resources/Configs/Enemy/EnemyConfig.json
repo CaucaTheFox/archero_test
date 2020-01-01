@@ -1,112 +1,44 @@
 {
   "Enemies": {
-    "bat_green": {
-      "Id": "bat_green",
-      "Name": "Green Batto",
-      "Health": 200,
-      "MeleeDamage": 15,
-      "ParticleDamage": 20,
-      "RangedDamage": 0,
-      "DamageResistance": 5
-    },
     "bat_pink": {
       "Id": "bat_pink",
       "Name": "Pink Batto",
-      "Health": 200,
-      "MeleeDamage": 15,
-      "ParticleDamage": 20,
-      "RangedDamage": 0,
-      "DamageResistance": 5
-    },
-    "bat_red": {
-      "Id": "bat_red",
-      "Name": "Red Batto",
-      "Health": 200,
-      "MeleeDamage": 15,
-      "ParticleDamage": 20,
-      "RangedDamage": 0,
-      "DamageResistance": 5
-    },
-    "cactusMonster_magenta": {
-      "Id": "cactusMonster_magenta",
-      "Name": "Magenta Poky",
-      "Health": 200,
-      "MeleeDamage": 0,
-      "ParticleDamage": 0,
-      "RangedDamage": 0,
-      "DamageResistance": 2
-    },
-    "cactusMonster_orange": {
-      "Id": "cactusMonster_orange",
-      "Name": "Orange Poky",
-      "Health": 200,
-      "MeleeDamage": 0,
-      "ParticleDamage": 0,
-      "RangedDamage": 0,
-      "DamageResistance": 2
+      "Health": 800,
+      "MeleeDamage": 50,
+      "ParticleDamage": 100,
+      "RangedDamage": 0
     },
     "cactusMonster_purple": {
       "Id": "cactusMonster_purple",
       "Name": "Purple Poky",
-      "Health": 200,
+      "Health": 600,
       "MeleeDamage": 0,
       "ParticleDamage": 0,
-      "RangedDamage": 0,
-      "DamageResistance": 2
-    },
-    "deathKnight_blue": {
-      "Id": "deathKnight_blue",
-      "Name": "Blue Death",
-      "Health": 200,
-      "MeleeDamage": 25,
-      "ParticleDamage": 0,
-      "RangedDamage": 0,
-      "DamageResistance": 5
-    },
-    "deathKnight_green": {
-      "Id": "deathKnight_green",
-      "Name": "Green Death",
-      "Health": 200,
-      "MeleeDamage": 25,
-      "ParticleDamage": 0,
-      "RangedDamage": 0,
-      "DamageResistance": 5
+      "RangedDamage": 0
     },
     "deathKnight_orange": {
       "Id": "deathKnight_orange",
       "Name": "Orange Death",
-      "Health": 200,
-      "MeleeDamage": 25,
+      "Health": 300,
+      "MeleeDamage": 100,
       "ParticleDamage": 0,
-      "RangedDamage": 0,
-      "DamageResistance": 5
-    },
-    "dragon_green": {
-      "Id": "dragon_green",
-      "Name": "Emerald",
-      "Health": 300,
-      "MeleeDamage": 25,
-      "ParticleDamage": 50,
-      "RangedDamage": 0,
-      "DamageResistance": 5
-    },
-    "dragon_purple": {
-      "Id": "dragon_purple",
-      "Name": "Amethyst",
-      "Health": 300,
-      "MeleeDamage": 25,
-      "ParticleDamage": 50,
-      "RangedDamage": 0,
-      "DamageResistance": 5
+      "RangedDamage": 0
     },
     "dragon_red": {
       "Id": "dragon_red",
       "Name": "Ruby",
-      "Health": 300,
-      "MeleeDamage": 25,
-      "ParticleDamage": 50,
-      "RangedDamage": 0,
-      "DamageResistance": 5
+      "Health": 1000,
+      "MeleeDamage": 100,
+      "ParticleDamage": 150,
+      "RangedDamage": 0
+    },
+    "slime_blue": {
+      "Id": "slime_blue",
+      "Name": "Glibber",
+      "Health": 500,
+      "MeleeDamage": 50,
+      "ParticleDamage": 0,
+      "RangedDamage": 0
     }
   }
 }

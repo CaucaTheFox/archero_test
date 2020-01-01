@@ -40,7 +40,6 @@ namespace Features.Enemies
             {
                 behaviour.Action.Init(enemy);
                 behaviour.Action.Enter();
-                Debug.Log($"[{enemy.name}]Current Action: {behaviour.Action.name} Enter");
                 yield return new WaitForSeconds(behaviour.ActionDuration);
                 behaviour.Action.Exit();
             }

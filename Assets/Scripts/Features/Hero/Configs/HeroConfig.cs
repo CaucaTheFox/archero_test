@@ -31,7 +31,6 @@ namespace Features.Heroes
         public int Attack;
         public float AttackSpeed;
         public int DamageResistance;
-        public int Dodge;
-        public int InitialSkillsAmount;
+        public float Dodge;
     }
 }

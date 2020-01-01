@@ -31,6 +31,5 @@ namespace Features.Enemies
         public int MeleeDamage;
         public int ParticleDamage;
         public int RangedDamage;
-        public int DamageResistance;
     }
 }

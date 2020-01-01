@@ -151,9 +151,11 @@ namespace Features.Rooms.Screens
             enemiesOnScreen.Clear();
             enemiesModel.OnPlayerHit -= HandlePlayerHit;
             enemiesModel.OnDeath -= HandleEnemyDeath;
+            Screen3D.OnPlayerHit -= HandlePlayerHit;
 
             Screen2D.ShowGameOverPanel();
             Screen2D.OnReset += HandleGameReset;
+
         }
 
         private void HandleGameReset()

@@ -10,6 +10,7 @@ namespace Features.Enemies
         {
             base.Execute();
             enemyActor.SetSpeed(0f);
+            enemyActor.PlayIdleAnimation();
             enemyActor.MeleeAttack(GetRandomAttackName());
         }
 

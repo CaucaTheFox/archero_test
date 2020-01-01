@@ -7,7 +7,8 @@ namespace Features.Heroes
 {
     public interface IHeroModel
     {
-        event Action OnDamageTaken; 
+        event Action OnDamageTaken;
+        event Action OnDodge;
         event Action OnDeath;
 
         Vector3 HeroPosition { get; }
@@ -34,7 +35,8 @@ namespace Features.Heroes
         #endregion
 
         #region Events
-        public event Action OnDamageTaken; 
+        public event Action OnDamageTaken;
+        public event Action OnDodge;
         public event Action OnDeath;
         #endregion
 
@@ -70,6 +72,14 @@ namespace Features.Heroes
 
         public void ApplyDamage(int damage)
         {
+            var random = UnityEngine.Random.value;
+            if (random <= heroInstance.Settings.Dodge)
+            {
+                heroInstance.PlayDodgeAnim();
+                OnDodge?.Invoke();
+                return;
+            }
+
             CurrentHealth -= damage;
             if (CurrentHealth > 0)
             {

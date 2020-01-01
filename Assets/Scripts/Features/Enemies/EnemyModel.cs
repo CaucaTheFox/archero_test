@@ -75,7 +75,7 @@ namespace Features.Enemies
                 return;
             }
 
-            currentHealth -= damage + Settings.DamageResistance; 
+            currentHealth -= damage;
             if (currentHealth > 0)
             {
                 OnDamageTaken?.Invoke(Index);

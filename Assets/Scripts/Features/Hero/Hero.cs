@@ -12,15 +12,20 @@ namespace Features.Heroes
         public event Action<int> OnHitEnemy;
         #endregion
 
+        #region Constants
+        private const string RunAnim = "Run";
+        private const string TakeDamageAnim = "Take Damage";
+        private const string DeathAnim = "Die";
+        private const string DodgeAnim = "Defend";
+        private const string ShootAnim = "Arrow Attack";
+        #endregion
+
         #region Unity Serialized Fields
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
         [SerializeField] private Transform healthBarAnchor;
         [SerializeField] private Arrow arrowPrefab;
         [SerializeField] private AnimationEventProvider animationEventProvider;
-        #endregion
-
-        #region Dependencies
         #endregion
 
         #region Properties
@@ -54,25 +59,30 @@ namespace Features.Heroes
             {
                 transform.forward = joyStickInput;
             }
-            animator.SetTrigger("Run");
+            animator.SetTrigger(RunAnim);
         }
 
         public void Shoot(Vector3 closestEnemyPosition)
         {
             isMoving = false;
-            animator.SetTrigger("Arrow Attack");
+            animator.SetTrigger(ShootAnim);
             animator.speed = Settings.AttackSpeed;
             transform.LookAt(closestEnemyPosition);
         }
 
         public void PlayDamageAnimation()
         {
-            animator.SetTrigger("Take Damage");
+            animator.SetTrigger(TakeDamageAnim);
         }
 
         public void PlayDeathAnimation()
         {
-            animator.SetTrigger("Die");
+            animator.SetTrigger(DeathAnim);
+        }
+
+        public void PlayDodgeAnim()
+        {
+            animator.SetTrigger(DodgeAnim);
         }
         #endregion
 
