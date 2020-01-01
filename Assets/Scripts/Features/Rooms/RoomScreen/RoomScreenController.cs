@@ -21,6 +21,15 @@ namespace Features.Rooms.Screens
         #region - Properties
         public override string Name => ScreenName;
         public TopDownCamera TopDownCamera { get; private set; }
+        public int WaveCount
+        {
+            get => waveCount;
+            set
+            {
+                waveCount = value;
+                Screen2D.UpdateWaveCount(value);
+            }
+        }
         #endregion
 
         #region - Dependencies
@@ -56,8 +65,7 @@ namespace Features.Rooms.Screens
             SpawnEnemies();
             Screen2D.Joystick.OnUpdate += HandlePlayerInput;
             Screen3D.OnPlayerHit += HandlePlayerHit;
-            waveCount += 1;
-            Screen2D.UpdateWaveCount(waveCount);
+            WaveCount = 1;
         }
 
         #endregion
@@ -136,6 +144,7 @@ namespace Features.Rooms.Screens
             {
                 enemiesModel.GenerateNextWave();
                 SpawnEnemies();
+                WaveCount += 1;
             }
         }
 
@@ -146,31 +155,33 @@ namespace Features.Rooms.Screens
 
         private void HandlePlayerDeath()
         {
+            UnsubscribeAll();
             foreach (var enemy in enemiesOnScreen)
             {
                
                 GameObject.Destroy(enemy.Value.gameObject);
             }
             enemiesOnScreen.Clear();
+
+            Screen2D.ShowGameOverPanel(WaveCount);
+            Screen2D.OnReset += HandleGameReset;
+        }
+
+        private void UnsubscribeAll()
+        {
+            Screen2D.Joystick.OnUpdate -= HandlePlayerInput;
+            hero.OnHitEnemy -= HandleHitEnemy;
+            heroModel.OnDeath -= HandlePlayerDeath; 
             enemiesModel.OnPlayerHit -= HandlePlayerHit;
             enemiesModel.OnDeath -= HandleEnemyDeath;
             Screen3D.OnPlayerHit -= HandlePlayerHit;
-
-            Screen2D.ShowGameOverPanel(waveCount);
-            Screen2D.OnReset += HandleGameReset;
-
         }
-
         private void HandleGameReset()
         {
             Screen2D.OnReset -= HandleGameReset;
             Screen2D.HideGameOverPanel();
 
-            Screen2D.Joystick.OnUpdate -= HandlePlayerInput;
-            hero.OnHitEnemy -= HandleHitEnemy;
-            heroModel.OnDeath -= HandlePlayerDeath;
             GameObject.Destroy(hero.gameObject);
-            waveCount = 0;
             Init();
         }
         #endregion

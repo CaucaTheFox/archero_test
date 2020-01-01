@@ -82,11 +82,13 @@ namespace Features.Heroes
             CurrentHealth -= damage;
             if (CurrentHealth > 0)
             {
+                heroInstance.PlayDamageAnimation();
                 OnDamageTaken?.Invoke();
             }
             else
             {
                 CurrentState = HeroState.Dead;
+                heroInstance.PlayDeathAnimation();
                 OnDeath?.Invoke();
             }
         }

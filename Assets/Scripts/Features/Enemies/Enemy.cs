@@ -26,6 +26,7 @@ namespace Features.Enemies
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
         [SerializeField] private Transform healthBarAnchor;
+        [SerializeField] private EnemyWeapon collisionWeapon;
         [SerializeField] private EnemyWeapon meleeWeapon;
         [SerializeField] private EnemyWeapon rangedWeapon;
         [SerializeField] private EnemyWeapon particleWeapon;
@@ -38,6 +39,7 @@ namespace Features.Enemies
         #endregion
 
         #region State
+        private int collisionDamage;
         private int meleeDamage;
         private int particleDamage;
         private int rangedDamage;
@@ -49,9 +51,14 @@ namespace Features.Enemies
         {
             EnemyModel = enemyModel;
             EnemyModel.OnDamageTaken += OnDamageTaken;
+            if (collisionWeapon != null)
+            {
+                collisionDamage = EnemyModel.Settings.CollisionDamage;
+                collisionWeapon.OnPlayerHit += HandleHitPlayerCollision;
+            }
             if (meleeWeapon != null)
             {
-                meleeDamage = EnemyModel.Settings.MeleeDamage;
+                collisionDamage = EnemyModel.Settings.MeleeDamage;
                 meleeWeapon.OnPlayerHit += HandleHitPlayerMelee;
             }
 
@@ -178,6 +185,13 @@ namespace Features.Enemies
         {
             animator.SetTrigger(DamageAnim);
         }
+
+        private void HandleHitPlayerCollision()
+        {
+            Debug.Log($"{EnemyModel.Settings.Name} collided with player");
+            EnemyModel.DispatchPlayerHit(collisionDamage);
+        }
+
         private void HandleHitPlayerMelee()
         {
             EnemyModel.DispatchPlayerHit(meleeDamage);

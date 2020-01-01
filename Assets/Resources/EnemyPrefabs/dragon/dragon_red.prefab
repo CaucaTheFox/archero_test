@@ -630,6 +630,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 2206104593050090144}
   animator: {fileID: 9569356}
   healthBarAnchor: {fileID: 4579354038866884442}
+  collisionWeapon: {fileID: 7388749928898225056}
   meleeWeapon: {fileID: 0}
   rangedWeapon: {fileID: 0}
   particleWeapon: {fileID: 5432336444474515837}
@@ -2524,8 +2525,9 @@ GameObject:
   m_Component:
   - component: {fileID: 485786}
   - component: {fileID: 13771948}
+  - component: {fileID: 7388749928898225056}
   - component: {fileID: 6062773291620850207}
-  - component: {fileID: 1114463795818689319}
+  - component: {fileID: 7027250317767723746}
   m_Layer: 0
   m_Name: Toon Dragon
   m_TagString: Untagged
@@ -2649,6 +2651,19 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.26290727, y: -0.073150575, z: 0.00004529953}
     m_Extent: {x: 3.3143585, y: 1.5110946, z: 4.4917154}
   m_DirtyAABB: 0
+--- !u!114 &7388749928898225056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 3
 --- !u!54 &6062773291620850207
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2665,8 +2680,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &1114463795818689319
-MeshCollider:
+--- !u!65 &7027250317767723746
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2675,10 +2690,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: ff475114c240ff643aead33d7e05a767, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.7023666, y: 6.427513, z: 3.021417}
+  m_Center: {x: 0.06252758, y: 0.77122086, z: 1.3737344}
 --- !u!1 &187526
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,9 +2907,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1.2342533
-  m_Height: 7.174234
+  m_Height: 5.037034
   m_Direction: 2
-  m_Center: {x: 0.0846864, y: -0.000002852478, z: 4.115878}
+  m_Center: {x: 0.084686205, y: -0.0000048039396, z: 3.0472784}
 --- !u!114 &5432336444474515837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2909,7 +2923,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
-  particleSystem: {fileID: 2958659026541640364}
 --- !u!1 &8530033557866526650
 GameObject:
   m_ObjectHideFlags: 0
@@ -3009,21 +3022,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b016902fa95739745ad3aa832dd54747, type: 3}
---- !u!4 &2958659026561137584 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 475128, guid: b016902fa95739745ad3aa832dd54747,
-    type: 3}
-  m_PrefabInstance: {fileID: 2958659026560926792}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2958659026541640364 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19840740, guid: b016902fa95739745ad3aa832dd54747,
-    type: 3}
-  m_PrefabInstance: {fileID: 2958659026560926792}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2958659026560754688 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 188488, guid: b016902fa95739745ad3aa832dd54747,
+    type: 3}
+  m_PrefabInstance: {fileID: 2958659026560926792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2958659026561137584 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 475128, guid: b016902fa95739745ad3aa832dd54747,
     type: 3}
   m_PrefabInstance: {fileID: 2958659026560926792}
   m_PrefabAsset: {fileID: 0}

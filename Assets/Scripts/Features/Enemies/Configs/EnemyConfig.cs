@@ -28,6 +28,7 @@ namespace Features.Enemies
         public string Id;
         public string Name;
         public int Health;
+        public int CollisionDamage;
         public int MeleeDamage;
         public int ParticleDamage;
         public int RangedDamage;

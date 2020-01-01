@@ -4927,10 +4927,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440910}
+  - component: {fileID: 8526995346197600885}
   - component: {fileID: 13753566}
   - component: {fileID: 5915006016598410928}
   - component: {fileID: 1527467713350433650}
-  - component: {fileID: 8526995346197600885}
   m_Layer: 0
   m_Name: Slime Viking
   m_TagString: Untagged
@@ -4952,6 +4952,19 @@ Transform:
   m_Father: {fileID: 484700}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8526995346197600885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 3
 --- !u!137 &13753566
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -5038,20 +5051,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: a87499e05aa4fb14a9f4f6e2e12226ad, type: 3}
---- !u!114 &8526995346197600885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponType: 0
-  particleSystem: {fileID: 0}
 --- !u!1 &160732
 GameObject:
   m_ObjectHideFlags: 0
@@ -5264,6 +5263,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 2598177611527043495}
   animator: {fileID: 9532142}
   healthBarAnchor: {fileID: 3337170138444920122}
+  collisionWeapon: {fileID: 8526995346197600885}
   meleeWeapon: {fileID: 8526995346197600885}
   rangedWeapon: {fileID: 0}
   particleWeapon: {fileID: 0}

@@ -534,7 +534,6 @@ GameObject:
   - component: {fileID: 7267090637042419875}
   - component: {fileID: 5859173584620298777}
   - component: {fileID: 9530270}
-  - component: {fileID: 7507305161185421555}
   m_Layer: 0
   m_Name: cactusMonster_purple
   m_TagString: Untagged
@@ -589,7 +588,8 @@ MonoBehaviour:
   navMeshAgent: {fileID: 5859173584620298777}
   animator: {fileID: 9530270}
   healthBarAnchor: {fileID: 8135280597536614914}
-  meleeWeapon: {fileID: 3159854770281227782}
+  collisionWeapon: {fileID: 3159854770281227782}
+  meleeWeapon: {fileID: 8096992862779997086}
   rangedWeapon: {fileID: 0}
   particleWeapon: {fileID: 0}
 --- !u!195 &5859173584620298777
@@ -633,20 +633,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7507305161185421555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b12582826902f94d8d5c2ca2c052607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 7267090637042419875}
-  behaviours: []
 --- !u!1 &141366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,8 +1058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
-  particleSystem: {fileID: 0}
+  weaponType: 3
 --- !u!1 &161612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,6 +1100,9 @@ GameObject:
   - component: {fileID: 462614}
   - component: {fileID: 19800548}
   - component: {fileID: 19965564}
+  - component: {fileID: 8096992862779997086}
+  - component: {fileID: 8052544927286453725}
+  - component: {fileID: 4561366923079555104}
   m_Layer: 0
   m_Name: aura
   m_TagString: Untagged
@@ -1389,7 +1377,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1.5
-      minScalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1422,7 +1410,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -1475,7 +1463,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -1528,7 +1516,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -1581,7 +1569,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5821,6 +5809,48 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8096992862779997086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 0
+--- !u!54 &8052544927286453725
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162484}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &4561366923079555104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &167786
 GameObject:
   m_ObjectHideFlags: 0
@@ -5830,8 +5860,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 403052}
+  - component: {fileID: 4059288923034543446}
   - component: {fileID: 19801158}
   - component: {fileID: 19934450}
+  - component: {fileID: 5647479236970579329}
+  - component: {fileID: 2123659945776622094}
   m_Layer: 0
   m_Name: aura
   m_TagString: Untagged
@@ -5853,6 +5886,19 @@ Transform:
   m_Father: {fileID: 461340}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4059288923034543446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 0
 --- !u!198 &19801158
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -6106,7 +6152,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1.5
-      minScalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6139,7 +6185,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -6192,7 +6238,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -6245,7 +6291,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -6298,7 +6344,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -10538,6 +10584,35 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!54 &5647479236970579329
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167786}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2123659945776622094
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167786}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &177290
 GameObject:
   m_ObjectHideFlags: 0
@@ -10914,6 +10989,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 427836}
     m_Modifications:
+    - target: {fileID: 497076293722583307, guid: 58d6bb328d505ce488f174178a094bfb,
+        type: 3}
+      propertyPath: attackNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 497076293722583307, guid: 58d6bb328d505ce488f174178a094bfb,
+        type: 3}
+      propertyPath: attackNames.Array.data[1]
+      value: PowerPunch
+      objectReference: {fileID: 0}
     - target: {fileID: 4400852826692264716, guid: 58d6bb328d505ce488f174178a094bfb,
         type: 3}
       propertyPath: enemy

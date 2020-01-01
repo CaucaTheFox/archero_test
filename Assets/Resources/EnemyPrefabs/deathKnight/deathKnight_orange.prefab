@@ -378,6 +378,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 8886539880119685391}
   animator: {fileID: 9597222}
   healthBarAnchor: {fileID: 5368406753788368732}
+  collisionWeapon: {fileID: 8397896281795987019}
   meleeWeapon: {fileID: 145094475835990173}
   rangedWeapon: {fileID: 0}
   particleWeapon: {fileID: 0}
@@ -1040,6 +1041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466754}
+  - component: {fileID: 8397896281795987019}
   - component: {fileID: 13756072}
   - component: {fileID: 6103520356598785509}
   - component: {fileID: 4812361474857632018}
@@ -1064,6 +1066,19 @@ Transform:
   m_Father: {fileID: 480822}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8397896281795987019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 3
 --- !u!137 &13756072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -6243,7 +6258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
-  particleSystem: {fileID: 0}
 --- !u!54 &3546191891449938795
 Rigidbody:
   m_ObjectHideFlags: 0

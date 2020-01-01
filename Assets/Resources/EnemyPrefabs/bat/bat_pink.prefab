@@ -39,9 +39,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 464772}
+  - component: {fileID: 2045571090220037424}
   - component: {fileID: 13729204}
   - component: {fileID: 260445769448468428}
-  - component: {fileID: 7529576404069448059}
+  - component: {fileID: 6824879964417331203}
   m_Layer: 0
   m_Name: Toon Bat
   m_TagString: Untagged
@@ -63,6 +64,19 @@ Transform:
   m_Father: {fileID: 471314}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2045571090220037424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8dc9ee46288ff42b829c5eac653068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 3
 --- !u!137 &13729204
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -136,8 +150,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7529576404069448059
-BoxCollider:
+--- !u!64 &6824879964417331203
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,9 +160,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.3792999, y: 1, z: 2.290522}
-  m_Center: {x: -0.013769031, y: 2.0642887e-15, z: 0.6452613}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: cae08b2a8dd381e41b32ff4f43feaab9, type: 3}
 --- !u!1 &112992
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 112992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7389146403136489527}
   - {fileID: 478250}
@@ -210,6 +225,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 4659343883667133545}
   animator: {fileID: 9595778}
   healthBarAnchor: {fileID: 6751494461903215112}
+  collisionWeapon: {fileID: 2045571090220037424}
   meleeWeapon: {fileID: 0}
   rangedWeapon: {fileID: 0}
   particleWeapon: {fileID: 6372655573172451131}
@@ -222,7 +238,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 112992}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 5
   m_Acceleration: 30
   avoidancePriority: 50
@@ -739,7 +755,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
-  particleSystem: {fileID: 1381735170064146954}
 --- !u!1 &8193659436087472207
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,21 +846,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fbee48b95219234b805ff9b9972fdc0, type: 3}
---- !u!1 &1381735170049603164 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 105512, guid: 5fbee48b95219234b805ff9b9972fdc0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1381735170049698420}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1381735170064146954 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19892350, guid: 5fbee48b95219234b805ff9b9972fdc0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1381735170049698420}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1381735170050088840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407036, guid: 5fbee48b95219234b805ff9b9972fdc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1381735170049698420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1381735170049603164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 105512, guid: 5fbee48b95219234b805ff9b9972fdc0,
     type: 3}
   m_PrefabInstance: {fileID: 1381735170049698420}
   m_PrefabAsset: {fileID: 0}
