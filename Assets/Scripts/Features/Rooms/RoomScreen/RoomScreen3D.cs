@@ -1,4 +1,5 @@
 ﻿using Core.IoC;
+using Features.Heroes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +14,20 @@ namespace Features.Rooms.Screens
         [Serializable]
         private struct BaseTileToTemplate
         {
-            public GameObject Template;
+            public Tile Template;
             public BaseFloorTile Tile;
         }
 
        [Serializable]
         private struct SpecialTileToTemplate
         {
-            public GameObject Template;
+            public Tile Template;
             public SpecialFloorTile Tile;
         }
+
+        #region Events
+        public Action<int> OnPlayerHit;
+        #endregion
 
         #region Unity Serialized Fields
         [SerializeField] private NavMeshSurface baseFloorSurface;
@@ -41,8 +46,8 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region State
-        private Dictionary<BaseFloorTile, GameObject> baseTileToPrefabMap;
-        private Dictionary<SpecialFloorTile, GameObject> specialTileToPrefabMap;
+        private Dictionary<BaseFloorTile, Tile> baseTileToPrefabMap;
+        private Dictionary<SpecialFloorTile, Tile> specialTileToPrefabMap;
         #endregion
 
         #region Lifecycle
@@ -99,13 +104,20 @@ namespace Features.Rooms.Screens
                         throw new Exception($"[RoomView] No Template found for tile type {tile}");
                     }
 
-                    var tileInstance = GameObject.Instantiate(template, specialFloorContainer);
-                    var yPosition = tile == SpecialFloorTile.Trap ? 0 : specialFloorContainer.position.y;
-                    tileInstance.transform.position = new Vector3(j, yPosition, i);
+                    var tileInstance = Instantiate(template, specialFloorContainer);
+                    tileInstance.transform.position = new Vector3(j, tileInstance.transform.position.y, i);
+                    if (tileInstance is TrapTile trap)
+                    {
+                        trap.OnPlayerHit += HandlePlayerHit;
+                    }
                 }
             }
         }
 
+        private void HandlePlayerHit(int damage)
+        {
+            OnPlayerHit?.Invoke(damage);
+        }
         #endregion
 
     }

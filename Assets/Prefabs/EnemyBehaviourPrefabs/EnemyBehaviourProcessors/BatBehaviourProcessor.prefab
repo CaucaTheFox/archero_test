@@ -49,14 +49,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   behaviours:
-  - Action: {fileID: 6620366831542525263}
+  - Action: {fileID: 401512032831244162}
     ActionDuration: 1
   - Action: {fileID: 8090163110647027266}
     ActionDuration: 2
   - Action: {fileID: 401512032831244162}
-    ActionDuration: 3
+    ActionDuration: 1
   - Action: {fileID: 1608721009745080700}
-    ActionDuration: 3
+    ActionDuration: 2
 --- !u!1001 &1388839136713800378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,18 +219,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3094203744256625300}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6620366831542525263 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8147175998812018651, guid: 82ee2f4eae69f28438e4c4d9e46ad9c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 3094203744256625300}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1187dd7381981e7448b38887a31c21d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4390647331256789600
 PrefabInstance:
   m_ObjectHideFlags: 0

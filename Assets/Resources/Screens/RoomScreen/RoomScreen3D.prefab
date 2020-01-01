@@ -8998,14 +8998,18 @@ MonoBehaviour:
   enemyContainer: {fileID: 9129806140244574124}
   specialFloorContainer: {fileID: 7225846960883522534}
   baseTileTemplates:
-  - Template: {fileID: 1219471545100730, guid: d6cc54c8129e8274c9b8090d3c5e85f9, type: 3}
+  - Template: {fileID: 6413241640264044760, guid: d6cc54c8129e8274c9b8090d3c5e85f9,
+      type: 3}
     Tile: 0
-  - Template: {fileID: 1640771308685042, guid: ff78edb367a079b4a8f8ae2d128c581f, type: 3}
+  - Template: {fileID: 6627463601362456010, guid: ff78edb367a079b4a8f8ae2d128c581f,
+      type: 3}
     Tile: 1
   specialTileTemplates:
-  - Template: {fileID: 1219471545100730, guid: 1b8fbee291cdc1046a281cb2b3b51bf7, type: 3}
+  - Template: {fileID: 3217622054338859857, guid: 1b8fbee291cdc1046a281cb2b3b51bf7,
+      type: 3}
     Tile: 1
-  - Template: {fileID: 1779254397466754, guid: eb3f51c9e4e6faa45b78a8c2a6e0c16d, type: 3}
+  - Template: {fileID: 4460724084894505299, guid: eb3f51c9e4e6faa45b78a8c2a6e0c16d,
+      type: 3}
     Tile: 2
 --- !u!1 &3114026108929673773
 GameObject:
@@ -10803,7 +10807,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3991004604651413961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 80695678541310634}

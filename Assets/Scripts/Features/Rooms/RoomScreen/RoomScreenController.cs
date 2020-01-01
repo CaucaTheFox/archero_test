@@ -54,6 +54,7 @@ namespace Features.Rooms.Screens
             enemiesModel.OnPlayerHit += HandlePlayerHit;
             SpawnEnemies();
             Screen2D.Joystick.OnUpdate += HandlePlayerInput;
+            Screen3D.OnPlayerHit += HandlePlayerHit;
         }
 
         #endregion

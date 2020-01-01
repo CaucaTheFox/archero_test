@@ -12,6 +12,7 @@ namespace Features.Enemies
         private const string DeathAnim = "Die";
         private const string RunAnim = "Run";
         private const string ParticleAttackAnim = "ParticleAttack";
+        private const string ParticleAttackEndAnim = "ParticleAttackEnd";
         private const string RangedAttackAnim = "RangedAttack";
         private const string DamageAnim = "Take Damage";
         private const string IdleAnim = "Idle";
@@ -140,6 +141,7 @@ namespace Features.Enemies
 
         public void EndParticleAttack()
         {
+            animator.SetTrigger(ParticleAttackEndAnim);
             particleWeapon.HideParticle();
         }
 
