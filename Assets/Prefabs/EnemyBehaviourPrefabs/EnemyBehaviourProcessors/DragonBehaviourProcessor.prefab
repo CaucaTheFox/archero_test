@@ -51,11 +51,11 @@ MonoBehaviour:
   - Action: {fileID: 2795401132602632220}
     ActionDuration: 3
   - Action: {fileID: 3695291045891126229}
-    ActionDuration: 1
+    ActionDuration: 2
   - Action: {fileID: 2795401132602632220}
     ActionDuration: 3
   - Action: {fileID: 3695291045891126229}
-    ActionDuration: 1
+    ActionDuration: 2
 --- !u!1001 &1177564992865820478
 PrefabInstance:
   m_ObjectHideFlags: 0

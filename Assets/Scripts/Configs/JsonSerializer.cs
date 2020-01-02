@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using WanzyeeStudio.Json;
 
-namespace ColorZoo.Platform.Data
+namespace Configs
 {
     public interface IJsonSerializer
     {

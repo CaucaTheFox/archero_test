@@ -8,7 +8,6 @@ namespace Core.CameraScripts
         [SerializeField] private float height = 10f;
         [SerializeField] private float distance = 20f;
         [SerializeField] private float angle = 45f;
-        [SerializeField] private float smoothSpeed = 0.5f;
         [SerializeField] private float[] cameraXRotation;
         #endregion
 
@@ -18,10 +17,6 @@ namespace Core.CameraScripts
         #endregion
 
         #region Lifecycle
-        private void Start()
-        {
-            HandleCamera();
-        }
         private void Update()
         {
             HandleCamera();
@@ -49,12 +44,7 @@ namespace Core.CameraScripts
 
         private void SetCameraPosition(Vector3 newPosition)
         {
-            transform.position = Vector3.SmoothDamp(
-                transform.position,
-                newPosition,
-                ref refVelocity,
-                smoothSpeed
-            );
+            transform.position = newPosition;
 
             transform.LookAt(CameraTarget);
             transform.rotation = Quaternion.Euler(

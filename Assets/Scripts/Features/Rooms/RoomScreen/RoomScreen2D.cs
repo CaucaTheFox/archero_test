@@ -36,29 +36,36 @@ namespace Features.Rooms.Screens
         public void InstantiateHeroHealthBar(Transform target, Camera camera, IHeroModel heroModel)
         {
             var healthBar = Instantiate(heroHealthBarTemplate, markerViewCollection);
-            healthBar.SetData(heroModel);
             healthBar.SetTarget(target, camera);
+            healthBar.SetData(heroModel);
         }
 
         public void InstantiateEnemyHealthBar(Transform target, Camera camera, IEnemyModel enemyModel)
         {
             var healthBar = Instantiate(enemyHealthBarTemplate, markerViewCollection);
-            healthBar.SetData(enemyModel);
             healthBar.SetTarget(target, camera);
+            healthBar.SetData(enemyModel);
         }
 
         public void ShowGameOverPanel(int waveCount)
         {
-            gameOverPanel.gameObject.SetActive(true);
-            gameOverLabel.text = $"You fell in wave {waveCount}. Can you do better?";
             markerViewCollection.DestroyChildren();
-            resetButton.onClick.AddListener(() => OnReset?.Invoke());
+            gameOverPanel.gameObject.SetActive(true);
+            gameOverLabel.text = $"You fell in wave {waveCount}. Try again!";
+            resetButton.onClick.AddListener(DispatchReset);
         }
 
         public void HideGameOverPanel()
         {
-            gameOverPanel.gameObject.SetActive(false);
             resetButton.onClick.RemoveAllListeners();
+            gameOverPanel.gameObject.SetActive(false);
+        }
+        #endregion
+
+        #region Private
+        private void DispatchReset()
+        {
+            OnReset?.Invoke();
         }
         #endregion
     }

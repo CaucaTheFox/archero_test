@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6627463601362456010}
   - component: {fileID: 33792022910275110}
   - component: {fileID: 23990411449202740}
-  - component: {fileID: 5741080058743250152}
   - component: {fileID: 8066379757841560503}
   m_Layer: 0
   m_Name: WaterTile
@@ -93,20 +92,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5741080058743250152
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640771308685042}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: d8be467a57b68b14583adbf3902c07d4, type: 3}
 --- !u!208 &8066379757841560503
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -119,7 +104,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.5, y: 1.5, z: 0.5}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.42, z: 0}
   m_TimeToStationary: 0.5

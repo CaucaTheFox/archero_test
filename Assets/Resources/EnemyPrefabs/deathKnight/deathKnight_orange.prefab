@@ -401,7 +401,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.1
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!95 &9597222
@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 8397896281795987019}
   - component: {fileID: 13756072}
   - component: {fileID: 6103520356598785509}
-  - component: {fileID: 4812361474857632018}
+  - component: {fileID: 860731357572727893}
   m_Layer: 0
   m_Name: Toon Death Knight
   m_TagString: Untagged
@@ -1059,7 +1059,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163566}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1167,8 +1167,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &4812361474857632018
-MeshCollider:
+--- !u!65 &860731357572727893
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1177,10 +1177,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: cd607b25707b277428da92110da3cbda, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1.03, z: 0}
 --- !u!1 &171440
 GameObject:
   m_ObjectHideFlags: 0

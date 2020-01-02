@@ -407,7 +407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000074655, y: -430}
+  m_AnchoredPosition: {x: 0, y: -275}
   m_SizeDelta: {x: 1080, y: 177.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7716602201927377485
@@ -436,7 +436,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You fell in wave {waveCount}. Can you do better?
+  m_text: 'You fell in wave {waveCount}.
+
+    Try again!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -464,8 +466,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -505,10 +507,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 841246750914495986}
-    characterCount: 48
+    characterCount: 40
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 9
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
     lineCount: 2
     pageCount: 1
@@ -562,7 +564,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000042068, y: 523}
+  m_AnchoredPosition: {x: 0, y: 420}
   m_SizeDelta: {x: 1080, y: 369.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3574870679003306152
@@ -715,10 +717,10 @@ RectTransform:
   m_Father: {fileID: 964726166793703915}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -337.65, y: 888.55005}
-  m_SizeDelta: {x: 404.7, y: 142.9}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -86.59}
+  m_SizeDelta: {x: 404.7, y: 142.90002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1662422426122402869
 CanvasRenderer:
@@ -874,7 +876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -682}
+  m_AnchoredPosition: {x: 0, y: -491}
   m_SizeDelta: {x: 404.4, y: 131.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4369082531058269825

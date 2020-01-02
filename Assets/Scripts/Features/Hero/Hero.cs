@@ -22,7 +22,7 @@ namespace Features.Heroes
         #region Unity Serialized Fields
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
-        [SerializeField] private Transform healthBarAnchor;
+        [SerializeField] private Transform healthBarAnchor, arrowAnchor;
         [SerializeField] private Arrow arrowPrefab;
         [SerializeField] private AnimationEventProvider animationEventProvider;
         #endregion
@@ -41,6 +41,7 @@ namespace Features.Heroes
         private void Start()
         {
             animationEventProvider.OnAttack += ShowArrow;
+            animator.speed = 1;
         }
         private void OnDestroy()
         {
@@ -53,19 +54,21 @@ namespace Features.Heroes
         {
             isMoving = true;
             animator.speed = 1;
+            animator.ResetTrigger(ShootAnim);
+            animator.SetTrigger(RunAnim);
             transform.Translate(joyStickInput * navMeshAgent.speed * Time.deltaTime, Space.World);
             if (joyStickInput != Vector3.zero)
             {
                 transform.forward = joyStickInput;
             }
-            animator.SetTrigger(RunAnim);
         }
 
         public void Shoot(Vector3 closestEnemyPosition)
         {
-            isMoving = false;
-            animator.SetTrigger(ShootAnim);
+            isMoving = false; 
             animator.speed = Settings.AttackSpeed;
+            animator.ResetTrigger(RunAnim);
+            animator.SetTrigger(ShootAnim);
             transform.LookAt(closestEnemyPosition);
         }
 
@@ -90,7 +93,7 @@ namespace Features.Heroes
             }
 
             var arrow = GameObject.Instantiate<Arrow>(arrowPrefab);
-            arrow.transform.position = Position;
+            arrow.transform.position = arrowAnchor.position;
             arrow.transform.up = -transform.forward;
             arrow.FlightDirection = transform.forward;
             arrow.OnHitEnemy += DispatchHitEnemy;

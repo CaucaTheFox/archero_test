@@ -89,7 +89,7 @@ namespace Features.Enemies
 
         public void DispatchPlayerHit(int damage)
         {
-            OnPlayerHit.Invoke(damage);
+            OnPlayerHit?.Invoke(damage);
         }
         #endregion
     }

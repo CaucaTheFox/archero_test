@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    public event Action<bool> OnUpdate;
+    public event Action<bool> OnFixedUpdate;
     public float Horizontal => snapX ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x;
     public float Vertical => snapY ? SnapFloat(input.y, AxisOptions.Vertical) : input.y;
     public Vector2 Direction => new Vector2(Horizontal, Vertical);
@@ -58,9 +58,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchoredPosition = Vector2.zero;
     }
 
-    private void Update()
+    public void FixedUpdate()
     {
-        OnUpdate?.Invoke(isPointerDown);
+        OnFixedUpdate?.Invoke(isPointerDown);
     }
     public virtual void OnPointerDown(PointerEventData eventData)
     {

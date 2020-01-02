@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Utility.Utility;
 
 namespace Features.Rooms.Screens
 {
@@ -49,10 +50,6 @@ namespace Features.Rooms.Screens
         public override void Init()
         {
             TopDownCamera = Camera.main.GetComponent<TopDownCamera>();
-            if (TopDownCamera == null)
-            {
-                throw new Exception("[RoomScreenController] No TopDownCamera component found on main camera.");
-            }
 
             hero = heroModel.CreateHero(Screen3D.HeroContainer);
             hero.OnHitEnemy += HandleHitEnemy;
@@ -63,7 +60,7 @@ namespace Features.Rooms.Screens
             enemiesModel.OnDeath += HandleEnemyDeath;
             enemiesModel.OnPlayerHit += HandlePlayerHit;
             SpawnEnemies();
-            Screen2D.Joystick.OnUpdate += HandlePlayerInput;
+            Screen2D.Joystick.OnFixedUpdate += HandlePlayerInput;
             Screen3D.OnPlayerHit += HandlePlayerHit;
             WaveCount = 1;
         }
@@ -103,11 +100,6 @@ namespace Features.Rooms.Screens
             else
             {
                 var closestEnemy = FindClosestEnemy();
-                if (closestEnemy == null)
-                {
-                    return;
-                }
-
                 hero.Shoot(closestEnemy.Position);
             }
         }
@@ -115,12 +107,9 @@ namespace Features.Rooms.Screens
         private Enemy FindClosestEnemy()
         {
             var orderedByDistance = enemiesOnScreen
-                .Where(x => x.Value.EnemyModel.IsVisible)
                 .OrderBy(x => Vector3.Distance(hero.Position, x.Value.Position));
                 
-            return orderedByDistance.Count() == 0 
-                ? null 
-                : orderedByDistance.First().Value;
+            return orderedByDistance.First().Value;
         }
 
         private void HandleHitEnemy(int enemyIndex)
@@ -155,33 +144,30 @@ namespace Features.Rooms.Screens
 
         private void HandlePlayerDeath()
         {
-            UnsubscribeAll();
             foreach (var enemy in enemiesOnScreen)
             {
-               
                 GameObject.Destroy(enemy.Value.gameObject);
             }
+
             enemiesOnScreen.Clear();
-
-            Screen2D.ShowGameOverPanel(WaveCount);
-            Screen2D.OnReset += HandleGameReset;
-        }
-
-        private void UnsubscribeAll()
-        {
-            Screen2D.Joystick.OnUpdate -= HandlePlayerInput;
-            hero.OnHitEnemy -= HandleHitEnemy;
-            heroModel.OnDeath -= HandlePlayerDeath; 
             enemiesModel.OnPlayerHit -= HandlePlayerHit;
             enemiesModel.OnDeath -= HandleEnemyDeath;
             Screen3D.OnPlayerHit -= HandlePlayerHit;
+
+            Screen2D.ShowGameOverPanel(waveCount);
+            Screen2D.OnReset += HandleGameReset;
         }
+
         private void HandleGameReset()
         {
             Screen2D.OnReset -= HandleGameReset;
             Screen2D.HideGameOverPanel();
 
-            GameObject.Destroy(hero.gameObject);
+            Screen2D.Joystick.OnFixedUpdate -= HandlePlayerInput;
+            hero.OnHitEnemy -= HandleHitEnemy;
+            heroModel.OnDeath -= HandlePlayerDeath;
+            Screen3D.HeroContainer.DestroyChildren();
+            hero = null;
             Init();
         }
         #endregion

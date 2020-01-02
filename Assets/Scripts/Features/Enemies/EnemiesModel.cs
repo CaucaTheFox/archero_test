@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Features.Enemies
 {
@@ -45,6 +46,10 @@ namespace Features.Enemies
 
         public void ApplyDamage(int enemyIndex, int damage)
         {
+            if (enemyIndex >= EnemyModels.Length)
+            {
+                return;
+            }
             EnemyModels[enemyIndex].ApplyDamage(damage);
         }
 
@@ -54,7 +59,7 @@ namespace Features.Enemies
             {
                 model.OnDamageTaken -= DispatchDamageTaken;
                 model.OnDeath -= DispatchDamageTaken;
-                model.OnPlayerHit -= DispatchPlayerHit; 
+                model.OnPlayerHit -= DispatchPlayerHit;
             }
 
             var enemyAmount = UnityEngine.Random.Range(1, MaxEnemies);

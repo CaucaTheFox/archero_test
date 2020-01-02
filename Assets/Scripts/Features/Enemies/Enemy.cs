@@ -56,9 +56,10 @@ namespace Features.Enemies
                 collisionDamage = EnemyModel.Settings.CollisionDamage;
                 collisionWeapon.OnPlayerHit += HandleHitPlayerCollision;
             }
+
             if (meleeWeapon != null)
             {
-                collisionDamage = EnemyModel.Settings.MeleeDamage;
+                meleeDamage = EnemyModel.Settings.MeleeDamage;
                 meleeWeapon.OnPlayerHit += HandleHitPlayerMelee;
             }
 
@@ -188,7 +189,6 @@ namespace Features.Enemies
 
         private void HandleHitPlayerCollision()
         {
-            Debug.Log($"{EnemyModel.Settings.Name} collided with player");
             EnemyModel.DispatchPlayerHit(collisionDamage);
         }
 

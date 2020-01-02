@@ -21,7 +21,6 @@ namespace Features.Screens
 
         public void RegisterServices(IIoC container)
         {
-            container.RegisterSingleton<IScreenExtensions, ScreenExtensions>();
         }
     }
 }
