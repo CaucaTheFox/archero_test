@@ -28,12 +28,12 @@ namespace UI
         #region Private
         private void HandleDamageTaken()
         {
-            base.TweenedUpdate(heroModel.CurrentHealthNormalized, heroModel.CurrentHealth);
+            TweenedUpdate(heroModel.CurrentHealthNormalized, heroModel.CurrentHealth);
         }
         private void HandleDeath()
         {
-            base.TweenedUpdate(heroModel.CurrentHealthNormalized, heroModel.CurrentHealth);
-            GameObject.Destroy(gameObject, 0.5f);
+            TweenedUpdate(heroModel.CurrentHealthNormalized, heroModel.CurrentHealth);
+            Destroy(gameObject, 0.5f);
         }
 
         private void HandleDodge()

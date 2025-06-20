@@ -28,7 +28,7 @@ namespace Features.Enemies
         {
             var randomDirection = Random.insideUnitSphere * directionScalar;
             randomDirection.y = 0f;
-            enemyActor.MoveTorwardsTarget(randomDirection);
+            enemyActor.MoveTowardsTarget(randomDirection);
         }
     }
 }

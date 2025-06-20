@@ -6,7 +6,7 @@
         {
             base.Execute();
             enemyActor.SetBaseSpeed();
-            enemyActor.MoveTorwardsTarget(heroModel.HeroPosition);
+            enemyActor.MoveTowardsTarget(heroModel.HeroPosition);
             enemyActor.OnDestinationReached += HandleDestinationReached;
         }
 
@@ -17,7 +17,7 @@
         }
         private void HandleDestinationReached()
         {
-            enemyActor.MoveTorwardsTarget(heroModel.HeroPosition);
+            enemyActor.MoveTowardsTarget(heroModel.HeroPosition);
         }
     }
 }

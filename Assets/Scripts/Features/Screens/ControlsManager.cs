@@ -13,17 +13,15 @@ namespace Features.Screens
     
     public class ControlsManager: IControlsManager
     {
-        #region - Constants
+        #region Constants
         private const string LogTag = "PopupManager";
         #endregion
         
-        #region - Dependencies
-#pragma warning disable 649
+        #region Dependencies
         [Inject] private IResourceManager resourceManager;
-#pragma warning restore 649
         #endregion
         
-        #region - Public
+        #region Public
         public T Instantiate<T>(string prefabPath) where T : MonoBehaviour
         {
             return Instantiate<T>(prefabPath, null);
@@ -36,20 +34,18 @@ namespace Features.Screens
                 return null;
             }
 
-            var gameObject = GameObject.Instantiate(prefab, parent);
-
+            var gameObject = Object.Instantiate(prefab, parent);
             if (gameObject == null) {
                 return null;
             }
 
             gameObject.name = prefab.name;
-
             return gameObject.GetComponent<T>();
         }
 
         public void Destroy(GameObject gameObject)
         {
-            GameObject.Destroy(gameObject);
+            Object.Destroy(gameObject);
         }
         #endregion
     }

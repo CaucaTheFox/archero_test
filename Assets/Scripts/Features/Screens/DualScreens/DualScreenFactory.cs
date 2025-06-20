@@ -8,18 +8,18 @@ namespace Features.Screens
         where Screen3DType: MonoBehaviour
         where ScreenControllerType: DualScreenController<Screen2DType, Screen3DType>, new()
     {
-        #region - Dependencies
+        #region Dependencies
         [Inject] protected ISceneLayers gameLayers;
         [Inject] protected IControlsManager controlsManager;
         [Inject] protected IIoC container;
         #endregion
         
-        #region - State
+        #region State
         private string screen2DPrefabPath;
         private string screen3DPrefabPath;
         #endregion
         
-        #region - Lifecycle
+        #region Lifecycle
         public DualScreenFactory(string screen2DPrefabPath, string screen3DPrefabPath)
         {
             this.screen2DPrefabPath = screen2DPrefabPath;
@@ -27,7 +27,7 @@ namespace Features.Screens
         }
         #endregion
         
-        #region - Public
+        #region Public
         public IScreenController Create()
         {
             var layer3D = gameLayers.GetLayerTransform(SceneLayer.WorldLayer);

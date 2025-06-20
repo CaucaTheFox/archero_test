@@ -6,9 +6,7 @@ namespace Features.Screens
 {
     public class ScreensInitialization: IFeatureInitialization, IServiceRegistration
     {
-#pragma warning disable 649
         [Inject] private IScreenManager screenManager;
-#pragma warning restore 649
         
         public void Init()
         {

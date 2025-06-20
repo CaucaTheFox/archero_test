@@ -9,20 +9,28 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utility.Utility;
+using Object = UnityEngine.Object;
 
 namespace Features.Rooms.Screens
 {
     public class RoomScreenController: DualScreenController<RoomScreen2D, RoomScreen3D>
     {
-        #region - Constants
+        #region Constants
         public const string ScreenName = "RoomScreen";  
         private const string EnemyPath = "EnemyPrefabs/";
         #endregion
 
-        #region - Properties
+        #region Dependencies
+        [Inject] private IHeroModel heroModel;
+        [Inject] private IResourceManager resourceManager;
+        [Inject] private IEnemiesModel enemiesModel;
+        #endregion
+        
+        #region Properties
         public override string Name => ScreenName;
-        public TopDownCamera TopDownCamera { get; private set; }
-        public int WaveCount
+        private TopDownCamera TopDownCamera { get; set; }
+
+        private int WaveCount
         {
             get => waveCount;
             set
@@ -32,21 +40,15 @@ namespace Features.Rooms.Screens
             }
         }
         #endregion
-
-        #region - Dependencies
-        [Inject] private IHeroModel heroModel;
-        [Inject] private IResourceManager resourceManager;
-        [Inject] private IEnemiesModel enemiesModel;
-        #endregion
-
-        #region - State
+        
+        #region State
         private Hero hero;
         private Dictionary<string, Enemy> enemyPrefabCache = new Dictionary<string, Enemy>();
         private Dictionary<int, Enemy> enemiesOnScreen = new Dictionary<int, Enemy>();
         private int waveCount;
         #endregion
 
-        #region - Lifecycle
+        #region Lifecycle
         public override void Init()
         {
             TopDownCamera = Camera.main.GetComponent<TopDownCamera>();
@@ -67,7 +69,7 @@ namespace Features.Rooms.Screens
 
         #endregion
 
-        #region - Private
+        #region Private
         private void SpawnEnemies()
         {
             foreach (var enemy in enemiesModel)
@@ -85,6 +87,7 @@ namespace Features.Rooms.Screens
                 enemiesOnScreen.Add(enemy.Index, enemyInstance);
             }
         }
+        
         private void HandlePlayerInput(bool isPointerDown)
         {
             if (heroModel.CurrentState == HeroState.Dead)
@@ -120,7 +123,6 @@ namespace Features.Rooms.Screens
         private void HandleEnemyDeath(IEnemyModel model)
         {
             var index = model.Index;
-           
             if (!enemiesOnScreen.TryGetValue(index, out var enemy))
             {
                 throw new Exception("[RoomScreenController] No enemy on screen with Id " + index);
@@ -129,12 +131,12 @@ namespace Features.Rooms.Screens
             enemy.PlayDeathAnimation();
             enemiesOnScreen.Remove(index);
 
-            if (enemiesOnScreen.Count == 0)
-            {
-                enemiesModel.GenerateNextWave();
-                SpawnEnemies();
-                WaveCount += 1;
-            }
+            if (enemiesOnScreen.Count != 0) 
+                return;
+            
+            enemiesModel.GenerateNextWave();
+            SpawnEnemies();
+            WaveCount += 1;
         }
 
         private void HandlePlayerHit(int damage)
@@ -146,7 +148,7 @@ namespace Features.Rooms.Screens
         {
             foreach (var enemy in enemiesOnScreen)
             {
-                GameObject.Destroy(enemy.Value.gameObject);
+                Object.Destroy(enemy.Value.gameObject);
             }
 
             enemiesOnScreen.Clear();

@@ -33,6 +33,7 @@ namespace Features.Rooms.Screens
         {
             waveCountLabel.text = "Wave " + waveCount;
         }
+        
         public void InstantiateHeroHealthBar(Transform target, Camera camera, IHeroModel heroModel)
         {
             var healthBar = Instantiate(heroHealthBarTemplate, markerViewCollection);

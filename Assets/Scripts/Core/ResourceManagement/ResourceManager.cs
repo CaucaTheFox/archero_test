@@ -6,16 +6,7 @@ namespace Core.ResourceManagement
 {	
 	public class ResourceManager: IResourceManager
 	{
-		#region - Constants
-		private const string LogTag = "ResourceManager";
-        private const char Seperator = '|';
-        #endregion
-
-        #region - State
-        private readonly SortedList<int, IResourceProvider> providers = new SortedList<int, IResourceProvider>(new DuplicateKeyComparer<int>());
-		#endregion
-
-		#region - Types
+		#region Subclasses
 		private class DuplicateKeyComparer<TKey>: IComparer<TKey> where TKey: IComparable
 		{			
 			public int Compare(TKey x, TKey y)
@@ -25,15 +16,24 @@ namespace Core.ResourceManagement
 			}	
 		}
 		#endregion
+		
+		#region Constants
+		private const string LogTag = "ResourceManager";
+        private const char SeparatorChar = '|';
+        #endregion
 
-		#region - Lifecycle
+        #region State
+        private readonly SortedList<int, IResourceProvider> providers = new SortedList<int, IResourceProvider>(new DuplicateKeyComparer<int>());
+		#endregion
+		
+		#region Lifecycle
 		private void Init()
 		{
 			ReflectionUtility.ForAllInstances<IResourceProvider>(RegisterProvider);
 		}
 		#endregion
 
-		#region - Public
+		#region Public
 		public T LoadResource<T>(string resourceName) where T: UnityEngine.Object
 		{
 			T resource = null;
@@ -79,7 +79,7 @@ namespace Core.ResourceManagement
 		}
 		#endregion
 
-		#region - Private
+		#region Private
 		private void RegisterProvider(IResourceProvider provider)
 		{
 			providers.Add(provider.Priority, provider);
@@ -87,8 +87,8 @@ namespace Core.ResourceManagement
 
         private string ResolvePath(string property)
         {
-            var seperatorIndex = Array.IndexOf(property.ToCharArray(), Seperator);
-            return property.Substring(seperatorIndex + 1);
+            var separatorIndex = Array.IndexOf(property.ToCharArray(), SeparatorChar);
+            return property[(separatorIndex + 1)..];
         }
         #endregion
     }

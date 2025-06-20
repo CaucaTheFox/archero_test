@@ -19,11 +19,11 @@ namespace Features.Rooms
         public void OnTriggerEnter(Collider collider)
         {
             var hitHero = collider.GetComponentInParent<Hero>();
-            if (hitHero != null)
-            {
-                impactParticles.Play();
-                OnPlayerHit?.Invoke(damage);
-            }
+            if (hitHero == null) 
+                return;
+            
+            impactParticles.Play();
+            OnPlayerHit?.Invoke(damage);
         }
         #endregion
     }

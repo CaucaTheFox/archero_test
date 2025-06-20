@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Features.Enemies
 {
@@ -103,10 +102,7 @@ namespace Features.Enemies
         #region Enumerable
         public IEnumerator<IEnemyModel> GetEnumerator()
         {
-            foreach (var enemy in EnemyModels)
-            {
-                yield return enemy;
-            }
+            return EnemyModels.Cast<IEnemyModel>().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

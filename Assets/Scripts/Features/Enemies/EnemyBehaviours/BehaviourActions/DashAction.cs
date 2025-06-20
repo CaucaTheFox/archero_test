@@ -12,7 +12,7 @@ namespace Features.Enemies
         {
             base.Execute();
             enemyActor.SetSpeed(dashSpeed);
-            enemyActor.MoveTorwardsTarget(heroModel.HeroPosition);
+            enemyActor.MoveTowardsTarget(heroModel.HeroPosition);
         }
     }
 }

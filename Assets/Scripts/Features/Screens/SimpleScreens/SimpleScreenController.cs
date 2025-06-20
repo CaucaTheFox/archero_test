@@ -6,8 +6,8 @@ namespace Features.Screens
     {
         public abstract string Name { get; }
         public bool Visible {
-            get { return gameObject.activeSelf; }
-            set { gameObject.SetActive(value); }
+            get => gameObject.activeSelf;
+            set => gameObject.SetActive(value);
         }
         
         public void DestroyScreen()

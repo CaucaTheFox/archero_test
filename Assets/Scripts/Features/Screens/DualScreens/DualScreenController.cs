@@ -6,7 +6,7 @@ namespace Features.Screens
         where Screen2DType: MonoBehaviour
         where Screen3DType: MonoBehaviour
     {
-        #region - Properties
+        #region Properties
         public abstract string Name { get; }
         
         public Screen2DType Screen2D { get; set; }
@@ -22,7 +22,7 @@ namespace Features.Screens
         }
         #endregion
         
-        #region - Lifecycle
+        #region Lifecycle
         public virtual void Init()
         {
             

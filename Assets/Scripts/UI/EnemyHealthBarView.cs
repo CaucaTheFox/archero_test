@@ -1,5 +1,4 @@
 ﻿using Features.Enemies;
-using UnityEngine;
 
 namespace UI
 {
@@ -21,11 +20,11 @@ namespace UI
         #region Private
         private void HandleDamageTaken(int _)
         {
-            base.TweenedUpdate(enemyModel.CurrentHealthNormalized, 0);
+            TweenedUpdate(enemyModel.CurrentHealthNormalized, 0);
         }
         private void HandleDeath(int _)
         {
-            base.TweenedUpdate(enemyModel.CurrentHealthNormalized, 0);
+            TweenedUpdate(enemyModel.CurrentHealthNormalized, 0);
             DestroyBar();
         }
 
@@ -36,7 +35,7 @@ namespace UI
 
         private void DestroyBar()
         {
-            GameObject.Destroy(gameObject, 1f);
+            Destroy(gameObject, 1f);
         }
 
         private void OnDestroy()

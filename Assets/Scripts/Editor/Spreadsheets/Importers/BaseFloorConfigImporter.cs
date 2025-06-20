@@ -9,7 +9,7 @@ namespace Spreadsheets.Importers
 
     public static class BaseFloorConfigImporter
     {
-        private const string Uri = "https://docs.google.com/spreadsheets/" +
+        private const string Url = "https://docs.google.com/spreadsheets/" +
             "d/e/2PACX-1vRWPrm3oa7WjeuxoZxISDgFkG87Y2TY0Oa5PsLvCddi6Jq3rEXFoIkXe7U1jwK9BTc75k2qHzJNJt4Y/" +
             "pub?gid=0&single=true&output=csv";
 
@@ -17,7 +17,7 @@ namespace Spreadsheets.Importers
         [MenuItem("Import Spreadsheets/BaseFloor Config")]
         public static void Import() =>
                 SpreadsheetImporter.ImportUsingMapper<BaseFloor, BaseFloorConfigMapper>(
-                    Uri,
+                    Url,
                     importedData =>
                         {
                             var newConfig = new BaseFloorConfig(importedData);

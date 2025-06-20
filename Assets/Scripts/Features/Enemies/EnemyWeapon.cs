@@ -1,6 +1,5 @@
 ﻿using Features.Heroes;
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Features.Enemies
@@ -22,10 +21,7 @@ namespace Features.Enemies
         #region Unity Serialized Fields
         [SerializeField] private WeaponType weaponType;
         #endregion
-
-        #region Lifecycle
-        #endregion
-
+        
         #region Public
         protected virtual void OnTriggerEnter(Collider collider)
         {

@@ -12,8 +12,9 @@ namespace UI
         [SerializeField] private TextMeshProUGUI totalHealthAmount;
         #endregion
 
-        #region Public
-        public void SetData(float percentage, int totalHealth)
+        #region Protected
+
+        protected void SetData(float percentage, int totalHealth)
         {
             fillImage.fillAmount = percentage;
             if (totalHealthAmount != null)
@@ -22,7 +23,7 @@ namespace UI
             }
         }
 
-        public void TweenedUpdate(float percentage, int health)
+        protected void TweenedUpdate(float percentage, int health)
         {
             fillImage.DOFillAmount(percentage, 0.5f).SetEase(Ease.InQuint);
             if (totalHealthAmount != null)

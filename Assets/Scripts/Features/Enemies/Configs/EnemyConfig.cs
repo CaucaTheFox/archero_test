@@ -26,7 +26,6 @@ namespace Features.Enemies
     public class EnemySettings
     {
         public string Id;
-        public string Name;
         public int Health;
         public int CollisionDamage;
         public int MeleeDamage;

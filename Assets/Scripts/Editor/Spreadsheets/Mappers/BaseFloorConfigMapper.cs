@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Spreadsheets.Mappers
 {
-    public sealed class BaseFloorConfigMapper : ClassMap<BaseFloor>
+    public class BaseFloorConfigMapper : ClassMap<BaseFloor>
     {
         public BaseFloorConfigMapper()
         {

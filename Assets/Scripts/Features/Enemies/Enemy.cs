@@ -9,13 +9,14 @@ namespace Features.Enemies
     public class Enemy : InjectableBehaviour
     {
         #region Constants
-        private const string DeathAnim = "Die";
-        private const string RunAnim = "Run";
-        private const string ParticleAttackAnim = "ParticleAttack";
-        private const string ParticleAttackEndAnim = "ParticleAttackEnd";
-        private const string RangedAttackAnim = "RangedAttack";
-        private const string DamageAnim = "Take Damage";
         private const string IdleAnim = "Idle";
+        
+        private static readonly int DieTrigger = Animator.StringToHash("Die");
+        private static readonly int RunTrigger = Animator.StringToHash("Run");
+        private static readonly int ParticleAttackTrigger = Animator.StringToHash("ParticleAttack");
+        private static readonly int ParticleAttackEndTrigger = Animator.StringToHash("ParticleAttackEnd");
+        private static readonly int RangedAttackTrigger = Animator.StringToHash("RangedAttack");
+        private static readonly int DamageTrigger = Animator.StringToHash("Take Damage");
         #endregion
 
         #region Events
@@ -80,14 +81,9 @@ namespace Features.Enemies
 
         private void Update()
         {
-            if (
-                !navMeshAgent.enabled
-                || navMeshAgent.pathPending
-                || navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance
-            )
-            {
+            if (!navMeshAgent.enabled || navMeshAgent.pathPending || 
+                navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
                 return;
-            }
 
             if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
             {
@@ -104,23 +100,23 @@ namespace Features.Enemies
         #endregion
 
         #region Public
-        public void MoveTorwardsTarget(Vector3 target)
+        public void MoveTowardsTarget(Vector3 target)
         {
             if (EnemyModel.IsDead)
-            {
                 return;
-            }
+            
             navMeshAgent.SetDestination(target);
-            animator.SetTrigger(RunAnim);
+            animator.SetTrigger(RunTrigger);
         }
 
         public void StopAgent()
         {
             navMeshAgent.isStopped = true;
         }
+        
         public void PlayDeathAnimation()
         {
-            animator.SetTrigger(DeathAnim);
+            animator.SetTrigger(DieTrigger);
             var deathSequence = DOTween.Sequence();
             deathSequence.AppendInterval(1.5f);
             deathSequence.Append(transform
@@ -132,7 +128,7 @@ namespace Features.Enemies
         {
             if (meleeWeapon == null)
             {
-                throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a melee weapon");
+                throw new Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a melee weapon");
             }
             animator.SetTrigger(attackName);
             meleeWeapon.Attack();
@@ -141,15 +137,15 @@ namespace Features.Enemies
         {
             if (particleWeapon == null)
             {
-                throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a particle weapon");
+                throw new Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a particle weapon");
             }
-            animator.SetTrigger(ParticleAttackAnim);
+            animator.SetTrigger(ParticleAttackTrigger);
             particleWeapon.Attack();
         }
 
         public void EndParticleAttack()
         {
-            animator.SetTrigger(ParticleAttackEndAnim);
+            animator.SetTrigger(ParticleAttackEndTrigger);
             particleWeapon.HideParticle();
         }
 
@@ -157,9 +153,9 @@ namespace Features.Enemies
         {
             if (rangedWeapon == null)
             {
-                throw new System.Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a ranged weapon");
+                throw new Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a ranged weapon");
             }
-            animator.SetTrigger(RangedAttackAnim);
+            animator.SetTrigger(RangedAttackTrigger);
             rangedWeapon.Attack();
         }
 
@@ -184,7 +180,7 @@ namespace Features.Enemies
         #region Private
         private void OnDamageTaken(int damage)
         {
-            animator.SetTrigger(DamageAnim);
+            animator.SetTrigger(DamageTrigger);
         }
 
         private void HandleHitPlayerCollision()

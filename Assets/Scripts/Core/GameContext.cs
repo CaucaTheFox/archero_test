@@ -1,30 +1,29 @@
-using Configs;
 using Core.Utility;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Debug = UnityEngine.Debug;
 
 namespace Core
 {
     public class GameContext
     {
+        #region Properties
+        public static IoC.IoC Container => container ??= CreateContainer();
+        #endregion
+        
+        #region State
         private static IoC.IoC container;
-        public static IoC.IoC Container {
-            get => container ?? (container = CreateContainer());
-            set => container = value;
-        }
-
+        #endregion
+        
+        #region Lifecycle
         public static void Init()
         {
-            var container = Container;
-
             ReflectionUtility.ForAllInstances<IFeatureInitialization>(feature => {
-                container.ResolveAll(feature);
+                Container.ResolveAll(feature);
                 feature.Init();
             });
         }
+        #endregion
 
-        private static IoC.IoC CreateContainer ()
+        #region Private
+        private static IoC.IoC CreateContainer()
         {
             var container = new IoC.IoC ();
 
@@ -34,5 +33,6 @@ namespace Core
 
             return container;
         }
+        #endregion
     }
 }

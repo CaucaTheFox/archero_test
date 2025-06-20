@@ -22,17 +22,13 @@ namespace Core.CameraScripts
             HandleCamera();
         }
         #endregion
-
-        #region Public
-        #endregion
-
+        
         #region Private
         protected virtual void HandleCamera()
         {
             if (CameraTarget == null)
-            {
                 return;
-            }
+            
 
             var worldPosition = Vector3.forward * distance + Vector3.up * height;
             var rotatedWorldPosition = Quaternion.AngleAxis(angle, Vector3.up) * worldPosition;

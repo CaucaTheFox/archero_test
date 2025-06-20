@@ -1,5 +1,4 @@
 ﻿using Core.IoC;
-using Features.Heroes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +36,7 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region Dependencies
-        [Inject] IRoomsModel roomModel;
+        [Inject] private IRoomsModel roomModel;
         #endregion
 
         #region Properties

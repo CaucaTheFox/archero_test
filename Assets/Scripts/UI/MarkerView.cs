@@ -19,9 +19,7 @@ namespace UI
         public void Update()
         {
             if (target == null)
-            {
                 return;
-            }
 
             transform.position = GetScreenPosition;
         }

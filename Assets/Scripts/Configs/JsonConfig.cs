@@ -17,7 +17,7 @@ public abstract class JsonConfig<A> : IJsonConfig<A> where A : class
 
     private A config;
 
-    public A Value => config ?? (config = LoadConfig());
+    public A Value => config ??= LoadConfig();
 
     private A LoadConfig()
     {

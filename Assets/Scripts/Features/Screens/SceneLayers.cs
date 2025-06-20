@@ -18,11 +18,11 @@ namespace Features.Screens
     
     public class SceneLayers: ISceneLayers
     {
-        #region - State
+        #region State
         private Transform[] layerTransforms;
         #endregion
 
-        #region - Lifecycle
+        #region Lifecycle
         private void Init()
         {
             var names = Enum.GetNames(typeof(SceneLayer));

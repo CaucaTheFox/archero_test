@@ -49,8 +49,8 @@ namespace Features.Heroes
         public Vector3 HeroPosition => heroInstance.Position;
         public Vector3 HeroForward => heroInstance.transform.forward;
         public float CurrentHealthNormalized => (float) CurrentHealth / heroInstance.Settings.Health;
-        public int CurrentHealth { get; set; }
-        public HeroState CurrentState { get; set; }
+        public int CurrentHealth { get; private set; }
+        public HeroState CurrentState { get; private set; }
 
         public int GetCurrentHeroAttack => heroInstance.Settings.Attack; // could be altered with armor/items to be more than base attack
         #endregion
@@ -58,6 +58,7 @@ namespace Features.Heroes
         #region State
         private Hero heroInstance;
         #endregion
+        
         #region Public
         public Hero CreateHero(Transform parent)
         {

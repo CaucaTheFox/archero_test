@@ -28,6 +28,7 @@ namespace Features.Rooms
         public int Id; 
         public List<BasicRow> Rows;
     }
+    
     public class BasicRow
     {
         public BaseFloorTile[] Tiles;

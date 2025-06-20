@@ -54,15 +54,15 @@ namespace Features.Enemies
 
         #region State     
         private bool isVisible;
-        // in real game setting, these would be applied to a gamestate saved to disk
+        // in real game setting, these would be applied to a gameState saved to disk
         private int currentHealth;
         #endregion
 
         #region Public
         public EnemyModel(EnemySettings settings, int index)
         {
-            this.Settings = settings;
-            this.Index = index;
+            Settings = settings;
+            Index = index;
             currentHealth = settings.Health;
             EnemyState = EnemyState.Alive;
             isVisible = true;
@@ -71,9 +71,7 @@ namespace Features.Enemies
         public void ApplyDamage(int damage)
         {
             if (EnemyState == EnemyState.Dead || !IsVisible)
-            {
                 return;
-            }
 
             currentHealth -= damage;
             if (currentHealth > 0)

@@ -10,10 +10,12 @@ namespace Core
         [Inject] private IScreenManager screenManager;
         #endregion
 
+        #region Lifecycle
         private void Start()
         {
             GameContext.Init();
             screenManager.Push<RoomScreenController>(RoomScreenController.ScreenName);
         }
+        #endregion
     }
 }

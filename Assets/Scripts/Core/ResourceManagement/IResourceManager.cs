@@ -9,15 +9,4 @@ namespace Core.ResourceManagement
         T LoadAssetUri<T>(string guidAndPath) where T : UnityEngine.Object;
 
     }
-
-	static class ResourceManagerExtension
-	{
-		public static T LoadAssetUriIfNotNull<T>(this IResourceManager resourceManager, string guidAndPath)
-			where T : UnityEngine.Object
-		{
-			return !string.IsNullOrEmpty(guidAndPath) 
-				? resourceManager.LoadAssetUri<T>(guidAndPath) 
-				: null;
-		}
-	}
 }

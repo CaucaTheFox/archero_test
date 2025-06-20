@@ -13,10 +13,10 @@ namespace Features.Heroes
         #endregion
 
         #region Constants
-        private const string RunAnim = "Run";
-        private const string TakeDamageAnim = "Take Damage";
-        private const string DeathAnim = "Die";
-        private const string ShootAnim = "Arrow Attack";
+        private static readonly int RunTrigger = Animator.StringToHash("Run");
+        private static readonly int ShootTrigger = Animator.StringToHash("Arrow Attack");
+        private static readonly int TakeDamageTrigger = Animator.StringToHash("Take Damage");
+        private static readonly int DeathTrigger = Animator.StringToHash("Die");
         #endregion
 
         #region Unity Serialized Fields
@@ -54,9 +54,9 @@ namespace Features.Heroes
         {
             isMoving = true;
             animator.speed = 1;
-            animator.ResetTrigger(ShootAnim);
-            animator.SetTrigger(RunAnim);
-            transform.Translate(joyStickInput * navMeshAgent.speed * Time.deltaTime, Space.World);
+            animator.ResetTrigger(ShootTrigger);
+            animator.SetTrigger(RunTrigger);
+            transform.Translate(joyStickInput * (navMeshAgent.speed * Time.deltaTime), Space.World);
             if (joyStickInput != Vector3.zero)
             {
                 transform.forward = joyStickInput;
@@ -67,19 +67,19 @@ namespace Features.Heroes
         {
             isMoving = false; 
             animator.speed = Settings.AttackSpeed;
-            animator.ResetTrigger(RunAnim);
-            animator.SetTrigger(ShootAnim);
+            animator.ResetTrigger(RunTrigger);
+            animator.SetTrigger(ShootTrigger);
             transform.LookAt(closestEnemyPosition);
         }
 
         public void PlayDamageAnimation()
         {
-            animator.SetTrigger(TakeDamageAnim);
+            animator.SetTrigger(TakeDamageTrigger);
         }
 
         public void PlayDeathAnimation()
         {
-            animator.SetTrigger(DeathAnim);
+            animator.SetTrigger(DeathTrigger);
         }
         #endregion
 
@@ -88,11 +88,9 @@ namespace Features.Heroes
         private void ShowArrow()
         {
             if (isMoving)
-            {
                 return;
-            }
 
-            var arrow = GameObject.Instantiate<Arrow>(arrowPrefab);
+            var arrow = Instantiate(arrowPrefab);
             arrow.transform.position = arrowAnchor.position;
             arrow.transform.up = -transform.forward;
             arrow.FlightDirection = transform.forward;

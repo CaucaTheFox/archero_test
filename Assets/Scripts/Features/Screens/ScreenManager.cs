@@ -33,15 +33,15 @@ namespace Features.Screens
     
     public class ScreenManager: IScreenManager
     {
-        #region - Constants
+        #region Constants
         private const string LogTag = "ScreenManager";
         #endregion
         
-        #region - Events
+        #region Events
         public event Action<IScreenController> OnScreenChanged;
         #endregion
         
-        #region - Properties
+        #region Properties
 
         public IScreenController CurrentScreen
         {
@@ -53,21 +53,18 @@ namespace Features.Screens
         }
         #endregion
         
-        #region - Dependencies
-#pragma warning disable 649
+        #region Dependencies
         [Inject] private ISceneLayers layers;
         [Inject] private IResourceManager resourceManager;
-#pragma warning restore 649
-
         #endregion
         
-        #region - State
+        #region State
         private readonly Stack<IScreenController> screensStack = new Stack<IScreenController>();
         private readonly Dictionary<string, IScreenFactory> factories = new Dictionary<string, IScreenFactory>();
         private IScreenController currentScreen;
         #endregion
         
-        #region - Public
+        #region Public
         public void RegisterFactory(string prefabPath, IScreenFactory factory)
         {
             factories.Add(prefabPath, factory);
@@ -83,9 +80,7 @@ namespace Features.Screens
             }
             
             screensStack.Push(screen);
-
             CurrentScreen = screen;
-
             return screen;
         }
 
@@ -102,7 +97,6 @@ namespace Features.Screens
             current.Visible = true;
             
             CurrentScreen = current;
-            
             Resources.UnloadUnusedAssets();
         }
         
@@ -125,7 +119,7 @@ namespace Features.Screens
         }
         #endregion
         
-        #region - Private
+        #region Private
         private T LoadAndInstantiate<T>(string prefabPath) where T: class, IScreenController
         {
             IScreenFactory factory;
@@ -140,11 +134,7 @@ namespace Features.Screens
             }
 
             if (prefab.GetComponent<T>() == null) {
-                throw new Exception(string.Format("[{0}] Prefab {1} doesn't have the component {2}",
-                    LogTag,
-                    prefab.name,
-                    typeof(T).Name
-                ));
+                throw new Exception($"[{LogTag}] Prefab {prefab.name} doesn't have the component {typeof(T).Name}");
             }
 
             var parent = layers.GetLayerTransform(SceneLayer.ScreenLayer);
@@ -153,9 +143,8 @@ namespace Features.Screens
             if (gameObject == null) {
                 return null;
             }
-
+            
             gameObject.name = prefab.name;
-
             return gameObject.GetComponent<T>();
         }
         #endregion
@@ -168,10 +157,7 @@ namespace Features.Screens
             var baseType = controllerType.BaseType;
             
             if (baseType == null) {
-                throw new Exception(string.Format(
-                    "Type {0} should be derived from DualScreenController",
-                    controllerType.Name
-                ));
+                throw new Exception($"Type {controllerType.Name} should be derived from DualScreenController");
             }
             
             var viewTypes = baseType.GetGenericArguments();

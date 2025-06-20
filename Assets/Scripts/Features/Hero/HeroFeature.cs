@@ -3,7 +3,6 @@ using Core.IoC;
 
 namespace Features.Heroes
 {
-
     public class HeroFeature : IFeatureInitialization, IServiceRegistration
     {
         [Inject] private IHeroModel heroModel;

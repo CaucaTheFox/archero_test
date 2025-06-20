@@ -26,11 +26,9 @@ namespace Features.Heroes
     public class HeroSettings
     {
         public string Id;
-        public string Name;
         public int Health;
         public int Attack;
         public float AttackSpeed;
-        public int DamageResistance;
         public float Dodge;
     }
 }

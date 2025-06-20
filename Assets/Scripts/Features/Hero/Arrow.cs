@@ -44,7 +44,7 @@ namespace Features.Heroes
                 return;
             }
 
-            var movement = FlightDirection * Time.deltaTime * arrowSpeed + transform.position;
+            var movement = FlightDirection * (Time.deltaTime * arrowSpeed) + transform.position;
             movement.y = 0.5f;
             transform.position = movement;
         }
@@ -61,7 +61,7 @@ namespace Features.Heroes
             if (obstacle != null)
             {
                 hasHit = true;
-                GameObject.Destroy(gameObject, 0.5f);
+                Destroy(gameObject, 0.5f);
                 return;
             }
 
@@ -70,12 +70,9 @@ namespace Features.Heroes
             {
                 OnHitEnemy?.Invoke(hitEnemy.EnemyModel.Index);
                 hasHit = true;
-                GameObject.Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
-        #endregion
-
-        #region Private
         #endregion
     }
 }

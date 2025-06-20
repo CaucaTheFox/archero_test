@@ -5,7 +5,7 @@ namespace Features.Screens
     public abstract class ScreenController<ViewType>: IScreenController
         where ViewType: MonoBehaviour
     {
-        #region - Properties
+        #region Properties
         public abstract string Name { get; }
         public ViewType View { get; set; }
 
@@ -16,7 +16,7 @@ namespace Features.Screens
         }
         #endregion
         
-        #region - Lifecycle
+        #region Lifecycle
         public virtual void Init()
         {
             

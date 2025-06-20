@@ -7,24 +7,24 @@ namespace Features.Screens
         where ViewType: MonoBehaviour
         where ScreenControllerType: ScreenController<ViewType>, new()
     {
-        #region - Dependencies
+        #region Dependencies
         [Inject] protected ISceneLayers gameLayers;
         [Inject] protected IControlsManager controlsManager;
         [Inject] protected IIoC container;
         #endregion
         
-        #region - State
+        #region State
         private readonly string viewPrefabPath;
         #endregion
         
-        #region - Lifecycle
+        #region Lifecycle
         public ScreenFactory(string viewPrefabPath)
         {
             this.viewPrefabPath = viewPrefabPath;
         }
         #endregion
         
-        #region - Public
+        #region Public
         public IScreenController Create()
         {
             var screenLayer = gameLayers.GetLayerTransform(SceneLayer.ScreenLayer);

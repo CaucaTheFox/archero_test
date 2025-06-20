@@ -15,7 +15,6 @@ namespace Core.Time
         public long TimestampUtcNow => ToUnixTimeSeconds(UtcNow);
             
         private long ToUnixTimeSeconds(DateTime t) => ((DateTimeOffset)t).ToUnixTimeSeconds();
-
     }
 
 }

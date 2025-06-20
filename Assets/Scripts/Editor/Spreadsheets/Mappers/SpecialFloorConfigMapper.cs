@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Spreadsheets.Mappers
 {
-    public sealed class SpecialFloorConfigMapper : ClassMap<SpecialFloor>
+    public class SpecialFloorConfigMapper : ClassMap<SpecialFloor>
     {
         public SpecialFloorConfigMapper()
         {

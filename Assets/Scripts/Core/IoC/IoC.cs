@@ -12,7 +12,6 @@ namespace Core.IoC
 
 	public interface IClassFactory<T> : IClassFactory where T : class
 	{
-		//T create ();
 	}
 
 	public interface ISmartFactory
@@ -40,23 +39,30 @@ namespace Core.IoC
 	
 	public class IoC: IIoC
 	{
-		const string LogTag = "IoC";
-
-		class ServiceFactory
+		#region Subclasses
+		private class ServiceFactory
 		{
-			public IClassFactory factory;
-			public bool isSingleton;
+			public readonly IClassFactory Factory;
+			public readonly bool IsSingleton;
 
 			public ServiceFactory (IClassFactory factory, bool isSingleton)
 			{
-				this.factory = factory;
-				this.isSingleton = isSingleton;
+				Factory = factory;
+				IsSingleton = isSingleton;
 			}
 		}
+		#endregion
 
-		Dictionary<Type, ServiceFactory> factories = new Dictionary<Type, ServiceFactory> ();
-		Dictionary<Type, object> instances = new Dictionary<Type, object> ();
+		#region Constants
+		private const string LogTag = "IoC";
+		#endregion
+		
+		#region State
+		private readonly Dictionary<Type, ServiceFactory> factories = new();
+		private readonly Dictionary<Type, object> instances = new();
+		#endregion
 
+		#region Public
 		public void Register<Interface, ClassType>() where Interface: class where ClassType: class, Interface
 		{
 			factories.Add(typeof(Interface), new ServiceFactory(new SmartFactory<Interface, ClassType>(this), false));
@@ -119,17 +125,18 @@ namespace Core.IoC
 				return null;
 			}
 
-			if (serviceFactory.isSingleton) {
+			if (serviceFactory.IsSingleton) {
 				if (instances.ContainsKey(type)) {
 					return instances[type];
 				}
 
-				var newInstance = serviceFactory.factory.Create();
+				var newInstance = serviceFactory.Factory.Create();
 				instances.Add (type, newInstance);
 				return newInstance;
 			}
-			return serviceFactory.factory.Create();
+			return serviceFactory.Factory.Create();
 		}
+		#endregion
 	}
 
 	[AttributeUsage(AttributeTargets.Field)]
@@ -161,18 +168,16 @@ namespace Core.IoC
 		public SmartFactory (IIoC container = null)
 		{
 			var type = typeof(T);
-			var constructors = type.GetConstructors ();
+			var constructors = type.GetConstructors();
 			Container = container;
 
 			if (constructors.Length == 1) {
-				constructor = constructors [0];
+				constructor = constructors[0];
 			} else {
-				//error!!!
-				throw new Exception ("SmartFactory could only instantinate the class with a single constructor!");
+				throw new Exception ("SmartFactory can only instantiate classes with a single constructor!");
 			}
 
 			var constructorParameters = constructor.GetParameters();
-
 			constructorInjections = new List<Type> ();
 
 			foreach (var parameter in constructorParameters) {
@@ -180,11 +185,9 @@ namespace Core.IoC
 			}
 			
 			fieldsInjections = new List<FieldInfo>();
-
 			var fields = type.GetFields(
 				BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
 			);
-			
 			foreach (var field in fields)
 			{
 				if (!field.HasAttribute(typeof(InjectAttribute))) {
@@ -213,16 +216,13 @@ namespace Core.IoC
 			var newObject = constructor.Invoke(parameters);
 			
 			count = fieldsInjections.Count;
-
 			for (var i = 0; i < count; i += 1) {
 				var field = fieldsInjections[i];
 				var service = Container.Resolve(field.FieldType);
 				field.SetValue(newObject, service);
 			}
 
-			var factory = newObject as ISmartFactory;
-			
-			if (factory != null) {
+			if (newObject is ISmartFactory factory) {
 				factory.Container = Container;
 			}
 			
