@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 7211117955545391085}
   - component: {fileID: 9596988}
   m_Layer: 0
-  m_Name: bat_red
+  m_Name: Bat_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

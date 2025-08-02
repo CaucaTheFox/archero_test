@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 8886539880119685391}
   - component: {fileID: 9597222}
   m_Layer: 0
-  m_Name: deathKnight_orange
+  m_Name: DeathKnight_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

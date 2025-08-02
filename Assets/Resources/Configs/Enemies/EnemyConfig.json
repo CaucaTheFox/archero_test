@@ -1,44 +1,44 @@
 {
   "Enemies": {
-    "bat_pink": {
-      "Id": "bat_pink",
-      "Name": "Pink Batto",
+    "Bat_Pink": {
+      "Id": "Bat_Pink",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_00",
       "Health": 800,
       "CollisionDamage": 20,
       "MeleeDamage": 50,
       "ParticleDamage": 150,
       "RangedDamage": 0
     },
-    "cactusMonster_purple": {
-      "Id": "cactusMonster_purple",
-      "Name": "Purple Poky",
+    "Cactus_Purple": {
+      "Id": "Cactus_Purple",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_01",
       "Health": 600,
       "CollisionDamage": 20,
       "MeleeDamage": 100,
       "ParticleDamage": 0,
       "RangedDamage": 0
     },
-    "deathKnight_orange": {
-      "Id": "deathKnight_orange",
-      "Name": "Orange Death",
+    "DeathKnight_Orange": {
+      "Id": "DeathKnight_Orange",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_02",
       "Health": 300,
       "CollisionDamage": 20,
       "MeleeDamage": 200,
       "ParticleDamage": 0,
       "RangedDamage": 0
     },
-    "dragon_red": {
-      "Id": "dragon_red",
-      "Name": "Ruby",
+    "Dragon_Red": {
+      "Id": "Dragon_Red",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_03",
       "Health": 1000,
       "CollisionDamage": 20,
       "MeleeDamage": 100,
       "ParticleDamage": 150,
       "RangedDamage": 0
     },
-    "slime_blue": {
-      "Id": "slime_blue",
-      "Name": "Glibber",
+    "Slime_Blue": {
+      "Id": "Slime_Blue",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_04",
       "Health": 500,
       "CollisionDamage": 20,
       "MeleeDamage": 150,

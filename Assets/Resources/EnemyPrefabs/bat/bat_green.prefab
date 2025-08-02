@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 9510704}
   - component: {fileID: 3373117743008223899}
   m_Layer: 0
-  m_Name: bat_green
+  m_Name: Bat_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -143,21 +143,24 @@ namespace Features.Enemies
                 switch (actionData.GetEnemyBehaviourActionType())
                 {
                     case EnemyBehaviourActionType.Idle:
+                        var idleEnemyBehaviourAction = new IdleEnemyBehaviourAction();
+                        idleEnemyBehaviourAction.Init(this);
+                        behaviourActions.TryAdd(EnemyBehaviourActionType.Idle, idleEnemyBehaviourAction);
                         break;
                     case EnemyBehaviourActionType.Movement:
                         var movementEnemyBehaviourAction = new MovementEnemyBehaviourAction();
                         movementEnemyBehaviourAction.Init(this);
-                        behaviourActions.Add(EnemyBehaviourActionType.Movement, movementEnemyBehaviourAction);
+                        behaviourActions.TryAdd(EnemyBehaviourActionType.Movement, movementEnemyBehaviourAction);
                         break;
                     case EnemyBehaviourActionType.Dash:
                         var dashEnemyBehaviourAction = new DashEnemyBehaviourAction();
                         dashEnemyBehaviourAction.Init(this);
-                        behaviourActions.Add(EnemyBehaviourActionType.Dash, dashEnemyBehaviourAction);
+                        behaviourActions.TryAdd(EnemyBehaviourActionType.Dash, dashEnemyBehaviourAction);
                         break;
                     case EnemyBehaviourActionType.Attack:
                         var attackEnemyBehaviourAction = new AttackEnemyBehaviourAction();
                         attackEnemyBehaviourAction.Init(this);
-                        behaviourActions.Add(EnemyBehaviourActionType.Attack, attackEnemyBehaviourAction);
+                        behaviourActions.TryAdd(EnemyBehaviourActionType.Attack, attackEnemyBehaviourAction);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 9595778}
   - component: {fileID: 282706093075040193}
   m_Layer: 0
-  m_Name: bat_pink
+  m_Name: Bat_Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

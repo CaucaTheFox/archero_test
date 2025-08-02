@@ -5,6 +5,55 @@
       "EnemyBehaviourActionData": [
         {
           "Type": "Idle",
+          "ActionDuration": 1.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "Wave",
+          "RandomDirectionScalar": 0.0,
+          "WaveFrequency": 5.0,
+          "WaveMagnitude": 10.0,
+          "ActionDuration": 1.0
+        },
+        {
+          "Type": "Dash",
+          "Speed": 10.0,
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "Wave",
+          "RandomDirectionScalar": 0.0,
+          "WaveFrequency": 5.0,
+          "WaveMagnitude": 10.0,
+          "ActionDuration": 1.0
+        },
+        {
+          "Type": "Dash",
+          "Speed": 10.0,
+          "ActionDuration": 2.0
+        }
+      ]
+    },
+    "EnemyBehaviourConfig_01": {
+      "Id": "EnemyBehaviourConfig_01",
+      "EnemyBehaviourActionData": [
+        {
+          "Type": "Idle",
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "Default",
+          "RandomDirectionScalar": 0.0,
+          "WaveFrequency": 0.0,
+          "WaveMagnitude": 0.0,
+          "ActionDuration": 1.0
+        },
+        {
+          "Type": "Attack",
+          "SubType": "Melee",
+          "AttackIds": [],
           "ActionDuration": 2.0
         },
         {
@@ -16,28 +65,112 @@
           "ActionDuration": 2.0
         },
         {
-          "Type": "Dash",
-          "Speed": 0.0,
+          "Type": "Attack",
+          "SubType": "Melee",
+          "AttackIds": [],
+          "ActionDuration": 2.0
+        }
+      ]
+    },
+    "EnemyBehaviourConfig_02": {
+      "Id": "EnemyBehaviourConfig_02",
+      "EnemyBehaviourActionData": [
+        {
+          "Type": "Idle",
           "ActionDuration": 2.0
         },
         {
           "Type": "Movement",
-          "SubType": "Default",
-          "RandomDirectionScalar": 2.0,
-          "WaveFrequency": 2.0,
-          "WaveMagnitude": 4.0,
-          "ActionDuration": 2.0
-        },
-        {
-          "Type": "Dash",
-          "Speed": 5.0,
-          "ActionDuration": 0.5
+          "SubType": "Invisible",
+          "RandomDirectionScalar": 0.0,
+          "WaveFrequency": 0.0,
+          "WaveMagnitude": 0.0,
+          "ActionDuration": 1.0
         },
         {
           "Type": "Attack",
           "SubType": "Melee",
           "AttackIds": [],
+          "ActionDuration": 5.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "Invisible",
+          "RandomDirectionScalar": 0.0,
+          "WaveFrequency": 0.0,
+          "WaveMagnitude": 0.0,
+          "ActionDuration": 3.0
+        },
+        {
+          "Type": "Attack",
+          "SubType": "Melee",
+          "AttackIds": [],
+          "ActionDuration": 3.0
+        }
+      ]
+    },
+    "EnemyBehaviourConfig_03": {
+      "Id": "EnemyBehaviourConfig_03",
+      "EnemyBehaviourActionData": [
+        {
+          "Type": "Idle",
           "ActionDuration": 2.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "Default",
+          "RandomDirectionScalar": 0.0,
+          "WaveFrequency": 0.0,
+          "WaveMagnitude": 0.0,
+          "ActionDuration": 3.0
+        },
+        {
+          "Type": "Attack",
+          "SubType": "Particle",
+          "AttackIds": [],
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "Default",
+          "RandomDirectionScalar": 0.0,
+          "WaveFrequency": 0.0,
+          "WaveMagnitude": 0.0,
+          "ActionDuration": 3.0
+        },
+        {
+          "Type": "Attack",
+          "SubType": "Particle",
+          "AttackIds": [],
+          "ActionDuration": 2.0
+        }
+      ]
+    },
+    "EnemyBehaviourConfig_04": {
+      "Id": "EnemyBehaviourConfig_04",
+      "EnemyBehaviourActionData": [
+        {
+          "Type": "Idle",
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "RandomDirection",
+          "RandomDirectionScalar": 5.0,
+          "WaveFrequency": 0.0,
+          "WaveMagnitude": 0.0,
+          "ActionDuration": 3.0
+        },
+        {
+          "Type": "Dash",
+          "Speed": 14.0,
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Attack",
+          "SubType": "Melee",
+          "AttackIds": [],
+          "ActionDuration": 1.0
         }
       ]
     }

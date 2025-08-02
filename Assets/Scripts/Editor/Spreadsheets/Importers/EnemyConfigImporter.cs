@@ -7,9 +7,10 @@ namespace Spreadsheets.Importers
 {
     public static class EnemyConfigImporter
     {
-        private const string Url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWPrm3oa7WjeuxoZxISDgFkG87Y2TY0Oa5PsLvCddi6Jq3rEXFoIkXe7U1jwK9BTc75k2qHzJNJt4Y/pub?gid=1407994961&single=true&output=csv";
-
-
+        private const string Url = "https://docs.google.com/spreadsheets/d/" +
+                                   "1WSJIC9YE3-Ib5XzUwBmLfsWMZd4DKYYoBgMLrtgY52U" +
+                                   "/export?format=csv&id=1WSJIC9YE3-Ib5XzUwBmLfsWMZd4DKYYoBgMLrtgY52U&gid=1614437953";
+        
         [MenuItem("ArcheroTest/Import Spreadsheets/Enemy Config")]
         public static void Import() =>
                 SpreadsheetImporter.ImportSimple<EnemySettings>(

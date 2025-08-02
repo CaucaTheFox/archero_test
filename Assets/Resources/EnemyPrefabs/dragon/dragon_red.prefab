@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 2206104593050090144}
   - component: {fileID: 9569356}
   m_Layer: 0
-  m_Name: dragon_red
+  m_Name: Dragon_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

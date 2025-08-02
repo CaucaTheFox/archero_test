@@ -1820,7 +1820,7 @@ GameObject:
   - component: {fileID: 627134500790467610}
   - component: {fileID: 9599522}
   m_Layer: 0
-  m_Name: dragon_purple
+  m_Name: Dragon_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

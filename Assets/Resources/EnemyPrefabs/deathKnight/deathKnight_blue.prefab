@@ -6418,7 +6418,7 @@ GameObject:
   - component: {fileID: 1039756172871243726}
   - component: {fileID: 9564250}
   m_Layer: 0
-  m_Name: deathKnight_blue
+  m_Name: DeathKnight_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

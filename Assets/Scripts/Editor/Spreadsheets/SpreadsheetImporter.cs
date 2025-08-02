@@ -13,21 +13,21 @@ namespace Spreadsheets
 {
     public static class SpreadsheetImporter
     {
-        private static void ImportGeneric<A>(
-            string url, Func<string, List<A>> parser, Action<List<A>> onComplete
-        )
+        private static void ImportGeneric<A>(string url, Func<string, List<A>> parser, Action<List<A>> onComplete)
         {
             var request = UnityWebRequest.Get(url);
             request.timeout = 20;
             var op = request.SendWebRequest();
-            op.completed += _ => {
+            op.completed += _ =>
+            {
                 var result = parser(request.downloadHandler.text);
                 onComplete?.Invoke(result);
                 EditorUtility.DisplayDialog(
-                    "Great Success",
+                    "Success",
                     $"{typeof(A).Name} updated successfully",
                     "OK"
                 );
+
             };
         }
 

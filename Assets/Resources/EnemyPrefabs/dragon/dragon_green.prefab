@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 5552263778760428525}
   - component: {fileID: 9562036}
   m_Layer: 0
-  m_Name: dragon_green
+  m_Name: Dragon_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

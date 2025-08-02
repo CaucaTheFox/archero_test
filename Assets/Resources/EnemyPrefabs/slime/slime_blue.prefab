@@ -5303,7 +5303,7 @@ GameObject:
   - component: {fileID: 2598177611527043495}
   - component: {fileID: 9532142}
   m_Layer: 0
-  m_Name: slime_blue
+  m_Name: Slime_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
