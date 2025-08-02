@@ -1,4 +1,7 @@
 ﻿using System;
+using Core;
+using Core.IoC;
+using Core.ResourceManagement;
 
 namespace Features.Enemies
 {
@@ -9,16 +12,17 @@ namespace Features.Enemies
         event Action<int> OnPlayerHit;
         event Action OnVisibilityChange;
 
-        int Index { get; }
+        int InstanceId { get; }
         float CurrentHealthNormalized { get; }
         bool IsDead { get; }
         bool IsVisible { get; set; }
         EnemySettings Settings { get; }
         EnemyState EnemyState { get; set; }
+        Enemy EnemyInstance { get;}
+        
         void ApplyDamage(int damage);
-        void DispatchPlayerHit(int damage);
-
     }
+    
     public enum EnemyState
     {
         Alive,
@@ -34,8 +38,16 @@ namespace Features.Enemies
         public event Action OnVisibilityChange;
         #endregion
 
+        #region Constants
+        private const string EnemyPath = "EnemyPrefabs/";
+        #endregion
+        
+        #region Dependencies
+        [Inject] private IResourceManager resourceManager;
+        #endregion
+        
         #region Properties
-        public int Index { get; }
+        public int InstanceId { get; }
         public float CurrentHealthNormalized => (float) currentHealth / Settings.Health;
         public bool IsDead => EnemyState == EnemyState.Dead;
         public bool IsVisible {
@@ -48,26 +60,38 @@ namespace Features.Enemies
         }
 
         public EnemySettings Settings { get; }
-
         public EnemyState EnemyState { get; set; }
+        public Enemy EnemyInstance { get; private set; }
         #endregion
 
         #region State     
         private bool isVisible;
-        // in real game setting, these would be applied to a gameState saved to disk
         private int currentHealth;
         #endregion
 
-        #region Public
-        public EnemyModel(EnemySettings settings, int index)
+        #region Lifecycle
+        public EnemyModel(int instanceId, EnemySettings settings)
         {
+            GameContext.Container.ResolveAll(this);
+            
+            InstanceId = instanceId;
             Settings = settings;
-            Index = index;
             currentHealth = settings.Health;
             EnemyState = EnemyState.Alive;
             isVisible = true;
+            
+            SpawnEnemyInstance();
         }
-
+        
+        public void Cleanup()
+        { 
+            EnemyInstance.OnPlayerHit -= DispatchPlayerHit;
+            UnityEngine.Object.Destroy(EnemyInstance);
+            EnemyInstance = null;
+        }
+        #endregion
+        
+        #region Public
         public void ApplyDamage(int damage)
         {
             if (EnemyState == EnemyState.Dead || !IsVisible)
@@ -76,16 +100,29 @@ namespace Features.Enemies
             currentHealth -= damage;
             if (currentHealth > 0)
             {
-                OnDamageTaken?.Invoke(Index);
+                OnDamageTaken?.Invoke(InstanceId);
+                EnemyInstance.PlayDamageAnimation();
             }
             else
             {
                 EnemyState = EnemyState.Dead;
-                OnDeath?.Invoke(Index);
+                OnDeath?.Invoke(InstanceId);
+                EnemyInstance.PlayDeathAnimation();
             }
         }
+        #endregion
 
-        public void DispatchPlayerHit(int damage)
+        #region Private
+        private void SpawnEnemyInstance()
+        {
+            var split = Settings.Id.Split('_');
+            var path = EnemyPath + split[0] + "/" + Settings.Id;
+            var enemyTemplate = resourceManager.LoadResource<Enemy>(path);
+            EnemyInstance = UnityEngine.Object.Instantiate(enemyTemplate);
+            EnemyInstance.OnPlayerHit += DispatchPlayerHit;
+        }
+        
+        private void DispatchPlayerHit(int damage)
         {
             OnPlayerHit?.Invoke(damage);
         }

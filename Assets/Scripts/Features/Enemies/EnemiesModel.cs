@@ -1,25 +1,30 @@
 ﻿using Core.IoC;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Features.Enemies
 {
-    public interface IEnemiesModel : IEnumerable<IEnemyModel>
+    public interface IEnemiesModel
     {
         event Action<IEnemyModel> OnDamageTaken;
         event Action<IEnemyModel> OnDeath;
         event Action<int> OnPlayerHit;
+        
+        Dictionary<int, EnemyModel> EnemyModels { get; }
+        
         void Init();
-        void ApplyDamage(int enemyIndex, int damage);
+        void Cleanup();
+        
+        void ApplyDamage(int instanceId, int damage);
         void GenerateNextWave();
     }
 
     public class EnemiesModel : IEnemiesModel
     {
         #region Constants
-        private const int MaxEnemies = 4; // for demo purpose, enemy count per room would be defined by GD differently 
+        private const int MaxEnemies = 4; // for demo purpose only, enemy count per room would be defined through configs usually
         #endregion
 
         #region Events
@@ -32,35 +37,44 @@ namespace Features.Enemies
         [Inject] private IJsonConfig<EnemyConfig> enemyConfig;
         #endregion
 
-        #region State
-        private EnemyModel[] EnemyModels; 
+        #region Properties
+        public Dictionary<int, EnemyModel> EnemyModels { get; private set; }
         #endregion
-
-        #region Public
+        
+        #region State
+        #endregion
+        
+        #region Lifecycle
         public void Init()
         {
             var enemyAmount = UnityEngine.Random.Range(1, MaxEnemies);
             GenerateEnemies(enemyAmount);
         }
 
-        public void ApplyDamage(int enemyIndex, int damage)
+        public void Cleanup()
         {
-            if (enemyIndex >= EnemyModels.Length)
+            foreach (var entry in EnemyModels)
             {
-                return;
+                entry.Value.Cleanup();
+                entry.Value.OnDamageTaken -= DispatchDamageTaken;
+                entry.Value.OnDeath -= DispatchDamageTaken;
+                entry.Value.OnPlayerHit -= DispatchPlayerHit;
             }
-            EnemyModels[enemyIndex].ApplyDamage(damage);
+            EnemyModels.Clear();
+        }
+        #endregion
+        
+        #region Public
+        public void ApplyDamage(int instanceId, int damage)
+        {
+            if (EnemyModels.TryGetValue(instanceId, out var enemyModel))
+            {
+                enemyModel.ApplyDamage(damage);
+            }
         }
 
         public void GenerateNextWave()
         {
-            foreach (var model in EnemyModels)
-            {
-                model.OnDamageTaken -= DispatchDamageTaken;
-                model.OnDeath -= DispatchDamageTaken;
-                model.OnPlayerHit -= DispatchPlayerHit;
-            }
-
             var enemyAmount = UnityEngine.Random.Range(1, MaxEnemies);
             GenerateEnemies(enemyAmount);
         }
@@ -69,45 +83,47 @@ namespace Features.Enemies
         #region Private
         private void GenerateEnemies(int enemyAmount)
         {
-            EnemyModels = new EnemyModel[enemyAmount];
+            EnemyModels = new Dictionary<int, EnemyModel>();
             var enemySettings = enemyConfig.Value.Enemies.Select(x => x.Value).ToList();
             for (int i = 0; i < enemyAmount; i++)
             {
+                var instanceId = i;
                 var randomIndex = UnityEngine.Random.Range(0, enemyConfig.Value.Enemies.Count);
-                var enemyModel = new EnemyModel(enemySettings[randomIndex], i);
-                EnemyModels[i] = enemyModel;
+                var randomEnemySettings = enemySettings[randomIndex];
+                var enemyModel = new EnemyModel(instanceId, randomEnemySettings);
                 enemyModel.OnDamageTaken += DispatchDamageTaken;
                 enemyModel.OnDeath += DispatchDeath;
                 enemyModel.OnPlayerHit += DispatchPlayerHit;
+                EnemyModels.Add(instanceId, enemyModel);
             }
         }
 
-        private void DispatchDamageTaken(int enemyIndex)
+        private void RemoveEnemyModel(int instanceId)
         {
-            OnDamageTaken?.Invoke(EnemyModels[enemyIndex]);
+            if (EnemyModels.TryGetValue(instanceId, out var enemyModel))
+            {
+                enemyModel.Cleanup();
+                enemyModel.OnDamageTaken -= DispatchDamageTaken;
+                enemyModel.OnDeath -= DispatchDamageTaken;
+                enemyModel.OnPlayerHit -= DispatchPlayerHit;
+                EnemyModels.Remove(instanceId);
+            }
+        }
+        
+        private void DispatchDamageTaken(int instanceId)
+        {
+            OnDamageTaken?.Invoke(EnemyModels[instanceId]);
         }
 
-        private void DispatchDeath(int enemyIndex)
+        private void DispatchDeath(int instanceId)
         {
-            OnDeath?.Invoke(EnemyModels[enemyIndex]);
+            OnDeath?.Invoke(EnemyModels[instanceId]);
+            RemoveEnemyModel(instanceId);
         }
 
         private void DispatchPlayerHit(int damage)
         {
             OnPlayerHit?.Invoke(damage);
-        }
-
-        #endregion
-
-        #region Enumerable
-        public IEnumerator<IEnemyModel> GetEnumerator()
-        {
-            return EnemyModels.Cast<IEnemyModel>().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
         #endregion
     }

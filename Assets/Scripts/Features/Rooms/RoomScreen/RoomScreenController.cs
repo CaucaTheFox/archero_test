@@ -4,12 +4,9 @@ using Core.ResourceManagement;
 using Features.Enemies;
 using Features.Heroes;
 using Features.Screens;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utility.Utility;
-using Object = UnityEngine.Object;
 
 namespace Features.Rooms.Screens
 {
@@ -17,7 +14,6 @@ namespace Features.Rooms.Screens
     {
         #region Constants
         public const string ScreenName = "RoomScreen";  
-        private const string EnemyPath = "EnemyPrefabs/";
         #endregion
 
         #region Dependencies
@@ -43,25 +39,23 @@ namespace Features.Rooms.Screens
         
         #region State
         private Hero hero;
-        private Dictionary<string, Enemy> enemyPrefabCache = new Dictionary<string, Enemy>();
-        private Dictionary<int, Enemy> enemiesOnScreen = new Dictionary<int, Enemy>();
         private int waveCount;
         #endregion
 
         #region Lifecycle
         public override void Init()
         {
-            TopDownCamera = Camera.main.GetComponent<TopDownCamera>();
-
-            hero = heroModel.CreateHero(Screen3D.HeroContainer);
-            hero.OnHitEnemy += HandleHitEnemy;
-            heroModel.OnDeath += HandlePlayerDeath;
-            TopDownCamera.CameraTarget = hero.transform;
+            SpawnHero();
             Screen2D.InstantiateHeroHealthBar(hero.HealthBarAnchor, Camera.main, heroModel);
+            
+            TopDownCamera = Camera.main.GetComponent<TopDownCamera>();
+            TopDownCamera.CameraTarget = hero.transform;
+        
             enemiesModel.Init();
             enemiesModel.OnDeath += HandleEnemyDeath;
             enemiesModel.OnPlayerHit += HandlePlayerHit;
-            SpawnEnemies();
+            SpawnEnemyHealthBars();
+            
             Screen2D.Joystick.OnFixedUpdate += HandlePlayerInput;
             Screen3D.OnPlayerHit += HandlePlayerHit;
             WaveCount = 1;
@@ -70,30 +64,28 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region Private
-        private void SpawnEnemies()
+
+        private void SpawnHero()
         {
-            foreach (var enemy in enemiesModel)
+            hero = heroModel.CreateHero(Screen3D.HeroContainer);
+            hero.OnHitEnemy += HandleEnemyHit;
+            heroModel.OnDeath += HandlePlayerDeath;
+        }
+        
+        private void SpawnEnemyHealthBars()
+        {
+            foreach (var entry in enemiesModel.EnemyModels)
             {
-                var settings = enemy.Settings;
-                var split = settings.Id.Split('_');
-                var path = EnemyPath + split[0] + "/" + settings.Id;
-                var enemyTemplate = enemyPrefabCache.TryGetValue(settings.Id, out var template)
-                    ? template
-                    : resourceManager.LoadResource<Enemy>(path);
-                enemyPrefabCache[settings.Id] = enemyTemplate;
-                var enemyInstance = UnityEngine.Object.Instantiate(enemyTemplate, Screen3D.EnemyContainer);
-                enemyInstance.Init(enemy);
-                Screen2D.InstantiateEnemyHealthBar(enemyInstance.HealthBarAnchor, Camera.main, enemy);
-                enemiesOnScreen.Add(enemy.Index, enemyInstance);
+                var enemyInstance = entry.Value.EnemyInstance;
+                enemyInstance.transform.SetParent(Screen3D.EnemyContainer);
+                Screen2D.InstantiateEnemyHealthBar(enemyInstance.HealthBarAnchor, Camera.main, entry.Value);
             }
         }
         
         private void HandlePlayerInput(bool isPointerDown)
         {
             if (heroModel.CurrentState == HeroState.Dead)
-            {
                 return;
-            }
 
             if (isPointerDown)
             {
@@ -109,33 +101,25 @@ namespace Features.Rooms.Screens
 
         private Enemy FindClosestEnemy()
         {
-            var orderedByDistance = enemiesOnScreen
-                .OrderBy(x => Vector3.Distance(hero.Position, x.Value.Position));
+            var orderedByDistance = enemiesModel.EnemyModels
+                .Select(x => x.Value.EnemyInstance)
+                .OrderBy(x => Vector3.Distance(hero.Position, x.Position));
                 
-            return orderedByDistance.First().Value;
+            return orderedByDistance.First();
         }
 
-        private void HandleHitEnemy(int enemyIndex)
+        private void HandleEnemyHit(int enemyIndex)
         {
             enemiesModel.ApplyDamage(enemyIndex, heroModel.GetCurrentHeroAttack); 
         }
 
         private void HandleEnemyDeath(IEnemyModel model)
         {
-            var index = model.Index;
-            if (!enemiesOnScreen.TryGetValue(index, out var enemy))
-            {
-                throw new Exception("[RoomScreenController] No enemy on screen with Id " + index);
-            }
-
-            enemy.PlayDeathAnimation();
-            enemiesOnScreen.Remove(index);
-
-            if (enemiesOnScreen.Count != 0) 
+            if (enemiesModel.EnemyModels.Count != 0) 
                 return;
             
             enemiesModel.GenerateNextWave();
-            SpawnEnemies();
+            SpawnEnemyHealthBars();
             WaveCount += 1;
         }
 
@@ -146,27 +130,23 @@ namespace Features.Rooms.Screens
 
         private void HandlePlayerDeath()
         {
-            foreach (var enemy in enemiesOnScreen)
-            {
-                Object.Destroy(enemy.Value.gameObject);
-            }
-
-            enemiesOnScreen.Clear();
+            enemiesModel.Cleanup();
             enemiesModel.OnPlayerHit -= HandlePlayerHit;
             enemiesModel.OnDeath -= HandleEnemyDeath;
+            
             Screen3D.OnPlayerHit -= HandlePlayerHit;
-
+            
             Screen2D.ShowGameOverPanel(waveCount);
             Screen2D.OnReset += HandleGameReset;
         }
 
         private void HandleGameReset()
         {
-            Screen2D.OnReset -= HandleGameReset;
             Screen2D.HideGameOverPanel();
-
+            Screen2D.OnReset -= HandleGameReset;
             Screen2D.Joystick.OnFixedUpdate -= HandlePlayerInput;
-            hero.OnHitEnemy -= HandleHitEnemy;
+            
+            hero.OnHitEnemy -= HandleEnemyHit;
             heroModel.OnDeath -= HandlePlayerDeath;
             Screen3D.HeroContainer.DestroyChildren();
             hero = null;

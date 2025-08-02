@@ -21,6 +21,7 @@ namespace Features.Enemies
 
         #region Events
         public event Action OnDestinationReached; 
+        public event Action<int> OnPlayerHit; 
         #endregion
 
         #region Unity Serialized Fields
@@ -34,7 +35,6 @@ namespace Features.Enemies
         #endregion
 
         #region Properties
-        public IEnemyModel EnemyModel { get; private set; }
         public Vector3 Position => transform.position;
         public Transform HealthBarAnchor => healthBarAnchor;
         #endregion
@@ -45,38 +45,34 @@ namespace Features.Enemies
         private int particleDamage;
         private int rangedDamage;
         private float baseSpeed;
+        private EnemySettings enemySettings;
         #endregion
 
         #region Lifecycle       
-        public void Init(IEnemyModel enemyModel)
+        public void Init(EnemySettings enemySettings)
         {
-            EnemyModel = enemyModel;
-            EnemyModel.OnDamageTaken += OnDamageTaken;
+            this.enemySettings = enemySettings;
+            baseSpeed = navMeshAgent.speed;
+            
             if (collisionWeapon != null)
             {
-                collisionDamage = EnemyModel.Settings.CollisionDamage;
-                collisionWeapon.OnPlayerHit += HandleHitPlayerCollision;
+                collisionWeapon.OnPlayerHit += DispatchPlayerCollision;
             }
 
             if (meleeWeapon != null)
             {
-                meleeDamage = EnemyModel.Settings.MeleeDamage;
-                meleeWeapon.OnPlayerHit += HandleHitPlayerMelee;
+                meleeWeapon.OnPlayerHit += DispatchPlayerMeleeHit;
             }
 
             if (particleWeapon != null)
             {
-                particleDamage = EnemyModel.Settings.ParticleDamage;
-                particleWeapon.OnPlayerHit += HandleHitPlayerParticle;
+                particleWeapon.OnPlayerHit += DispatchPlayerParticleHit;
             }
 
             if (rangedWeapon != null)
             {
-                rangedDamage = EnemyModel.Settings.RangedDamage;
-                rangedWeapon.OnPlayerHit += HandleHitPlayerRanged;
+                rangedWeapon.OnPlayerHit += DispatchPlayerRangedHit;
             }
-
-            baseSpeed = navMeshAgent.speed;
         }
 
         private void Update()
@@ -90,20 +86,13 @@ namespace Features.Enemies
                 OnDestinationReached?.Invoke();
             }
         }
-                    
-                    
-        private void OnDestroy()
-        {
-            EnemyModel.OnDamageTaken -= OnDamageTaken;
-            EnemyModel = null;
-        }
         #endregion
 
         #region Public
         public void MoveTowardsTarget(Vector3 target)
         {
-            if (EnemyModel.IsDead)
-                return;
+            //    if (EnemyModel.IsDead)
+              //  return;
             
             navMeshAgent.SetDestination(target);
             animator.SetTrigger(RunTrigger);
@@ -124,36 +113,40 @@ namespace Features.Enemies
                 .OnComplete(() => Destroy(gameObject)));
         }
 
-        public void MeleeAttack(string attackName)
+        public void ExecuteMeleeAttack(string attackName)
         {
             if (meleeWeapon == null)
             {
-                throw new Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a melee weapon");
+                throw new Exception($"[Enemy] {enemySettings.Id} does not have a melee weapon");
             }
             animator.SetTrigger(attackName);
             meleeWeapon.Attack();
         }
-        public void ParticleAttack()
+        public void ExecuteParticleAttack()
         {
             if (particleWeapon == null)
             {
-                throw new Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a particle weapon");
+                throw new Exception($"[Enemy] {enemySettings.Id} does not have a particle weapon");
             }
             animator.SetTrigger(ParticleAttackTrigger);
             particleWeapon.Attack();
         }
 
-        public void EndParticleAttack()
+        public void StopParticleAttack()
         {
+            if (particleWeapon == null)
+            {
+                throw new Exception($"[Enemy] {enemySettings.Id} does not have a particle weapon");
+            }
             animator.SetTrigger(ParticleAttackEndTrigger);
             particleWeapon.HideParticle();
         }
 
-        public void RangedAttack()
+        public void ExecuteRangedAttack()
         {
             if (rangedWeapon == null)
             {
-                throw new Exception($"[Enemy] {EnemyModel.Settings.Id} does not have a ranged weapon");
+                throw new Exception($"[Enemy] {enemySettings.Id} does not have a ranged weapon");
             }
             animator.SetTrigger(RangedAttackTrigger);
             rangedWeapon.Attack();
@@ -175,32 +168,32 @@ namespace Features.Enemies
         {
             animator.Play(IdleAnim);
         }
-        #endregion
 
-        #region Private
-        private void OnDamageTaken(int damage)
+        public void PlayDamageAnimation()
         {
             animator.SetTrigger(DamageTrigger);
         }
+        #endregion
 
-        private void HandleHitPlayerCollision()
+        #region Private
+        private void DispatchPlayerCollision()
         {
-            EnemyModel.DispatchPlayerHit(collisionDamage);
+            OnPlayerHit?.Invoke(enemySettings.CollisionDamage);
         }
 
-        private void HandleHitPlayerMelee()
+        private void DispatchPlayerMeleeHit()
         {
-            EnemyModel.DispatchPlayerHit(meleeDamage);
+            OnPlayerHit?.Invoke(enemySettings.MeleeDamage);
         }
 
-        private void HandleHitPlayerParticle()
+        private void DispatchPlayerParticleHit()
         {
-            EnemyModel.DispatchPlayerHit(particleDamage);
+            OnPlayerHit?.Invoke(enemySettings.ParticleDamage);
         }
 
-        private void HandleHitPlayerRanged()
+        private void DispatchPlayerRangedHit()
         {
-            EnemyModel.DispatchPlayerHit(rangedDamage);
+            OnPlayerHit?.Invoke(enemySettings.RangedDamage);
         }
         #endregion
     }
