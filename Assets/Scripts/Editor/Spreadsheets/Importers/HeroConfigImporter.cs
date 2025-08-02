@@ -13,7 +13,7 @@ namespace Spreadsheets.Importers
             "pub?gid=2145931350&single=true&output=csv";
 
 
-        [MenuItem("Import Spreadsheets/Hero Config")]
+        [MenuItem("ArcheroTest/Import Spreadsheets/Hero Config")]
         public static void Import() =>
                 SpreadsheetImporter.ImportSimple<HeroSettings>(
                     Uri,

@@ -14,7 +14,7 @@ namespace Spreadsheets.Importers
             "pub?gid=0&single=true&output=csv";
 
 
-        [MenuItem("Import Spreadsheets/BaseFloor Config")]
+        [MenuItem("ArcheroTest/Import Spreadsheets/BaseFloor Config")]
         public static void Import() =>
                 SpreadsheetImporter.ImportUsingMapper<BaseFloor, BaseFloorConfigMapper>(
                     Url,

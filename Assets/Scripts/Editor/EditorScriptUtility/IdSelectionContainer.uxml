@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="IdSelectionContainer" style="flex-direction: row;">
+        <ui:Button text="Prev: ID (Localization)" display-tooltip-when-elided="true" name="PreviousIdButton" style="width: 200px; max-width: 200px;" />
+        <ui:DropdownField index="0" name="IdDropdown" style="flex-grow: 1;" />
+        <ui:Button text="Next: ID (Localization)" display-tooltip-when-elided="true" name="NextIdButton" style="width: 200px; max-width: 200px;" />
+    </ui:VisualElement>
+</ui:UXML>

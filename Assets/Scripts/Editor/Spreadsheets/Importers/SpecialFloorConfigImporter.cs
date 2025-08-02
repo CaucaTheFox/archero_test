@@ -14,7 +14,7 @@ namespace Spreadsheets.Importers
             "pub?gid=465461440&single=true&output=csv";
 
 
-        [MenuItem("Import Spreadsheets/SpecialFloor Config")]
+        [MenuItem("ArcheroTest/Import Spreadsheets/SpecialFloor Config")]
         public static void Import() =>
                 SpreadsheetImporter.ImportUsingMapper<SpecialFloor, SpecialFloorConfigMapper>(
                     Uri,

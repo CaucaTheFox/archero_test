@@ -1,0 +1,10 @@
+{
+  "Configs": {
+    "EnemyBehaviourConfig_00": {
+      "Id": "EnemyBehaviourConfig_00",
+      "Behaviours": [
+        null
+      ]
+    }
+  }
+}

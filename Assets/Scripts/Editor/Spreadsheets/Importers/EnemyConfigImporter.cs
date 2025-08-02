@@ -12,7 +12,7 @@ namespace Spreadsheets.Importers
             "pub?gid=1407994961&single=true&output=csv";
 
 
-        [MenuItem("Import Spreadsheets/Enemy Config")]
+        [MenuItem("ArcheroTest/Import Spreadsheets/Enemy Config")]
         public static void Import() =>
                 SpreadsheetImporter.ImportSimple<EnemySettings>(
                     Uri,
@@ -22,7 +22,7 @@ namespace Spreadsheets.Importers
                         {
                             var newConfig = new EnemyConfig(importedData);
                             var json = JsonConvert.SerializeObject(newConfig, Formatting.Indented);
-                            var path = Path.Combine("Assets/Resources/Configs/Enemy", "EnemyConfig.json");
+                            var path = Path.Combine("Assets/Resources/Configs/Enemies", "EnemyConfig.json");
                             File.WriteAllText(path, json);
                         }
                 );

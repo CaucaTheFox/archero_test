@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:Template name="UIDividerHorizontal" src="project://database/Assets/Scripts/Editor/EditorScriptUtility/UIDividerHorizontal.uxml?fileID=9197481963319205126&amp;guid=9294483a02fc11c4c9742e1395ab26d3&amp;type=3#UIDividerHorizontal" />
+    <ui:Template name="IdSelectionContainer" src="project://database/Assets/Scripts/Editor/EditorScriptUtility/IdSelectionContainer.uxml?fileID=9197481963319205126&amp;guid=435a6c42eded42946987887e53178cdf&amp;type=3#IdSelectionContainer" />
+    <ui:VisualElement name="Header" style="justify-content: center; align-items: center;">
+        <ui:Label text="ENEMY BEHAVIOUR CONFIGS EDITOR" display-tooltip-when-elided="true" style="-unity-font-style: bold; margin-top: 16px; margin-right: 0; padding-right: 20px; padding-left: 20px; left: auto; right: auto;" />
+        <ui:VisualElement style="flex-shrink: 0; flex-direction: row; margin-top: 16px; margin-bottom: 16px; padding-left: 16px; padding-right: 16px; left: auto; right: auto;">
+            <ui:Button text="Save Changes" display-tooltip-when-elided="true" name="SaveButton" style="width: 150px;" />
+            <ui:Button text="Add Enemy Behaviour Config" display-tooltip-when-elided="true" name="AddConfigButton" style="width: 200px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Instance template="UIDividerHorizontal" name="UIDividerHorizontal" style="padding-left: 16px; padding-right: 16px;" />
+    <ui:Instance template="IdSelectionContainer" name="IdSelectionContainer" style="margin-top: 8px; margin-bottom: 8px; padding-left: 16px; padding-right: 16px;" />
+    <ui:ScrollView name="ConfigScrollView" style="padding-left: 16px; padding-right: 16px;">
+        <uie:PropertyField name="ScrollViewPropertyField" />
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="TutorialConfigDescriptionsLabel" />
+    </ui:ScrollView>
+    <uie:PropertyField name="ConfigPropertyField" style="padding-left: 16px; padding-right: 16px;" />
+</ui:UXML>
