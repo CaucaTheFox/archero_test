@@ -2,7 +2,6 @@
 using Core.IoC;
 using Features.Heroes;
 using System;
-using UnityEngine;
 
 namespace Features.Enemies
 {
@@ -14,7 +13,7 @@ namespace Features.Enemies
         Attack
     }
     
-    public class BehaviourAction
+    public class EnemyBehaviourAction
     {
         #region Events
         public event Action OnEnter;
@@ -43,7 +42,7 @@ namespace Features.Enemies
             OnEnter?.Invoke();
             Execute();
         }
-        public virtual void Execute() { }
+        protected virtual void Execute() { }
 
         public virtual void Exit()
         {

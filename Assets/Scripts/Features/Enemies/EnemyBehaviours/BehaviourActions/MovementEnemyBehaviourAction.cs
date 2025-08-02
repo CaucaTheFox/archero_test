@@ -13,7 +13,7 @@ namespace Features.Enemies
         Wave
     }
     
-    public class MovementEnemyBehaviourAction : BehaviourAction
+    public class MovementEnemyBehaviourAction : EnemyBehaviourAction
     {
         #region State
         private MovementEnemyBehaviourActionData data;
@@ -40,7 +40,7 @@ namespace Features.Enemies
             base.Enter(enemyBehaviourActionData);
         }
 
-        public override void Execute()
+        protected override void Execute()
         {
             base.Execute();
             enemyModel.EnemyInstance.SetBaseSpeed();

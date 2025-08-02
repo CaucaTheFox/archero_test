@@ -10,7 +10,7 @@ namespace Features.Enemies
         Ranged
     }
     
-    public class AttackEnemyBehaviourAction : BehaviourAction
+    public class AttackEnemyBehaviourAction : EnemyBehaviourAction
     {
         #region State
         private AttackEnemyBehaviourActionData data;
@@ -29,7 +29,7 @@ namespace Features.Enemies
             base.Enter(enemyBehaviourActionData);
         }
 
-        public override void Execute()
+        protected override void Execute()
         {
             base.Execute();
             enemyModel.EnemyInstance.SetSpeed(0f);

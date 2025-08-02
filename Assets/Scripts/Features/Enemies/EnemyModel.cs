@@ -75,7 +75,7 @@ namespace Features.Enemies
         private bool isVisible;
         private int currentHealth;
         private Coroutine enemyBehaviourRoutine;
-        private Dictionary<EnemyBehaviourActionType, BehaviourAction> behaviourActions;
+        private Dictionary<EnemyBehaviourActionType, EnemyBehaviourAction> behaviourActions;
         #endregion
 
         #region Lifecycle
@@ -136,7 +136,7 @@ namespace Features.Enemies
 
         private void StartEnemyBehaviourRoutine()
         {
-            behaviourActions = new Dictionary<EnemyBehaviourActionType, BehaviourAction>();
+            behaviourActions = new Dictionary<EnemyBehaviourActionType, EnemyBehaviourAction>();
             var enemyBehaviourConfig = enemyBehaviourCatalogueConfig.Value.Configs[Settings.EnemyBehaviourConfigId];
             foreach (var actionData in enemyBehaviourConfig.EnemyBehaviourActionData)
             {
@@ -150,6 +150,9 @@ namespace Features.Enemies
                         behaviourActions.Add(EnemyBehaviourActionType.Movement, movementEnemyBehaviourAction);
                         break;
                     case EnemyBehaviourActionType.Dash:
+                        var dashEnemyBehaviourAction = new DashEnemyBehaviourAction();
+                        dashEnemyBehaviourAction.Init(this);
+                        behaviourActions.Add(EnemyBehaviourActionType.Dash, dashEnemyBehaviourAction);
                         break;
                     case EnemyBehaviourActionType.Attack:
                         var attackEnemyBehaviourAction = new AttackEnemyBehaviourAction();

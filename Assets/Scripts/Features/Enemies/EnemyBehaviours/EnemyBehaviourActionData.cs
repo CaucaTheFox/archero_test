@@ -44,7 +44,7 @@ namespace Features.Enemies
     public class DashEnemyBehaviourActionData : EnemyBehaviourActionData
     {
         [HideInInspector] public EnemyBehaviourActionType Type = EnemyBehaviourActionType.Dash;
-        
+        public float Speed;
         public override EnemyBehaviourActionType GetEnemyBehaviourActionType()
         {
             return Type; 
