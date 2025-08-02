@@ -47,9 +47,7 @@ namespace Features.Rooms.Screens
         {
             SpawnHero();
             Screen2D.InstantiateHeroHealthBar(hero.HealthBarAnchor, Camera.main, heroModel);
-            
-            TopDownCamera = Camera.main.GetComponent<TopDownCamera>();
-            TopDownCamera.CameraTarget = hero.transform;
+            Screen3D.TopDownCamera.CameraTarget = hero.transform;
             
             enemiesModel.OnDeath += HandleEnemyDeath;
             enemiesModel.OnPlayerHit += HandlePlayerHit;

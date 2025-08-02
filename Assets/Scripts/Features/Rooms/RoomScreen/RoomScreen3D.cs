@@ -1,7 +1,8 @@
-﻿using Core.IoC;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.CameraScripts;
+using Core.IoC;
 using UnityEngine;
 using UnityEngine.AI;
 using Utility.Utility;
@@ -29,6 +30,7 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region Unity Serialized Fields
+        [SerializeField] private TopDownCamera topDownCamera;
         [SerializeField] private NavMeshSurface baseFloorSurface;
         [SerializeField] private Transform heroContainer, enemyContainer, specialFloorContainer;
         [SerializeField] private BaseTileToTemplate[] baseTileTemplates;
@@ -40,6 +42,7 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region Properties
+        public TopDownCamera TopDownCamera => topDownCamera;
         public Transform HeroContainer => heroContainer;
         public Transform EnemyContainer => enemyContainer;
         #endregion
