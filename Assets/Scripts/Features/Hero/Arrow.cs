@@ -1,5 +1,6 @@
 ﻿using Features.Enemies;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,34 +24,40 @@ namespace Features.Heroes
         #region State
         private float lifeTime;
         private bool hasHit;
+        private Coroutine flightRoutine;
+        private WaitForEndOfFrame waitForEndOfFrame;
         #endregion
 
         #region Lifecycle
-        private void Start()
+
+        public void Init(Vector3 position, Vector3 direction)
         {
             lifeTime = 0;
+            transform.position = position;
+            transform.up = -direction;
+            FlightDirection = direction;
+            waitForEndOfFrame = new WaitForEndOfFrame(); 
+            flightRoutine = StartCoroutine(FlightRoutine());
         }
-        private void Update()
+        
+        private IEnumerator FlightRoutine()
         {
             if (hasHit)
+                yield break;
+            
+            while (lifeTime < arrowLifeTime)
             {
-                return;
+                lifeTime += Time.deltaTime;
+                var movement = FlightDirection * (Time.deltaTime * arrowSpeed) + transform.position;
+                movement.y = 0.5f;
+                transform.position = movement;
+                yield return waitForEndOfFrame;
             }
-
-            lifeTime += Time.deltaTime;
+          
             if (lifeTime >= arrowLifeTime)
             {
-                GameObject.Destroy(gameObject);
-                return;
+                Destroy(gameObject);
             }
-
-            var movement = FlightDirection * (Time.deltaTime * arrowSpeed) + transform.position;
-            movement.y = 0.5f;
-            transform.position = movement;
-        }
-        private void OnDestroy()
-        {
-
         }
         #endregion
 
@@ -66,12 +73,12 @@ namespace Features.Heroes
             }
 
             var hitEnemy = collider.GetComponentInParent<Enemy>();
-            if (hitEnemy != null)
-            {
-                OnHitEnemy?.Invoke(hitEnemy.InstanceId);
-                hasHit = true;
-                Destroy(gameObject);
-            }
+            if (hitEnemy == null) 
+                return;
+            
+            OnHitEnemy?.Invoke(hitEnemy.InstanceId);
+            hasHit = true;
+            Destroy(gameObject);
         }
         #endregion
     }

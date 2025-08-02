@@ -1,7 +1,7 @@
 {
   "Heroes": {
-    "archer_green": {
-      "Id": "archer_green",
+    "Archer_Green": {
+      "Id": "Archer_Green",
       "Name": "Link",
       "Health": 1200,
       "Attack": 75,

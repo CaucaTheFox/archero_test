@@ -91,9 +91,7 @@ namespace Features.Heroes
                 return;
 
             var arrow = Instantiate(arrowPrefab);
-            arrow.transform.position = arrowAnchor.position;
-            arrow.transform.up = -transform.forward;
-            arrow.FlightDirection = transform.forward;
+            arrow.Init(arrowAnchor.position, transform.forward);
             arrow.OnHitEnemy += DispatchHitEnemy;
             
             void DispatchHitEnemy(int enemyIndex)
