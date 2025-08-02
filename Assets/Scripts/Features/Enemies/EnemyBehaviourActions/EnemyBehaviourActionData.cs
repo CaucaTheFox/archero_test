@@ -6,7 +6,6 @@ namespace Features.Enemies
     [Serializable]
     public class EnemyBehaviourActionData
     {
-        public EnemyBehaviourActionType Type;
         public float ActionDuration;
         
         public virtual EnemyBehaviourActionType GetEnemyBehaviourActionType( )

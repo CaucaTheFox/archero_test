@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Features.Enemies;
 using Tools;
-using Unity.EditorCoroutines.Editor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -169,43 +167,6 @@ namespace Utility
             idDropdownOptions = serializedProperties
                 .Select(x => x.FindPropertyRelative("Id").stringValue)
                 .ToList(); 
-        }
-
-        private void UpdateDisplayedData()
-        {
-            scrollViewPropertyField.Unbind();
-
-            var tutorialConfigListProperty = serializedConfig.FindPropertyRelative("configList");
-            scrollViewPropertyField.BindProperty(tutorialConfigListProperty);
-            EditorCoroutineUtility.StartCoroutineOwnerless(DisableFoldoutTogglesDelayed());
-
-            IEnumerator DisableFoldoutTogglesDelayed()
-            {
-                yield return new WaitForSeconds(0.0f);
-                var childElements = EditorScriptUtility.GetAllChildVisualElementsRecursive(scrollViewPropertyField);
-                var foldouts = new List<VisualElement>();
-
-                foreach (var child in childElements)
-                {
-                    var childFoldouts = child.Query<Toggle>().ToList();
-                    if (childFoldouts.Count > 0)
-                    {
-                        foreach (var childFoldout in childFoldouts)
-                        {
-                            if (!childFoldout.parent.name.Contains("configList.Array") ||
-                                foldouts.Any(x => x.parent.name == childFoldout.parent.name))
-                                continue;
-                            foldouts.Add(childFoldout);
-                        }
-                    }
-                }
-
-                foreach (var foldout in foldouts)
-                {
-                    foldout.Q<Toggle>().value = false;
-                    foldout.SetEnabled(false);
-                }
-            }
         }
         
         private void HandleSaveButtonClicked()

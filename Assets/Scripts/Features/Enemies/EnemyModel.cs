@@ -140,7 +140,7 @@ namespace Features.Enemies
             var enemyBehaviourConfig = enemyBehaviourCatalogueConfig.Value.Configs[Settings.EnemyBehaviourConfigId];
             foreach (var actionData in enemyBehaviourConfig.EnemyBehaviourActionData)
             {
-                switch (actionData.Type)
+                switch (actionData.GetEnemyBehaviourActionType())
                 {
                     case EnemyBehaviourActionType.Idle:
                         break;
@@ -173,7 +173,7 @@ namespace Features.Enemies
             {
                 foreach (var actionData in enemyBehaviourActionData)
                 {
-                    if (behaviourActions.TryGetValue(actionData.Type, out var behaviourAction))
+                    if (behaviourActions.TryGetValue(actionData.GetEnemyBehaviourActionType(), out var behaviourAction))
                     {
                         behaviourAction.Enter(actionData);
                         yield return new WaitForSeconds(actionData.ActionDuration);

@@ -12,7 +12,6 @@
     <ui:Instance template="IdSelectionContainer" name="IdSelectionContainer" style="margin-top: 8px; margin-bottom: 8px; padding-left: 16px; padding-right: 16px;" />
     <ui:ScrollView name="ConfigScrollView" style="padding-left: 16px; padding-right: 16px;">
         <uie:PropertyField name="ScrollViewPropertyField" />
-        <ui:Label text="Label" display-tooltip-when-elided="true" name="TutorialConfigDescriptionsLabel" />
     </ui:ScrollView>
     <uie:PropertyField name="ConfigPropertyField" style="padding-left: 16px; padding-right: 16px;" />
 </ui:UXML>

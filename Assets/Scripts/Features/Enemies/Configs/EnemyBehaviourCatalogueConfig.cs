@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Features.Enemies
 {
@@ -46,6 +44,6 @@ namespace Features.Enemies
     public class EnemyBehaviourConfig
     {
         [HideInInspector] public string Id; 
-        public List<EnemyBehaviourActionData> EnemyBehaviourActionData;
+        [SerializeReference] [SerializeReferenceButton(true)] public List<EnemyBehaviourActionData> EnemyBehaviourActionData;
     }
 }

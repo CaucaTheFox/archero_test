@@ -2,7 +2,44 @@
   "Configs": {
     "EnemyBehaviourConfig_00": {
       "Id": "EnemyBehaviourConfig_00",
-      "BehaviourData": []
+      "EnemyBehaviourActionData": [
+        {
+          "Type": "Idle",
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "Default",
+          "RandomDirectionScalar": 0.0,
+          "WaveFrequency": 0.0,
+          "WaveMagnitude": 0.0,
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Dash",
+          "Speed": 0.0,
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Movement",
+          "SubType": "Default",
+          "RandomDirectionScalar": 2.0,
+          "WaveFrequency": 2.0,
+          "WaveMagnitude": 4.0,
+          "ActionDuration": 2.0
+        },
+        {
+          "Type": "Dash",
+          "Speed": 5.0,
+          "ActionDuration": 0.5
+        },
+        {
+          "Type": "Attack",
+          "SubType": "Melee",
+          "AttackIds": [],
+          "ActionDuration": 2.0
+        }
+      ]
     }
   }
 }
