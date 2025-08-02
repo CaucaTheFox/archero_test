@@ -38,12 +38,13 @@ namespace Features.Enemies
         {
             foreach (var behaviour in behaviours)
             {
-                behaviour.Action.Init(enemy);
-                behaviour.Action.Enter();
-                yield return new WaitForSeconds(behaviour.ActionDuration);
-                behaviour.Action.Exit();
+               // behaviour.Action.Init(enemy);
+             //   behaviour.Action.Enter();
+            //    yield return new WaitForSeconds(behaviour.ActionDuration);
+              //  behaviour.Action.Exit();
             }
 
+            yield return null;
             processingRoutine = null;
         }
 

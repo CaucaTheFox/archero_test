@@ -26,10 +26,12 @@ namespace Features.Enemies
     public class EnemySettings
     {
         public string Id;
+        public string EnemyBehaviourConfigId;
         public int Health;
         public int CollisionDamage;
         public int MeleeDamage;
         public int ParticleDamage;
         public int RangedDamage;
+     
     }
 }

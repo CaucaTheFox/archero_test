@@ -6,13 +6,14 @@ using UnityEngine;
 
 namespace Features.Enemies
 {
-    [Serializable]
-    public class Behaviour
+    public enum EnemyBehaviourActionType
     {
-        public BehaviourAction Action;
-        public float ActionDuration;
+        Idle,
+        Movement,
+        Dash,
+        Attack
     }
-
+    
     public class BehaviourAction : MonoBehaviour
     {
         #region Events
@@ -25,7 +26,8 @@ namespace Features.Enemies
         #endregion
 
         #region State
-        protected Enemy enemyActor;       
+        protected Enemy enemyActor;
+        protected EnemyBehaviourActionData enemyBehaviourActionData;
         #endregion
 
         #region Lifecycle
@@ -34,8 +36,9 @@ namespace Features.Enemies
             this.enemyActor = enemyActor;
             GameContext.Container.ResolveAll(this);
         }
-        public virtual void Enter()
+        public virtual void Enter(EnemyBehaviourActionData enemyBehaviourActionData)
         {
+            this.enemyBehaviourActionData = enemyBehaviourActionData;
             OnEnter?.Invoke();
             Execute();
         }

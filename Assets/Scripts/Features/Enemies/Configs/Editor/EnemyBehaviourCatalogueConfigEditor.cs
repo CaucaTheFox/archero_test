@@ -136,7 +136,7 @@ namespace Utility
             var config = new EnemyBehaviourConfig()
             {
                 Id = id,
-                Behaviours = new List<BehaviourAction>()
+                BehaviourData = new List<EnemyBehaviourActionData>()
             };
             return config;
         }
