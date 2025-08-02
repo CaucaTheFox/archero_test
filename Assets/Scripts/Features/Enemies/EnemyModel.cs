@@ -96,6 +96,8 @@ namespace Features.Enemies
         public void Cleanup()
         {
             StopEnemyBehaviourRoutine();
+            EnemyInstance.StopAgent();
+            EnemyInstance.StopParticleAttack();
             EnemyInstance.OnPlayerHit -= DispatchPlayerHit;
             UnityEngine.Object.Destroy(EnemyInstance);
             EnemyInstance = null;
@@ -127,10 +129,10 @@ namespace Features.Enemies
         #region Private
         private void SpawnEnemyInstance()
         {
-            var split = Settings.Id.Split('_');
             var path = EnemyPath + Settings.Id;
             var enemyTemplate = resourceManager.LoadResource<Enemy>(path);
             EnemyInstance = UnityEngine.Object.Instantiate(enemyTemplate);
+            EnemyInstance.Init(InstanceId, Settings);
             EnemyInstance.OnPlayerHit += DispatchPlayerHit;
         }
 

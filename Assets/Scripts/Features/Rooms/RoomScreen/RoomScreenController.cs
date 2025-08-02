@@ -87,6 +87,9 @@ namespace Features.Rooms.Screens
             if (heroModel.CurrentState == HeroState.Dead)
                 return;
 
+            if (enemiesModel.EnemyModels.Count == 0)
+                return;
+            
             if (isPointerDown)
             {
                 var input = new Vector3(Screen2D.Joystick.Horizontal, 0, Screen2D.Joystick.Vertical);

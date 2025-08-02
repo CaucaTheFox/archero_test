@@ -117,9 +117,8 @@ namespace Features.Enemies
         public void ExecuteMeleeAttack()
         {
             if (meleeWeapon == null)
-            {
-                throw new Exception($"[Enemy] {enemySettings.Id} does not have a melee weapon");
-            }
+                return;
+            
             var attackTriggerId = GetRandomAttackTriggerId();
             animator.SetTrigger(attackTriggerId);
             meleeWeapon.Attack();
@@ -128,9 +127,8 @@ namespace Features.Enemies
         public void ExecuteParticleAttack()
         {
             if (particleWeapon == null)
-            {
-                throw new Exception($"[Enemy] {enemySettings.Id} does not have a particle weapon");
-            }
+                return;
+            
             animator.SetTrigger(ParticleAttackTrigger);
             particleWeapon.Attack();
         }
@@ -138,9 +136,8 @@ namespace Features.Enemies
         public void StopParticleAttack()
         {
             if (particleWeapon == null)
-            {
-                throw new Exception($"[Enemy] {enemySettings.Id} does not have a particle weapon");
-            }
+                return;
+            
             animator.SetTrigger(ParticleAttackEndTrigger);
             particleWeapon.HideParticle();
         }
@@ -148,9 +145,8 @@ namespace Features.Enemies
         public void ExecuteRangedAttack()
         {
             if (rangedWeapon == null)
-            {
-                throw new Exception($"[Enemy] {enemySettings.Id} does not have a ranged weapon");
-            }
+                return;
+            
             animator.SetTrigger(RangedAttackTrigger);
             rangedWeapon.Attack();
         }
