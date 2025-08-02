@@ -33,6 +33,7 @@ namespace Features.Enemies
         [SerializeField] private EnemyWeapon meleeWeapon;
         [SerializeField] private EnemyWeapon rangedWeapon;
         [SerializeField] private EnemyWeapon particleWeapon;
+        [SerializeField] private string[] attackIds;
         #endregion
 
         #region Properties
@@ -94,9 +95,6 @@ namespace Features.Enemies
         #region Public
         public void MoveTowardsTarget(Vector3 target)
         {
-            //    if (EnemyModel.IsDead)
-              //  return;
-            
             navMeshAgent.SetDestination(target);
             animator.SetTrigger(RunTrigger);
         }
@@ -116,15 +114,17 @@ namespace Features.Enemies
                 .OnComplete(() => Destroy(gameObject)));
         }
 
-        public void ExecuteMeleeAttack(string attackName)
+        public void ExecuteMeleeAttack()
         {
             if (meleeWeapon == null)
             {
                 throw new Exception($"[Enemy] {enemySettings.Id} does not have a melee weapon");
             }
-            animator.SetTrigger(attackName);
+            var attackTriggerId = GetRandomAttackTriggerId();
+            animator.SetTrigger(attackTriggerId);
             meleeWeapon.Attack();
         }
+        
         public void ExecuteParticleAttack()
         {
             if (particleWeapon == null)
@@ -176,9 +176,16 @@ namespace Features.Enemies
         {
             animator.SetTrigger(DamageTrigger);
         }
+        
         #endregion
 
         #region Private
+        private string GetRandomAttackTriggerId()
+        {
+            var index = UnityEngine.Random.Range(0, attackIds.Length);
+            return attackIds[index];
+        }
+        
         private void DispatchPlayerCollision()
         {
             OnPlayerHit?.Invoke(enemySettings.CollisionDamage);

@@ -37,7 +37,7 @@ namespace Features.Enemies
             {
                 case AttackEnemyBehaviourActionSubType.Melee:
                     enemyModel.EnemyInstance.PlayIdleAnimation();
-                    enemyModel.EnemyInstance.ExecuteMeleeAttack(GetRandomAttackId());
+                    enemyModel.EnemyInstance.ExecuteMeleeAttack();
                     break;
                 case AttackEnemyBehaviourActionSubType.Particle:
                     enemyModel.EnemyInstance.PlayIdleAnimation();
@@ -68,14 +68,6 @@ namespace Features.Enemies
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-        #endregion
-        
-        #region Private
-        private string GetRandomAttackId()
-        {
-            var randomIndex = Random.Range(0, data.AttackIds.Length);
-            return data.AttackIds[randomIndex];
         }
         #endregion
     }

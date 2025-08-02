@@ -55,7 +55,6 @@ namespace Features.Enemies
     {
         [HideInInspector] public EnemyBehaviourActionType Type = EnemyBehaviourActionType.Attack;
         public AttackEnemyBehaviourActionSubType SubType;
-        public string[] AttackIds;
         
         public override EnemyBehaviourActionType GetEnemyBehaviourActionType()
         {
