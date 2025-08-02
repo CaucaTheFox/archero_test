@@ -30,8 +30,9 @@ namespace Features.Heroes
     public class HeroModel : IHeroModel
     {
         #region Constants
-        private const string DefaultHeroId = "archer_green";
-        private const string DefaultHeroPath = "HeroPrefabs/archer_green";
+        // if a choice between player characters was possible, this would be in some sort of InitialGameSettings config and customizable ingame later
+        private const string DefaultHeroId = "Archer_Green";
+        private const string DefaultHeroPath = "HeroPrefabs/Archer_Green";
         #endregion
 
         #region Events
