@@ -41,7 +41,7 @@ namespace Features.Rooms.Screens
             healthBar.SetData(heroModel);
         }
 
-        public void InstantiateEnemyHealthBar(Transform target, Camera camera, IEnemyModel enemyModel)
+        public void SpawnEnemyHealthBar(Transform target, Camera camera, IEnemyModel enemyModel)
         {
             var healthBar = Instantiate(enemyHealthBarTemplate, markerViewCollection);
             healthBar.SetTarget(target, camera);

@@ -50,8 +50,7 @@ namespace Features.Rooms.Screens
             
             TopDownCamera = Camera.main.GetComponent<TopDownCamera>();
             TopDownCamera.CameraTarget = hero.transform;
-        
-            enemiesModel.Init();
+            
             enemiesModel.OnDeath += HandleEnemyDeath;
             enemiesModel.OnPlayerHit += HandlePlayerHit;
             SpawnEnemyHealthBars();
@@ -78,7 +77,7 @@ namespace Features.Rooms.Screens
             {
                 var enemyInstance = entry.Value.EnemyInstance;
                 enemyInstance.transform.SetParent(Screen3D.EnemyContainer);
-                Screen2D.InstantiateEnemyHealthBar(enemyInstance.HealthBarAnchor, Camera.main, entry.Value);
+                Screen2D.SpawnEnemyHealthBar(enemyInstance.HealthBarAnchor, Camera.main, entry.Value);
             }
         }
         
@@ -116,12 +115,12 @@ namespace Features.Rooms.Screens
             enemiesModel.ApplyDamage(enemyIndex, heroModel.GetCurrentHeroAttack); 
         }
 
-        private void HandleEnemyDeath(IEnemyModel model)
+        private void HandleEnemyDeath()
         {
             if (enemiesModel.EnemyModels.Count != 0) 
                 return;
             
-            enemiesModel.GenerateNextWave();
+            enemiesModel.SpawnEnemyWave();
             SpawnEnemyHealthBars();
             WaveCount += 1;
         }

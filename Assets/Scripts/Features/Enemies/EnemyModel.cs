@@ -99,7 +99,7 @@ namespace Features.Enemies
             EnemyInstance.StopAgent();
             EnemyInstance.StopParticleAttack();
             EnemyInstance.OnPlayerHit -= DispatchPlayerHit;
-            UnityEngine.Object.Destroy(EnemyInstance);
+            UnityEngine.Object.Destroy(EnemyInstance.gameObject, 1f);
             EnemyInstance = null;
         }
         #endregion
@@ -120,6 +120,7 @@ namespace Features.Enemies
             {
                 EnemyState = EnemyState.Dead;
                 StopEnemyBehaviourRoutine();
+                EnemyInstance.StopAgent();
                 EnemyInstance.PlayDeathAnimation();
                 OnDeath?.Invoke(InstanceId);
             }

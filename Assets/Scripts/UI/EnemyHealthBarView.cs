@@ -35,14 +35,10 @@ namespace UI
 
         private void DestroyBar()
         {
-            Destroy(gameObject, 1f);
-        }
-
-        private void OnDestroy()
-        {
             enemyModel.OnDamageTaken -= HandleDamageTaken;
             enemyModel.OnDeath -= HandleDeath;
             enemyModel.OnVisibilityChange -= HandleVisibilityChange;
+            Destroy(gameObject, 1f);
         }
         #endregion
     }

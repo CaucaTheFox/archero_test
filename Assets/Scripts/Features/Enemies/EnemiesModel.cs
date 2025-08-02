@@ -1,15 +1,13 @@
-﻿using Core.IoC;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Core.IoC;
 
 namespace Features.Enemies
 {
     public interface IEnemiesModel
     {
-        event Action<IEnemyModel> OnDamageTaken;
-        event Action<IEnemyModel> OnDeath;
+        event Action OnDeath;
         event Action<int> OnPlayerHit;
         
         Dictionary<int, EnemyModel> EnemyModels { get; }
@@ -18,7 +16,7 @@ namespace Features.Enemies
         void Cleanup();
         
         void ApplyDamage(int instanceId, int damage);
-        void GenerateNextWave();
+        void SpawnEnemyWave();
     }
 
     public class EnemiesModel : IEnemiesModel
@@ -29,7 +27,7 @@ namespace Features.Enemies
 
         #region Events
         public event Action<IEnemyModel> OnDamageTaken;
-        public event Action<IEnemyModel> OnDeath;
+        public event Action OnDeath;
         public event Action<int> OnPlayerHit;
         #endregion
 
@@ -44,8 +42,7 @@ namespace Features.Enemies
         #region Lifecycle
         public void Init()
         {
-            var enemyAmount = UnityEngine.Random.Range(1, MaxEnemies);
-            GenerateEnemies(enemyAmount);
+            SpawnEnemyWave();
         }
 
         public void Cleanup()
@@ -53,8 +50,7 @@ namespace Features.Enemies
             foreach (var entry in EnemyModels)
             {
                 entry.Value.Cleanup();
-                entry.Value.OnDamageTaken -= DispatchDamageTaken;
-                entry.Value.OnDeath -= DispatchDamageTaken;
+                entry.Value.OnDeath -= DispatchDeath;
                 entry.Value.OnPlayerHit -= DispatchPlayerHit;
             }
             EnemyModels.Clear();
@@ -70,7 +66,7 @@ namespace Features.Enemies
             }
         }
 
-        public void GenerateNextWave()
+        public void SpawnEnemyWave()
         {
             var enemyAmount = UnityEngine.Random.Range(1, MaxEnemies);
             GenerateEnemies(enemyAmount);
@@ -88,7 +84,6 @@ namespace Features.Enemies
                 var randomIndex = UnityEngine.Random.Range(0, enemyConfig.Value.Enemies.Count);
                 var randomEnemySettings = enemySettings[randomIndex];
                 var enemyModel = new EnemyModel(instanceId, randomEnemySettings);
-                enemyModel.OnDamageTaken += DispatchDamageTaken;
                 enemyModel.OnDeath += DispatchDeath;
                 enemyModel.OnPlayerHit += DispatchPlayerHit;
                 EnemyModels.Add(instanceId, enemyModel);
@@ -100,22 +95,16 @@ namespace Features.Enemies
             if (EnemyModels.TryGetValue(instanceId, out var enemyModel))
             {
                 enemyModel.Cleanup();
-                enemyModel.OnDamageTaken -= DispatchDamageTaken;
-                enemyModel.OnDeath -= DispatchDamageTaken;
+                enemyModel.OnDeath -= DispatchDeath;
                 enemyModel.OnPlayerHit -= DispatchPlayerHit;
-                EnemyModels.Remove(instanceId);
             }
+            EnemyModels.Remove(instanceId);
         }
         
-        private void DispatchDamageTaken(int instanceId)
-        {
-            OnDamageTaken?.Invoke(EnemyModels[instanceId]);
-        }
-
         private void DispatchDeath(int instanceId)
         {
-            OnDeath?.Invoke(EnemyModels[instanceId]);
             RemoveEnemyModel(instanceId);
+            OnDeath?.Invoke();
         }
 
         private void DispatchPlayerHit(int damage)
