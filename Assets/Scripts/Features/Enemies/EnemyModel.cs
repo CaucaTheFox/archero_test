@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Core;
+using Core.CoroutineHelper;
 using Core.IoC;
 using Core.ResourceManagement;
+using UnityEngine;
 
 namespace Features.Enemies
 {
@@ -44,6 +48,9 @@ namespace Features.Enemies
         
         #region Dependencies
         [Inject] private IResourceManager resourceManager;
+        [Inject] private ICoroutineHelper coroutineHelper;
+        
+        [Inject] private IJsonConfig<EnemyBehaviourCatalogueConfig> enemyBehaviourCatalogueConfig;
         #endregion
         
         #region Properties
@@ -67,6 +74,8 @@ namespace Features.Enemies
         #region State     
         private bool isVisible;
         private int currentHealth;
+        private Coroutine enemyBehaviourRoutine;
+        private Dictionary<EnemyBehaviourActionType, BehaviourAction> behaviourActions;
         #endregion
 
         #region Lifecycle
@@ -81,10 +90,12 @@ namespace Features.Enemies
             isVisible = true;
             
             SpawnEnemyInstance();
+            StartEnemyBehaviourRoutine();
         }
         
         public void Cleanup()
-        { 
+        {
+            StopEnemyBehaviourRoutine();
             EnemyInstance.OnPlayerHit -= DispatchPlayerHit;
             UnityEngine.Object.Destroy(EnemyInstance);
             EnemyInstance = null;
@@ -106,6 +117,7 @@ namespace Features.Enemies
             else
             {
                 EnemyState = EnemyState.Dead;
+                StopEnemyBehaviourRoutine();
                 OnDeath?.Invoke(InstanceId);
                 EnemyInstance.PlayDeathAnimation();
             }
@@ -120,6 +132,63 @@ namespace Features.Enemies
             var enemyTemplate = resourceManager.LoadResource<Enemy>(path);
             EnemyInstance = UnityEngine.Object.Instantiate(enemyTemplate);
             EnemyInstance.OnPlayerHit += DispatchPlayerHit;
+        }
+
+        private void StartEnemyBehaviourRoutine()
+        {
+            behaviourActions = new Dictionary<EnemyBehaviourActionType, BehaviourAction>();
+            var enemyBehaviourConfig = enemyBehaviourCatalogueConfig.Value.Configs[Settings.EnemyBehaviourConfigId];
+            foreach (var actionData in enemyBehaviourConfig.EnemyBehaviourActionData)
+            {
+                switch (actionData.Type)
+                {
+                    case EnemyBehaviourActionType.Idle:
+                        break;
+                    case EnemyBehaviourActionType.Movement:
+                        var movementEnemyBehaviourAction = new MovementEnemyBehaviourAction();
+                        movementEnemyBehaviourAction.Init(this);
+                        behaviourActions.Add(EnemyBehaviourActionType.Movement, movementEnemyBehaviourAction);
+                        break;
+                    case EnemyBehaviourActionType.Dash:
+                        break;
+                    case EnemyBehaviourActionType.Attack:
+                        var attackEnemyBehaviourAction = new AttackEnemyBehaviourAction();
+                        attackEnemyBehaviourAction.Init(this);
+                        behaviourActions.Add(EnemyBehaviourActionType.Attack, attackEnemyBehaviourAction);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            
+            enemyBehaviourRoutine = coroutineHelper.StartCoroutine(EnemyBehaviourRoutine(enemyBehaviourConfig.EnemyBehaviourActionData));
+        }
+        
+        private IEnumerator EnemyBehaviourRoutine(List<EnemyBehaviourActionData> enemyBehaviourActionData)
+        {
+            while (EnemyState == EnemyState.Alive)
+            {
+                foreach (var actionData in enemyBehaviourActionData)
+                {
+                    if (behaviourActions.TryGetValue(actionData.Type, out var behaviourAction))
+                    {
+                        behaviourAction.Enter(actionData);
+                        yield return new WaitForSeconds(actionData.ActionDuration);
+                        behaviourAction.Exit();
+                    }
+                }
+            }
+            
+            enemyBehaviourRoutine = null;
+        }
+
+        private void StopEnemyBehaviourRoutine()
+        {
+            if (enemyBehaviourRoutine == null)
+                return;
+            
+            coroutineHelper.StopCoroutine(enemyBehaviourRoutine);
+            enemyBehaviourRoutine = null;
         }
         
         private void DispatchPlayerHit(int damage)

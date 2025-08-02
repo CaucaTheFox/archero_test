@@ -46,6 +46,6 @@ namespace Features.Enemies
     public class EnemyBehaviourConfig
     {
         [HideInInspector] public string Id; 
-        public List<EnemyBehaviourActionData> BehaviourData;
+        public List<EnemyBehaviourActionData> EnemyBehaviourActionData;
     }
 }

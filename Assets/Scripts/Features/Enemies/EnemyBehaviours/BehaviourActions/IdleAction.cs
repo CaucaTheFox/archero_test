@@ -7,8 +7,8 @@ namespace Features.Enemies
         public override void Execute()
         {
             base.Execute();
-            enemyActor.SetSpeed(0);
-            enemyActor.PlayIdleAnimation();
+            enemyModel.EnemyInstance.SetSpeed(0);
+            enemyModel.EnemyInstance.PlayIdleAnimation();
         }
     }
 }

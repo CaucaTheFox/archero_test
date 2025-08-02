@@ -1,6 +1,7 @@
 ﻿using Core.IoC;
 using DG.Tweening;
 using System;
+using Core;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -35,6 +36,7 @@ namespace Features.Enemies
         #endregion
 
         #region Properties
+        public int InstanceId { get; private set; }
         public Vector3 Position => transform.position;
         public Transform HealthBarAnchor => healthBarAnchor;
         #endregion
@@ -49,8 +51,9 @@ namespace Features.Enemies
         #endregion
 
         #region Lifecycle       
-        public void Init(EnemySettings enemySettings)
+        public void Init(int instanceId, EnemySettings enemySettings)
         {
+            InstanceId = instanceId;
             this.enemySettings = enemySettings;
             baseSpeed = navMeshAgent.speed;
             

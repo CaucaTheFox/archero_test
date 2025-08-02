@@ -14,7 +14,7 @@ namespace Features.Enemies
         Attack
     }
     
-    public class BehaviourAction : MonoBehaviour
+    public class BehaviourAction
     {
         #region Events
         public event Action OnEnter;
@@ -26,26 +26,24 @@ namespace Features.Enemies
         #endregion
 
         #region State
-        protected Enemy enemyActor;
+        protected IEnemyModel enemyModel;
         protected EnemyBehaviourActionData enemyBehaviourActionData;
         #endregion
 
         #region Lifecycle
-        public void Init(Enemy enemyActor)
+        public void Init(IEnemyModel enemyModel)
         {
-            this.enemyActor = enemyActor;
             GameContext.Container.ResolveAll(this);
+            this.enemyModel = enemyModel;
         }
+        
         public virtual void Enter(EnemyBehaviourActionData enemyBehaviourActionData)
         {
             this.enemyBehaviourActionData = enemyBehaviourActionData;
             OnEnter?.Invoke();
             Execute();
         }
-        public virtual void Execute()
-        {
-
-        }
+        public virtual void Execute() { }
 
         public virtual void Exit()
         {

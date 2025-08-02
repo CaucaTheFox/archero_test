@@ -68,7 +68,7 @@ namespace Features.Heroes
             var hitEnemy = collider.GetComponentInParent<Enemy>();
             if (hitEnemy != null)
             {
-                OnHitEnemy?.Invoke(hitEnemy.EnemyModel.Index);
+                OnHitEnemy?.Invoke(hitEnemy.InstanceId);
                 hasHit = true;
                 Destroy(gameObject);
             }

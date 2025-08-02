@@ -11,8 +11,8 @@ namespace Features.Enemies
         public override void Execute()
         {
             base.Execute();
-            enemyActor.SetSpeed(dashSpeed);
-            enemyActor.MoveTowardsTarget(heroModel.HeroPosition);
+            enemyModel.EnemyInstance.SetSpeed(dashSpeed);
+            enemyModel.EnemyInstance.MoveTowardsTarget(heroModel.HeroPosition);
         }
     }
 }

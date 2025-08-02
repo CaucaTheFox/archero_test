@@ -31,8 +31,8 @@ namespace Features.Enemies
             
             if (data.SubType == MovementEnemyBehaviourActionSubType.Invisible)
             {
-                enemyActor.EnemyModel.IsVisible = false;
-                enemyActor.transform
+                enemyModel.IsVisible = false;
+                enemyModel.EnemyInstance.transform
                     .DOScale(Vector3.zero, 0.3f)
                     .SetEase(Ease.InBounce);
             }
@@ -43,12 +43,12 @@ namespace Features.Enemies
         public override void Execute()
         {
             base.Execute();
-            enemyActor.SetBaseSpeed();
+            enemyModel.EnemyInstance.SetBaseSpeed();
             switch (data.SubType)
             {
                 case MovementEnemyBehaviourActionSubType.Default:
                 case MovementEnemyBehaviourActionSubType.Invisible:
-                    enemyActor.MoveTowardsTarget(heroModel.HeroPosition);
+                    enemyModel.EnemyInstance.MoveTowardsTarget(heroModel.HeroPosition);
                     break;
                 case MovementEnemyBehaviourActionSubType.RandomDirection:
                     MoveInRandomDirection();
@@ -59,16 +59,16 @@ namespace Features.Enemies
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            enemyActor.OnDestinationReached += HandleDestinationReached; 
+            enemyModel.EnemyInstance.OnDestinationReached += HandleDestinationReached; 
         }
 
         public override void Exit()
         {
-            enemyActor.OnDestinationReached -= HandleDestinationReached;
+            enemyModel.EnemyInstance.OnDestinationReached -= HandleDestinationReached;
             if (data.SubType == MovementEnemyBehaviourActionSubType.Invisible)
             {
-                enemyActor.EnemyModel.IsVisible = true;
-                enemyActor.transform
+                enemyModel.IsVisible = true;
+                enemyModel.EnemyInstance.transform
                     .DOScale(Vector3.one, 0.3f)
                     .SetEase(Ease.OutBounce);
             }
@@ -85,7 +85,7 @@ namespace Features.Enemies
             }
             else
             {
-                enemyActor.MoveTowardsTarget(heroModel.HeroPosition);
+                enemyModel.EnemyInstance.MoveTowardsTarget(heroModel.HeroPosition);
             }
         }
         
@@ -93,14 +93,14 @@ namespace Features.Enemies
         {
             var randomDirection = Random.insideUnitSphere * data.RandomDirectionScalar;
             randomDirection.y = 0f;
-            enemyActor.MoveTowardsTarget(randomDirection);
+            enemyModel.EnemyInstance.MoveTowardsTarget(randomDirection);
         }
         
         private void MoveInWaves()
         {
             var heroPosition = heroModel.HeroPosition;
-            heroPosition += enemyActor.transform.right * (Mathf.Sin(Time.time * data.WaveFrequency) * data.WaveMagnitude);
-            enemyActor.MoveTowardsTarget(heroPosition);
+            heroPosition += enemyModel.EnemyInstance.transform.right * (Mathf.Sin(Time.time * data.WaveFrequency) * data.WaveMagnitude);
+            enemyModel.EnemyInstance.MoveTowardsTarget(heroPosition);
         }
         #endregion
     }

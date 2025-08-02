@@ -1,3 +1,4 @@
+using Core.CoroutineHelper;
 using Core.IoC;
 using Core.ResourceManagement;
 using Core.Time;
@@ -10,6 +11,7 @@ namespace Core
         {
             container.RegisterSingleton<IResourceManager, ResourceManager>();
             container.RegisterSingleton<ITimeProvider, TimeProvider>();
+            container.RegisterSingleton<ICoroutineHelper, CoroutineHelper.CoroutineHelper>();
         }
     }
 }

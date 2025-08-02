@@ -32,22 +32,20 @@ namespace Features.Enemies
         public override void Execute()
         {
             base.Execute();
+            enemyModel.EnemyInstance.SetSpeed(0f);
             switch (data.SubType)
             {
                 case AttackEnemyBehaviourActionSubType.Melee:
-                    enemyActor.SetSpeed(0f);
-                    enemyActor.PlayIdleAnimation();
-                    enemyActor.ExecuteMeleeAttack(GetRandomAttackId());
+                    enemyModel.EnemyInstance.PlayIdleAnimation();
+                    enemyModel.EnemyInstance.ExecuteMeleeAttack(GetRandomAttackId());
                     break;
                 case AttackEnemyBehaviourActionSubType.Particle:
-                    enemyActor.SetSpeed(0f);
-                    enemyActor.PlayIdleAnimation();
-                    enemyActor.transform.LookAt(heroModel.HeroPosition);
-                    enemyActor.ExecuteParticleAttack();
+                    enemyModel.EnemyInstance.PlayIdleAnimation();
+                    enemyModel.EnemyInstance.transform.LookAt(heroModel.HeroPosition);
+                    enemyModel.EnemyInstance.ExecuteParticleAttack();
                     break;
                 case AttackEnemyBehaviourActionSubType.Ranged:
-                    enemyActor.SetSpeed(0f);
-                    enemyActor.ExecuteRangedAttack();
+                    enemyModel.EnemyInstance.ExecuteRangedAttack();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -63,7 +61,7 @@ namespace Features.Enemies
                 case AttackEnemyBehaviourActionSubType.Melee:
                     break;
                 case AttackEnemyBehaviourActionSubType.Particle:
-                    enemyActor.StopParticleAttack();
+                    enemyModel.EnemyInstance.StopParticleAttack();
                     break;
                 case AttackEnemyBehaviourActionSubType.Ranged:
                     break;

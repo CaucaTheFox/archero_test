@@ -41,9 +41,6 @@ namespace Features.Enemies
         public Dictionary<int, EnemyModel> EnemyModels { get; private set; }
         #endregion
         
-        #region State
-        #endregion
-        
         #region Lifecycle
         public void Init()
         {

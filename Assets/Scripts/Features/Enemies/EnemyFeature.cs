@@ -14,12 +14,19 @@ namespace Features.Enemies
         public void RegisterServices(IIoC container)
         {
             container.RegisterSingleton<IEnemiesModel, EnemiesModel>();
+            
             container.RegisterSingleton<IJsonConfig<EnemyConfig>, EnemyConfigContainer>();
+            container.RegisterSingleton<IJsonConfig<EnemyBehaviourCatalogueConfig>, EnemyBehaviourCatalogueConfigContainer>();
         }
 
         private class EnemyConfigContainer : JsonConfig<EnemyConfig>
         {
-            protected override string ConfigPath => "Configs/Enemy/EnemyConfig";
+            protected override string ConfigPath => "Configs/Enemies/EnemyConfig";
+        }
+        
+        private class EnemyBehaviourCatalogueConfigContainer : JsonConfig<EnemyBehaviourCatalogueConfig>
+        {
+            protected override string ConfigPath => "Configs/Enemies/EnemyBehaviourCatalogueConfig";
         }
     }
 }
