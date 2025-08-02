@@ -609,6 +609,10 @@ MonoBehaviour:
   meleeWeapon: {fileID: 8096992862779997086}
   rangedWeapon: {fileID: 0}
   particleWeapon: {fileID: 0}
+  attackIds:
+  - LeftPunch
+  - RightPunch
+  - PowerPunch
 --- !u!195 &5859173584620298777
 NavMeshAgent:
   m_ObjectHideFlags: 0

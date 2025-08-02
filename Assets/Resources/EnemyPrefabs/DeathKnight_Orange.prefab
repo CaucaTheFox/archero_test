@@ -392,6 +392,11 @@ MonoBehaviour:
   meleeWeapon: {fileID: 145094475835990173}
   rangedWeapon: {fileID: 0}
   particleWeapon: {fileID: 0}
+  attackIds:
+  - JumpAttack
+  - Slash1
+  - Slash2
+  - DoubleAttack
 --- !u!195 &8886539880119685391
 NavMeshAgent:
   m_ObjectHideFlags: 0

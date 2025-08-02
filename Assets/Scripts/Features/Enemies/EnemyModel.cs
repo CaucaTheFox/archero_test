@@ -118,8 +118,8 @@ namespace Features.Enemies
             {
                 EnemyState = EnemyState.Dead;
                 StopEnemyBehaviourRoutine();
-                OnDeath?.Invoke(InstanceId);
                 EnemyInstance.PlayDeathAnimation();
+                OnDeath?.Invoke(InstanceId);
             }
         }
         #endregion
@@ -128,7 +128,7 @@ namespace Features.Enemies
         private void SpawnEnemyInstance()
         {
             var split = Settings.Id.Split('_');
-            var path = EnemyPath + split[0] + "/" + Settings.Id;
+            var path = EnemyPath + Settings.Id;
             var enemyTemplate = resourceManager.LoadResource<Enemy>(path);
             EnemyInstance = UnityEngine.Object.Instantiate(enemyTemplate);
             EnemyInstance.OnPlayerHit += DispatchPlayerHit;
