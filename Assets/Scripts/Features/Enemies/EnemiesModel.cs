@@ -12,7 +12,7 @@ namespace Features.Enemies
         
         Dictionary<int, EnemyModel> EnemyModels { get; }
         
-        void Init();
+        void InitModel();
         void Cleanup();
         
         void ApplyDamage(int instanceId, int damage);
@@ -40,7 +40,7 @@ namespace Features.Enemies
         #endregion
         
         #region Lifecycle
-        public void Init()
+        public void InitModel()
         {
             SpawnEnemyWave();
         }

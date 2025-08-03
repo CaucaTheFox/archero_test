@@ -51,6 +51,7 @@ namespace Features.Rooms.Screens
             Screen2D.InstantiateHeroHealthBar(hero.HealthBarAnchor, Camera.main, heroModel);
             Screen3D.TopDownCamera.CameraTarget = hero.transform;
             
+            enemiesModel.InitModel();
             enemiesModel.OnDeath += HandleEnemyDeath;
             enemiesModel.OnPlayerHit += HandlePlayerHit;
             SpawnEnemyHealthBars();
@@ -60,10 +61,24 @@ namespace Features.Rooms.Screens
             WaveCount = 1;
         }
 
+        private void Cleanup()
+        {
+            hero.OnHitEnemy -= HandleEnemyHit;
+            heroModel.OnDeath -= HandlePlayerDeath;
+            Object.Destroy(hero.gameObject);
+            hero = null;
+            
+            enemiesModel.Cleanup();
+            enemiesModel.OnDeath -= HandleEnemyDeath;
+            enemiesModel.OnPlayerHit -= HandlePlayerHit;
+            
+            Screen2D.Joystick.OnFixedUpdate -= HandlePlayerInput;
+            
+            Screen3D.OnPlayerHit -= HandlePlayerHit;
+        }
         #endregion
 
         #region Private
-
         private void SpawnHero()
         {
             hero = heroModel.CreateHero(Screen3D.HeroContainer);
@@ -133,26 +148,15 @@ namespace Features.Rooms.Screens
 
         private void HandlePlayerDeath()
         {
-            enemiesModel.Cleanup();
-            enemiesModel.OnPlayerHit -= HandlePlayerHit;
-            enemiesModel.OnDeath -= HandleEnemyDeath;
-            
-            Screen3D.OnPlayerHit -= HandlePlayerHit;
-            
+            Cleanup();
             Screen2D.ShowGameOverPanel(waveCount);
             Screen2D.OnReset += HandleGameReset;
         }
 
         private void HandleGameReset()
         {
-            Screen2D.HideGameOverPanel();
             Screen2D.OnReset -= HandleGameReset;
-            Screen2D.Joystick.OnFixedUpdate -= HandlePlayerInput;
-            
-            hero.OnHitEnemy -= HandleEnemyHit;
-            heroModel.OnDeath -= HandlePlayerDeath;
-            Screen3D.HeroContainer.DestroyChildren();
-            hero = null;
+            Screen2D.HideGameOverPanel();
             Init();
         }
         #endregion
