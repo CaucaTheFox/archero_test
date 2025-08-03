@@ -5,7 +5,8 @@
       "EnemyBehaviourActionData": [
         {
           "Type": "Idle",
-          "ActionDuration": 1.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 3.0
         },
         {
           "Type": "Movement",
@@ -13,12 +14,14 @@
           "RandomDirectionScalar": 0.0,
           "WaveFrequency": 5.0,
           "WaveMagnitude": 10.0,
-          "ActionDuration": 1.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 1.0
         },
         {
           "Type": "Dash",
           "Speed": 10.0,
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         },
         {
           "Type": "Movement",
@@ -26,12 +29,14 @@
           "RandomDirectionScalar": 0.0,
           "WaveFrequency": 5.0,
           "WaveMagnitude": 10.0,
-          "ActionDuration": 1.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 1.0
         },
         {
           "Type": "Dash",
           "Speed": 10.0,
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         }
       ]
     },
@@ -40,7 +45,8 @@
       "EnemyBehaviourActionData": [
         {
           "Type": "Idle",
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         },
         {
           "Type": "Movement",
@@ -48,13 +54,14 @@
           "RandomDirectionScalar": 0.0,
           "WaveFrequency": 0.0,
           "WaveMagnitude": 0.0,
-          "ActionDuration": 1.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 1.0
         },
         {
           "Type": "Attack",
           "SubType": "Melee",
-          "AttackIds": [],
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         },
         {
           "Type": "Movement",
@@ -62,13 +69,14 @@
           "RandomDirectionScalar": 0.0,
           "WaveFrequency": 0.0,
           "WaveMagnitude": 0.0,
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         },
         {
           "Type": "Attack",
           "SubType": "Melee",
-          "AttackIds": [],
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         }
       ]
     },
@@ -77,7 +85,8 @@
       "EnemyBehaviourActionData": [
         {
           "Type": "Idle",
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         },
         {
           "Type": "Movement",
@@ -85,13 +94,14 @@
           "RandomDirectionScalar": 0.0,
           "WaveFrequency": 0.0,
           "WaveMagnitude": 0.0,
-          "ActionDuration": 1.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 1.0
         },
         {
           "Type": "Attack",
           "SubType": "Melee",
-          "AttackIds": [],
-          "ActionDuration": 5.0
+          "MinActionDuration": 3.0,
+          "MaxActionDuration": 5.0
         },
         {
           "Type": "Movement",
@@ -99,13 +109,14 @@
           "RandomDirectionScalar": 0.0,
           "WaveFrequency": 0.0,
           "WaveMagnitude": 0.0,
-          "ActionDuration": 3.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 3.0
         },
         {
           "Type": "Attack",
           "SubType": "Melee",
-          "AttackIds": [],
-          "ActionDuration": 3.0
+          "MinActionDuration": 3.0,
+          "MaxActionDuration": 5.0
         }
       ]
     },
@@ -114,7 +125,8 @@
       "EnemyBehaviourActionData": [
         {
           "Type": "Idle",
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 3.0
         },
         {
           "Type": "Movement",
@@ -122,13 +134,14 @@
           "RandomDirectionScalar": 0.0,
           "WaveFrequency": 0.0,
           "WaveMagnitude": 0.0,
-          "ActionDuration": 3.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 3.0
         },
         {
           "Type": "Attack",
           "SubType": "Particle",
-          "AttackIds": [],
-          "ActionDuration": 2.0
+          "MinActionDuration": 1.0,
+          "MaxActionDuration": 3.0
         },
         {
           "Type": "Movement",
@@ -136,13 +149,14 @@
           "RandomDirectionScalar": 0.0,
           "WaveFrequency": 0.0,
           "WaveMagnitude": 0.0,
-          "ActionDuration": 3.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 3.0
         },
         {
           "Type": "Attack",
           "SubType": "Particle",
-          "AttackIds": [],
-          "ActionDuration": 2.0
+          "MinActionDuration": 1.0,
+          "MaxActionDuration": 3.0
         }
       ]
     },
@@ -151,7 +165,8 @@
       "EnemyBehaviourActionData": [
         {
           "Type": "Idle",
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         },
         {
           "Type": "Movement",
@@ -159,18 +174,20 @@
           "RandomDirectionScalar": 5.0,
           "WaveFrequency": 0.0,
           "WaveMagnitude": 0.0,
-          "ActionDuration": 3.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 3.0
         },
         {
           "Type": "Dash",
           "Speed": 14.0,
-          "ActionDuration": 2.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         },
         {
           "Type": "Attack",
           "SubType": "Melee",
-          "AttackIds": [],
-          "ActionDuration": 1.0
+          "MinActionDuration": 0.0,
+          "MaxActionDuration": 2.0
         }
       ]
     }

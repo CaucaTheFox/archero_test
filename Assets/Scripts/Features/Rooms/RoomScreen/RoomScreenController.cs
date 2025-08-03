@@ -1,4 +1,3 @@
-using Core.CameraScripts;
 using Core.IoC;
 using Core.ResourceManagement;
 using Features.Enemies;
@@ -6,7 +5,6 @@ using Features.Heroes;
 using Features.Screens;
 using System.Linq;
 using UnityEngine;
-using Utility.Utility;
 
 namespace Features.Rooms.Screens
 {
@@ -24,8 +22,6 @@ namespace Features.Rooms.Screens
         
         #region Properties
         public override string Name => ScreenName;
-        private TopDownCamera TopDownCamera { get; set; }
-
         private int WaveCount
         {
             get => waveCount;

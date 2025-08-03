@@ -6,7 +6,7 @@ namespace Features.Enemies
     [Serializable]
     public class EnemyBehaviourActionData
     {
-        public float ActionDuration;
+        public float MinActionDuration, MaxActionDuration;
         
         public virtual EnemyBehaviourActionType GetEnemyBehaviourActionType( )
         {
@@ -44,6 +44,7 @@ namespace Features.Enemies
     {
         [HideInInspector] public EnemyBehaviourActionType Type = EnemyBehaviourActionType.Dash;
         public float Speed;
+        
         public override EnemyBehaviourActionType GetEnemyBehaviourActionType()
         {
             return Type; 

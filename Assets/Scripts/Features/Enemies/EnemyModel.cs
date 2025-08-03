@@ -179,12 +179,17 @@ namespace Features.Enemies
             {
                 foreach (var actionData in enemyBehaviourActionData)
                 {
-                    if (behaviourActions.TryGetValue(actionData.GetEnemyBehaviourActionType(), out var behaviourAction))
+                    if (!behaviourActions.TryGetValue(actionData.GetEnemyBehaviourActionType(), out var behaviourAction)) 
+                        continue;
+                    
+                    var duration = UnityEngine.Random.Range(actionData.MinActionDuration, actionData.MaxActionDuration);
+                    if (Mathf.Approximately(duration, 0))
                     {
-                        behaviourAction.Enter(actionData);
-                        yield return new WaitForSeconds(actionData.ActionDuration);
-                        behaviourAction.Exit();
+                        continue;
                     }
+                    behaviourAction.Enter(actionData);
+                    yield return new WaitForSeconds(duration);
+                    behaviourAction.Exit();
                 }
             }
             
