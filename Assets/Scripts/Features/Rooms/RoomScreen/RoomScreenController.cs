@@ -45,6 +45,8 @@ namespace Features.Rooms.Screens
         #region Lifecycle
         public override void Init()
         {
+            Screen3D.Init();
+            
             SpawnHero();
             Screen2D.InstantiateHeroHealthBar(hero.HealthBarAnchor, Camera.main, heroModel);
             Screen3D.TopDownCamera.CameraTarget = hero.transform;
@@ -75,6 +77,7 @@ namespace Features.Rooms.Screens
             {
                 var enemyInstance = entry.Value.EnemyInstance;
                 enemyInstance.transform.SetParent(Screen3D.EnemyContainer);
+                enemyInstance.transform.position = Screen3D.GetRandomSpawnPosition();
                 Screen2D.SpawnEnemyHealthBar(enemyInstance.HealthBarAnchor, Camera.main, entry.Value);
             }
         }

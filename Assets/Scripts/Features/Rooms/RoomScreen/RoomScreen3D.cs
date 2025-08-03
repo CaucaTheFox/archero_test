@@ -50,10 +50,11 @@ namespace Features.Rooms.Screens
         #region State
         private Dictionary<BaseFloorTile, Tile> baseTileToPrefabMap;
         private Dictionary<SpecialFloorTile, Tile> specialTileToPrefabMap;
+        private List<Vector3> tilePositions;
         #endregion
 
         #region Lifecycle
-        private void Start()
+        public void Init()
         {
             baseTileToPrefabMap = baseTileTemplates.ToDictionary(x => x.Tile, y => y.Template);
             specialTileToPrefabMap = specialTileTemplates.ToDictionary(x => x.Tile, y => y.Template);
@@ -61,14 +62,22 @@ namespace Features.Rooms.Screens
             InstantiateSpecialFloorTiles();
             baseFloorSurface.BuildNavMesh();
         }
-
         #endregion
 
+        #region Public
+        public Vector3 GetRandomSpawnPosition()
+        {
+            var randomIndex = UnityEngine.Random.Range(0, tilePositions.Count);
+            return tilePositions[randomIndex];
+        }
+        #endregion
+        
         #region Private
         private void InstantiateBaseFloorTiles()
         {
             var floorConfig = roomModel.GetRandomBaseFloorConfig();
             baseFloorSurface.transform.DestroyChildren();
+            tilePositions = new List<Vector3>();
             for (int i = 0; i < floorConfig.Rows.Count; i++)
             {
                 var row = floorConfig.Rows[i];
@@ -80,8 +89,10 @@ namespace Features.Rooms.Screens
                         throw new Exception($"[RoomScreen3D] No Template found for tile type {tile}");
                     }
 
-                    var tileInstance = GameObject.Instantiate(template, baseFloorSurface.transform);
-                    tileInstance.transform.position = new Vector3(j, 0, i);
+                    var tileInstance = Instantiate(template, baseFloorSurface.transform);
+                    var tilePosition =  new Vector3(j, 0, i);
+                    tileInstance.transform.position = tilePosition;
+                    tilePositions.Add(tilePosition);
                 }
             }
         }
@@ -110,13 +121,13 @@ namespace Features.Rooms.Screens
                     tileInstance.transform.position = new Vector3(j, tileInstance.transform.position.y, i);
                     if (tileInstance is TrapTile trap)
                     {
-                        trap.OnPlayerHit += HandlePlayerHit;
+                        trap.OnPlayerHit += DispatchPlayerHit;
                     }
                 }
             }
         }
 
-        private void HandlePlayerHit(int damage)
+        private void DispatchPlayerHit(int damage)
         {
             OnPlayerHit?.Invoke(damage);
         }
