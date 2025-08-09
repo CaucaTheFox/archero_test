@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.CameraScripts;
 using Core.IoC;
+using Core.RenderFeatures;
+using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
+
 using Utility.Utility;
 
 namespace Features.Rooms.Screens
@@ -35,10 +37,13 @@ namespace Features.Rooms.Screens
         [SerializeField] private Transform heroContainer, enemyContainer, specialFloorContainer;
         [SerializeField] private BaseTileToTemplate[] baseTileTemplates;
         [SerializeField] private SpecialTileToTemplate[] specialTileTemplates;
+        [SerializeField] private List<Renderer> renderers;
+        [SerializeField] private List<Renderer> depthTextureRenderersOnly;
         #endregion
 
         #region Dependencies
         [Inject] private IRoomsModel roomModel;
+        [Inject] private IRenderFeatureModel renderFeatureModel;
         #endregion
 
         #region Properties
@@ -50,7 +55,7 @@ namespace Features.Rooms.Screens
         #region State
         private Dictionary<BaseFloorTile, Tile> baseTileToPrefabMap;
         private Dictionary<SpecialFloorTile, Tile> specialTileToPrefabMap;
-        private List<Vector3> tilePositions;
+        private List<Tile> tiles;
         #endregion
 
         #region Lifecycle
@@ -61,14 +66,47 @@ namespace Features.Rooms.Screens
             InstantiateBaseFloorTiles();
             InstantiateSpecialFloorTiles();
             baseFloorSurface.BuildNavMesh();
+            
+            foreach (var renderer in renderers)
+            {
+                renderFeatureModel.AddRendererForDepthTexture(renderer);
+            }
+
+            foreach (var tile in tiles)
+            {
+                renderFeatureModel.AddRendererForDepthTexture(tile.MeshRenderer);
+            }
+            
+            foreach (var renderer in depthTextureRenderersOnly)
+            {
+                renderFeatureModel.AddRendererForDepthTexture(renderer);
+            }
+        }
+
+        public void Cleanup()
+        {
+            foreach (var renderer in renderers)
+            {
+                renderFeatureModel.RemoveRendererForDepthTexture(renderer);
+            }
+
+            foreach (var tile in tiles)
+            {
+                renderFeatureModel.RemoveRendererForDepthTexture(tile.MeshRenderer);
+            }
+
+            foreach (var renderer in depthTextureRenderersOnly)
+            {
+                renderFeatureModel.RemoveRendererForDepthTexture(renderer);
+            }
         }
         #endregion
 
         #region Public
         public Vector3 GetRandomSpawnPosition()
         {
-            var randomIndex = UnityEngine.Random.Range(0, tilePositions.Count);
-            return tilePositions[randomIndex];
+            var randomIndex = UnityEngine.Random.Range(0, tiles.Count);
+            return tiles[randomIndex].transform.position;
         }
         #endregion
         
@@ -77,7 +115,7 @@ namespace Features.Rooms.Screens
         {
             var floorConfig = roomModel.GetRandomBaseFloorConfig();
             baseFloorSurface.transform.DestroyChildren();
-            tilePositions = new List<Vector3>();
+            tiles = new List<Tile>();
             for (int i = 0; i < floorConfig.Rows.Count; i++)
             {
                 var row = floorConfig.Rows[i];
@@ -92,7 +130,7 @@ namespace Features.Rooms.Screens
                     var tileInstance = Instantiate(template, baseFloorSurface.transform);
                     var tilePosition =  new Vector3(j, 0, i);
                     tileInstance.transform.position = tilePosition;
-                    tilePositions.Add(tilePosition);
+                    tiles.Add(tileInstance);
                 }
             }
         }

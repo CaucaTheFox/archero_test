@@ -59,6 +59,7 @@ namespace Features.Rooms.Screens
 
         private void Cleanup()
         {
+            Screen3D.Cleanup();
             hero.OnHitEnemy -= HandleEnemyHit;
             heroModel.OnDeath -= HandlePlayerDeath;
             Object.Destroy(hero.gameObject);
