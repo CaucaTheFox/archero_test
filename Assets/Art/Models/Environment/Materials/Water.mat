@@ -33,11 +33,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CausticsTex_A:
-        m_Texture: {fileID: 2800000, guid: a94c8852b9909774ea5ce871f148b401, type: 3}
+        m_Texture: {fileID: 2800000, guid: dfdf379670c7afa4083a08097bbb6dc7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CausticsTex_B:
-        m_Texture: {fileID: 2800000, guid: 82dea8d8208ffc4479700218de7148c6, type: 3}
+        m_Texture: {fileID: 2800000, guid: dfdf379670c7afa4083a08097bbb6dc7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -78,10 +78,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SurfaceDistortion:
         m_Texture: {fileID: 2800000, guid: c53bb6b8c40b02141be3fdec5cc582e9, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _SurfaceNoise:
-        m_Texture: {fileID: 10916, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: 11cdc6345e3c5ff49b36ec9add664643, type: 3}
         m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -100,7 +100,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _AmplitudeNoise: 0.25
+    - _AmplitudeNoise: 0.342
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BlendOp: 0
@@ -117,13 +117,13 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FoamStep: 0.398
-    - _FoamThreshold: 0.3
+    - _FoamStep: 0.644
+    - _FoamThreshold: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 1
-    - _IntersectionThreshold: 1.58
+    - _IntersectionThreshold: 2.51
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -140,14 +140,14 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _SurfaceDistortionAmount: 0.089
+    - _SurfaceDistortionAmount: 0.168
     - _UVSec: 0
     - _WaterHeightMultiplier: 0.01
-    - _WaveAmplitude: 1.6
-    - _WaveDirection: 0
-    - _WaveFrequency: 1
+    - _WaveAmplitude: 2.82
+    - _WaveDirection: -0.247
+    - _WaveFrequency: 1.5
     - _WaveMode: 0
-    - _WaveNoise: 0.25
+    - _WaveNoise: 0.264
     - _WaveSpeed: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 1
@@ -156,12 +156,12 @@ Material:
     - _Caustics_A_ST: {r: 1, g: 0.9, b: 0.1, a: 0}
     - _Caustics_B_ST: {r: 0.9, g: 1, b: -0.07, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepWaterColor: {r: 0.086, g: 0.407, b: 1, a: 0.7176471}
+    - _DeepWaterColor: {r: 0.022116425, g: 0.16058908, b: 0.6698113, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShallowWaterColor: {r: 0.325, g: 0.807, b: 0.971, a: 0.7176471}
+    - _ShallowWaterColor: {r: 0, g: 0.9509802, b: 1, a: 0.7176471}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _SurfaceNoiseScroll: {r: 0.03, g: 0.2, b: 0, a: 0.2}
+    - _SurfaceNoiseScroll: {r: 0.02, g: 0.02, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2799733854494345642
 MonoBehaviour:
