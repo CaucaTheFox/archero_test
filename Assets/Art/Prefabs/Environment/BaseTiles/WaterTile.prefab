@@ -10,9 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4115408997890500}
   - component: {fileID: 6627463601362456010}
-  - component: {fileID: 33792022910275110}
-  - component: {fileID: 23990411449202740}
-  - component: {fileID: 8066379757841560503}
   m_Layer: 0
   m_Name: WaterTile
   m_TagString: Untagged
@@ -30,9 +27,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 461207557804022840}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6627463601362456010
@@ -47,22 +45,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77bec386542507749ba49642cf459ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 23990411449202740}
---- !u!33 &33792022910275110
+  meshRenderer: {fileID: 5692278750588074499}
+--- !u!1 &3832992736694421937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461207557804022840}
+  - component: {fileID: 3683520962635376223}
+  - component: {fileID: 1588701052202905173}
+  - component: {fileID: 5692278750588074499}
+  - component: {fileID: 3219044492392313199}
+  m_Layer: 0
+  m_Name: WaterTile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
+  m_IsActive: 1
+--- !u!4 &461207557804022840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3832992736694421937}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4115408997890500}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3683520962635376223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3832992736694421937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77bec386542507749ba49642cf459ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 5692278750588074499}
+--- !u!33 &1588701052202905173
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640771308685042}
-  m_Mesh: {fileID: 4300000, guid: d8be467a57b68b14583adbf3902c07d4, type: 3}
---- !u!23 &23990411449202740
+  m_GameObject: {fileID: 3832992736694421937}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5692278750588074499
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640771308685042}
+  m_GameObject: {fileID: 3832992736694421937}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -98,19 +144,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!208 &8066379757841560503
+--- !u!208 &3219044492392313199
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640771308685042}
+  m_GameObject: {fileID: 3832992736694421937}
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 1.5, z: 0.5}
+  m_Extents: {x: 5, y: 7.5, z: 5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.42, z: 0}
+  m_Center: {x: 0, y: 5.5, z: 0}
   m_TimeToStationary: 0.5
