@@ -2,7 +2,7 @@
 
 namespace Core.CameraScripts
 {
-    public class TopDownCamera : MonoBehaviour
+    public class FollowTargetCamera : MonoBehaviour
     {
         #region Unity Serialized Fields
         [SerializeField] private float height = 10f;

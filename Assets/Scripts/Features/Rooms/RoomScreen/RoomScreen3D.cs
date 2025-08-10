@@ -6,7 +6,7 @@ using Core.IoC;
 using Core.RenderFeatures;
 using Unity.AI.Navigation;
 using UnityEngine;
-
+using UnityEngine.Serialization;
 using Utility.Utility;
 
 namespace Features.Rooms.Screens
@@ -32,7 +32,7 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region Unity Serialized Fields
-        [SerializeField] private TopDownCamera topDownCamera;
+        [SerializeField] private FollowTargetCamera followTargetCamera;
         [SerializeField] private NavMeshSurface baseFloorSurface;
         [SerializeField] private Transform heroContainer, enemyContainer, specialFloorContainer;
         [SerializeField] private BaseTileToTemplate[] baseTileTemplates;
@@ -47,7 +47,7 @@ namespace Features.Rooms.Screens
         #endregion
 
         #region Properties
-        public TopDownCamera TopDownCamera => topDownCamera;
+        public FollowTargetCamera FollowTargetCamera => followTargetCamera;
         public Transform HeroContainer => heroContainer;
         public Transform EnemyContainer => enemyContainer;
         #endregion

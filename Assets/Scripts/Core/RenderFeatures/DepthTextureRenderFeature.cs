@@ -8,6 +8,8 @@ using UnityEngine.Experimental.Rendering;
 
 namespace Core.RenderFeatures
 {
+    // creates a custom depth texture including the renderers assigned to it
+    // useful if regular depth texture is not available (e.g. on mobile targets due to performance reasons)
     public class DepthTextureRenderFeature : ScriptableRendererFeature
     {
         public DepthTexturePassSettings settings = new();
