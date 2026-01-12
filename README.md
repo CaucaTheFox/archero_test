@@ -1,13 +1,11 @@
-Test/Demo project I created back in 2020 and updated in 2025/2026.
+Test/Demo project I created back in 2020 and updated in 2025/2026. Based on the mobile game "Archero" look and mechanic-wise. Art Assets folder is hidden and not available as it contains paid assets, so there will be errors if you attempt to open the project in Unity! Current Unity version: 2022.3.62f1 
 
 <p align="middle">
   <img src="Doc/Screenshots/Screenshot_1.png" width="300" />
   <img src="Doc/Screenshots/Screenshot_2.png" width="300" />
 </p>
 
-Based on the mobile game "Archero" look and mechanic-wise. Art Assets folder is hidden and not available as it contains paid assets, so there will be errors if you attempt to open the project in Unity! 
-
-Current Unity version: 2022.3.62f1
+https://github.com/user-attachments/assets/95f42907-1b75-426b-a6f7-509b54d6aecc
 
 To Do's:
 
@@ -28,6 +26,10 @@ Toon Enemies: https://assetstore.unity.com/packages/3d/characters/toon-enemies-p
 Toon Characters: https://assetstore.unity.com/packages/3d/characters/toon-heroes-pack-161154
 
 Toon shader is a simplified version by me but based on Dustyrooms FlatKit (https://assetstore.unity.com/packages/vfx/shaders/flat-kit-toon-shading-and-water-143368).
+
+
+
+
 
 
 
