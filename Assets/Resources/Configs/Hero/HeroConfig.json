@@ -1,0 +1,13 @@
+{
+  "Heroes": {
+    "Archer_Green": {
+      "Id": "Archer_Green",
+      "Name": "Link",
+      "Health": 1200,
+      "Attack": 75,
+      "AttackSpeed": 1.5,
+      "DamageResistance": 15,
+      "Dodge": 0.05
+    }
+  }
+}

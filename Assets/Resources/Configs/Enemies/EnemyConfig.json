@@ -1,0 +1,40 @@
+{
+  "Enemies": {
+    "Bat_Pink": {
+      "Id": "Bat_Pink",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_00",
+      "Health": 800,
+      "CollisionDamage": 20,
+      "MeleeDamage": 50,
+      "ParticleDamage": 150,
+      "RangedDamage": 0
+    },
+    "Cactus_Purple": {
+      "Id": "Cactus_Purple",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_01",
+      "Health": 600,
+      "CollisionDamage": 20,
+      "MeleeDamage": 100,
+      "ParticleDamage": 0,
+      "RangedDamage": 0
+    },
+    "DeathKnight_Orange": {
+      "Id": "DeathKnight_Orange",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_02",
+      "Health": 300,
+      "CollisionDamage": 20,
+      "MeleeDamage": 200,
+      "ParticleDamage": 0,
+      "RangedDamage": 0
+    },
+    "Dragon_Red": {
+      "Id": "Dragon_Red",
+      "EnemyBehaviourConfigId": "EnemyBehaviourConfig_03",
+      "Health": 1000,
+      "CollisionDamage": 20,
+      "MeleeDamage": 100,
+      "ParticleDamage": 150,
+      "RangedDamage": 0
+    }
+  }
+}
